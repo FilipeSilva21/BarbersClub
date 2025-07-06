@@ -1,0 +1,30 @@
+﻿@model BarberClub.DTOs.UserLoginRequest 
+@{
+    ViewData["Title"] = "Login";
+    Layout = "_Layout"; 
+}
+
+<div class="container d-flex align-items-center justify-content-center auth-container">
+    <div class="col-md-6 col-lg-5 col-xl-4">
+        <div class="form-container">
+            <h1 class="text-center mb-4">BARBERCLUB</h1>
+            
+            <form id="loginForm" method="post">
+                
+                <div id="loginError" class="alert alert-danger d-none" role="alert"></div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Email" id="email" class="form-control" placeholder="seu@email.com" />
+                    <label asp-for="Email"></label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Password" id="password" class="form-control" placeholder="Senha" />
+                    <label asp-for="Password"></label>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-brand">Entrar</button>
+                </div>
+            </form>
+            </div>
+    </div>
+</div>
