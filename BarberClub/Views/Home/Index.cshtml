@@ -1,8 +1,99 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+ViewData["Title"] = "Bem-vindo";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@section Styles {
+<link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+}
+
+<div id="client-view">
+    <section class="hero-section text-white text-center">
+        <div class="hero-overlay"></div>
+        <div class="container position-relative">
+            <h1 class="display-4 fw-bold">Seu Estilo, Sua Barbearia</h1>
+            <p class="lead my-4">Encontre as melhores barbearias da sua região e agende seu horário com facilidade.</p>
+            <form class="d-flex justify-content-center" role="search">
+                <div class="search-bar">
+                    <i class="bi bi-search"></i>
+                    <input class="form-control" type="search" placeholder="Buscar por barbearia, cidade ou serviço..." aria-label="Search">
+                </div>
+                <button class="btn btn-gold ms-2" type="submit">Buscar</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="featured-section py-5">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-5">Barbearias em Destaque</h2>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="card barber-card">
+                        <img src="https://images.unsplash.com/photo-1599351542803-3b625140e425?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8YmFyYmVyc2hvcHx8fHx8fDE2MjM4OTAwMzk&ixlib=rb-1.2.1&q=80&w=1080" class="card-img-top" alt="Fachada da Barbearia">
+                        <div class="card-body">
+                            <h5 class="card-title">Navalha de Ouro</h5>
+                            <p class="card-text text-muted"><i class="bi bi-geo-alt-fill me-2"></i>Salvador, BA</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="ratings"><i class="bi bi-star-fill"></i> 4.9 (120)</div>
+                                <a href="#" class="btn btn-outline-gold btn-sm">Agendar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
+
+<div id="barber-dashboard-view" class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="fw-bold">Meu Dashboard</h1>
+    </div>
+    <div class="row g-4 mb-5">
+        <div class="col-md-3">
+            <div class="stat-card">
+                <i class="bi bi-calendar-check"></i>
+                <div class="stat-card-body">
+                    <p>Próximos Agendamentos</p>
+                    <span class="fs-2 fw-bold">8</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <i class="bi bi-cash-stack"></i>
+                <div class="stat-card-body">
+                    <p>Receita do Mês</p>
+                    <span class="fs-2 fw-bold">R$ 4.580</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <i class="bi bi-star-half"></i>
+                <div class="stat-card-body">
+                    <p>Avaliação Média</p>
+                    <span class="fs-2 fw-bold">4.9</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <i class="bi bi-people"></i>
+                <div class="stat-card-body">
+                    <p>Total de Clientes</p>
+                    <span class="fs-2 fw-bold">142</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h2 class="fw-bold mb-4">Ações Rápidas</h2>
+    <div class="row g-4">
+        <div class="col-md-4"><a href="#" class="action-card"><i class="bi bi-calendar3"></i><span>Gerenciar Agenda</span></a></div>
+        <div class="col-md-4"><a href="#" class="action-card"><i class="bi bi-shop"></i><span>Editar Perfil da Barbearia</span></a></div>
+        <div class="col-md-4"><a href="#" class="action-card"><i class="bi bi-chat-left-text"></i><span>Ver Avaliações</span></a></div>
+    </div>
+</div>
+
+@section Scripts {
+<script src="~/js/home.js" asp-append-version="true"></script>
+}

@@ -1,0 +1,140 @@
+/* Estilos para a Visão do Cliente */
+
+.hero-section {
+  position: relative;
+  padding: 10rem 0;
+  background: url('https://images.unsplash.com/photo-1621607512214-6c3494d4a852?auto=format&fit=crop&w=1950&q=80') no-repeat center center;
+  background-size: cover;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.search-bar {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+}
+
+.search-bar .form-control {
+  padding-left: 2.5rem;
+  border-radius: 50px;
+  height: 50px;
+}
+
+.search-bar .bi-search {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6c757d;
+}
+
+.btn-gold {
+  background-color: var(--bc-gold, #c5a86a);
+  color: var(--bc-dark, #121212);
+  border: none;
+  border-radius: 50px;
+  font-weight: 500;
+  height: 50px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-gold:hover {
+  background-color: var(--bc-gold-hover, #e4d5b7);
+  color: var(--bc-dark, #121212);
+}
+
+.featured-section {
+  background-color: #1a1a1a;
+}
+
+.barber-card {
+  background-color: var(--bc-surface, #1e1e1e);
+  border: 1px solid #333;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.barber-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+}
+
+.barber-card .card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+.barber-card .card-body {
+  color: var(--bc-text-primary, #f0f0f0);
+}
+
+.barber-card .ratings {
+  color: var(--bc-gold, #c5a86a);
+  font-weight: 500;
+}
+
+.barber-card .ratings .bi-star-fill {
+  margin-right: 5px;
+}
+
+
+/* Estilos para o Dashboard do Barbeiro */
+
+.stat-card {
+  background-color: var(--bc-surface, #1e1e1e);
+  border-radius: 10px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  border: 1px solid #333;
+}
+
+.stat-card i {
+  font-size: 2.5rem;
+  color: var(--bc-gold, #c5a86a);
+  margin-right: 1.5rem;
+}
+
+.stat-card-body p {
+  margin-bottom: 0.25rem;
+  color: var(--bc-text-secondary, #a0a0a0);
+}
+
+.action-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bc-surface, #1e1e1e);
+  border-radius: 10px;
+  padding: 2rem;
+  text-decoration: none;
+  color: var(--bc-text-primary, #f0f0f0);
+  border: 1px solid #333;
+  transition: all 0.3s ease;
+}
+
+.action-card:hover {
+  background-color: #2a2a2a;
+  color: var(--bc-gold, #c5a86a);
+  transform: translateY(-5px);
+}
+
+.action-card i {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.action-card span {
+  font-size: 1.1rem;
+  font-weight: 500;
+}

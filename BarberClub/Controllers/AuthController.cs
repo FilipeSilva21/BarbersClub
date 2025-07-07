@@ -4,6 +4,8 @@ using System.Text;
 using BarberClub.DTOs;
 using BarberClub.Models;
 using BarberClub.Services;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -25,17 +27,28 @@ public class AuthController(IAuthService authService): ControllerBase
         
         return Ok(user);
     }
-
+    
     [HttpPost("login")]
-    public async Task<ActionResult<string>> Login(UserLoginRequest request)
+    public async Task<IActionResult> Login(UserLoginRequest request)
     {
-        var result = await authService.LoginAsync(request);
+        var (token, user) = await authService.LoginAsync(request);
 
-        if (result is null)
-            return BadRequest(new { message = "Email ou senha inválidos." });
-        
-        return Ok(new { token = result });
+        if (token is null || user is null)
+        {
+            return Unauthorized(new { message = "Email ou senha inválidos." });
+        }
+
+        return Ok(new
+        {
+            token = token,
+            user = new
+            {
+                name = user.FirstName,
+                email = user.Email
+            }
+        });
     }
+
 
     [Authorize]
     [HttpGet ("home")]

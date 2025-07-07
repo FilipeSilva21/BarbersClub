@@ -1,19 +1,57 @@
-﻿@model BarberClub.DTOs.UserRegisterRequest
-@{
-    ViewData["Title"] = "Registro";
-    Layout = "_Layout";
+﻿@{
+ViewData["Title"] = "Cadastro";
 }
-<div class="container d-flex align-items-center justify-content-center auth-container py-5">
-    <div class="col-md-6 col-lg-5 col-xl-4">
-        <div class="form-container">
-            <h1 class="text-center mb-4">CRIE SUA CONTA</h1>
-            
-            <form id="registerForm" method="post">
-                <div id="registerError" class="alert alert-danger d-none" role="alert"></div>
-                
-                <div class="mb-3">
-                    </div>
-                </form>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Account/Register.css" asp-append-version="true" />
+}
+
+<div class="auth-container">
+    <form id="registerForm" data-login-url="@Url.Action("Login", "Account")">
+        <h2>Crie sua Conta</h2>
+        <p class="text-muted">Junte-se ao clube para agendar horários ou cadastrar sua barbearia.</p>
+
+        <div class="mb-3 text-start">
+            <label for="username" class="form-label">Nome de Usuário</label>
+            <input type="text" class="form-control" id="username" placeholder="Ex: seu_usuario" required>
+        </div>
+
+        <div class="mb-3 text-start">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="seuemail@exemplo.com" required>
+        </div>
+
+        <div class="mb-3 text-start">
+            <label for="password" class="form-label">Crie uma Senha</label>
+            <input type="password" class="form-control" id="password" required>
+        </div>
+
+        <div class="mb-4 text-start">
+            <label for="confirmPassword" class="form-label">Confirme sua Senha</label>
+            <input type="password" class="form-control" id="confirmPassword" required>
+        </div>
+
+        <div id="errorMessage" class="error-message mb-3"></div>
+
+        <button type="submit" class="btn btn-primary w-100 d-flex align-items-center justify-content-center">
+            <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+            <span>Cadastrar</span>
+        </button>
+    </form>
+</div>
+
+<div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark text-white">
+            <div class="modal-header border-0"><h5 class="modal-title">Sucesso!</h5></div>
+            <div class="modal-body">Seu cadastro foi realizado com sucesso!</div>
+            <div class="modal-footer border-0">
+                <a id="redirectButton" href="#" class="btn btn-primary">Ok, ir para Login</a>
+            </div>
         </div>
     </div>
 </div>
+
+@section Scripts {
+<script src="~/js/Account/Register.js" asp-append-version="true"></script>
+}

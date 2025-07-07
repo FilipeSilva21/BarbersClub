@@ -24,7 +24,8 @@ public class AuthService(UserDbContext context, IConfiguration config): IAuthSer
         
         var hashedPassword = new PasswordHasher<User>().HashPassword(user, request.Password);
         
-        user.Username = request.Username;
+        user.FirstName = request.FirstName;
+        user.LastName = request.LastName;
         user.Email = request.Email;
         user.PasswordHashed = hashedPassword;
         user.Role = request.Role;
@@ -35,27 +36,29 @@ public class AuthService(UserDbContext context, IConfiguration config): IAuthSer
         return user;
     }
 
-    public async Task<string?> LoginAsync(UserLoginRequest request)
+    public async Task<(string? token, User? user)> LoginAsync(UserLoginRequest request)
     {
         var user = await context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
 
         if (user is null)
-            return null;
+            return (null, null);
 
         if (new PasswordHasher<User>().VerifyHashedPassword(
                 user,
                 user.PasswordHashed,
                 request.Password) == PasswordVerificationResult.Failed)
-            return null;
-        
-        return GenerateToken(user);
+            return (null, null);
+    
+        var token = GenerateToken(user);
+        return (token, user); 
     }
     
     private string GenerateToken(User users)
     {
         var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.Name, users.Email),
+            new Claim(ClaimTypes.Name, users.FirstName), 
+            new Claim(ClaimTypes.Email, users.Email),
             new Claim(ClaimTypes.NameIdentifier, users.Id.ToString()),
             new Claim(ClaimTypes.Role, users.Role.ToString())
         };
