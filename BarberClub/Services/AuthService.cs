@@ -57,7 +57,7 @@ public class AuthService(UserDbContext context, IConfiguration config): IAuthSer
     {
         var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.Name, users.FirstName), 
+            new Claim("firstName", users.FirstName), 
             new Claim(ClaimTypes.Email, users.Email),
             new Claim(ClaimTypes.NameIdentifier, users.Id.ToString()),
             new Claim(ClaimTypes.Role, users.Role.ToString())
