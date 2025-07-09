@@ -10,7 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace BarberClub.Services;
 
-public class AuthService(UserDbContext context, IConfiguration config): IAuthService
+public class AuthService(ProjectDbContext context, IConfiguration config): IAuthService
 {
     public async Task<User?> RegisterAsync(UserRegisterRequest request)
     {
@@ -23,7 +23,7 @@ public class AuthService(UserDbContext context, IConfiguration config): IAuthSer
         var user = new User();
         
         var hashedPassword = new PasswordHasher<User>().HashPassword(user, request.Password);
-        
+
         user.FirstName = request.FirstName;
         user.LastName = request.LastName;
         user.Email = request.Email;
@@ -52,14 +52,21 @@ public class AuthService(UserDbContext context, IConfiguration config): IAuthSer
         var token = GenerateToken(user);
         return (token, user); 
     }
-    
+
+    public async Task<BarberShop?> GetAllBarberShopsByUser(int userId)
+    {
+        return await context.BarberShops
+            .Include(u => u.User)
+            .FirstOrDefaultAsync(b => b.UserId == userId);
+    }
+
     private string GenerateToken(User users)
     {
         var claims = new List<Claim>
         {
-            new Claim("firstName", users.FirstName), 
+            new Claim("firstName", users.FirstName),
             new Claim(ClaimTypes.Email, users.Email),
-            new Claim(ClaimTypes.NameIdentifier, users.Id.ToString()),
+            new Claim(ClaimTypes.NameIdentifier, users.UserId.ToString()),
             new Claim(ClaimTypes.Role, users.Role.ToString())
         };
 

@@ -5,19 +5,21 @@
 namespace BarberClub.Migrations
 {
     /// <inheritdoc />
-    public partial class userobjectchange : Migration
+    public partial class completeaddress : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "Username",
-                table: "Users",
-                newName: "LastName");
+            migrationBuilder.AddColumn<string>(
+                name: "City",
+                table: "BarberShops",
+                type: "nvarchar(max)",
+                nullable: false,
+                defaultValue: "");
 
             migrationBuilder.AddColumn<string>(
-                name: "FirstName",
-                table: "Users",
+                name: "State",
+                table: "BarberShops",
                 type: "nvarchar(max)",
                 nullable: false,
                 defaultValue: "");
@@ -27,13 +29,12 @@ namespace BarberClub.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "FirstName",
-                table: "Users");
+                name: "City",
+                table: "BarberShops");
 
-            migrationBuilder.RenameColumn(
-                name: "LastName",
-                table: "Users",
-                newName: "Username");
+            migrationBuilder.DropColumn(
+                name: "State",
+                table: "BarberShops");
         }
     }
 }

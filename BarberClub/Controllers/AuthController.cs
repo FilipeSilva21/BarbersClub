@@ -13,7 +13,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace BarberClub.Controllers;
 
-[Route("api/[controller]")]
+[Route("auth/[controller]")]
 [ApiController]
 public class AuthController(IAuthService authService): ControllerBase
 {
