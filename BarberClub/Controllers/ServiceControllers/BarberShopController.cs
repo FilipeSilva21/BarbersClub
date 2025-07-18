@@ -5,15 +5,15 @@ using BarberClub.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BarberClub.Controllers;
+namespace BarberClub.Controllers.ServiceControllers;
 
 [Route("barbearia/[controller]")]
 [ApiController]
-public class BarberShopController : ControllerBase
+public class BarberShopApiController : ControllerBase
 {
     private readonly IBarberShopService _service;
 
-    public BarberShopController(IBarberShopService service)
+    public BarberShopApiController(IBarberShopService service)
     {
         this._service = service;
     }
@@ -46,6 +46,14 @@ public class BarberShopController : ControllerBase
 
         return CreatedAtAction(nameof(GetBarberShopById), new { id = barberShop.BarberShopId }, barberShop);
     }
+
+    [HttpGet("barberShops")]
+    public async Task<IActionResult> Index()
+    {
+        var barberShops = await _service.GetBarberShops();
+
+        return Ok(barberShops);
+    }
     
     [HttpGet("id/{barberShopId}")]
     public async Task<IActionResult> GetBarberShopById(int barberShopId)
@@ -58,48 +66,22 @@ public class BarberShopController : ControllerBase
         return Ok(barberShop);
     }
     
-    [HttpGet("state/{state}")]
-    public async Task<IActionResult> GetBarberShopsByState(string state)
+    [HttpGet("/barberShops")]
+    public async Task<IActionResult> GetBarberShops(
+        [FromQuery] string? city,
+        [FromQuery] string? state,
+        [FromQuery] string? barberName,
+        [FromQuery] string? barberShopName)
     {
-        var barberShop = await _service.GetBarberShopsByState(state);
-        
-        if (barberShop == null)
-            return NotFound();
+        var barberShop = await _service.SearchBarberShops(barberShopName, city, state, barberName);
         
         return Ok(barberShop);
-    }
-    
-    [HttpGet("city/{city}")]
-    public async Task<IActionResult> GetBarberShopsByCity(string city)
-    {
-        var barberShop = await _service.GetBarberShopsByState(city);
-        
-        if (barberShop == null)
-            return NotFound();
-        
-        return Ok(barberShop);
-    }
-    
-    [HttpGet("{userId}")]
-    public async Task<IActionResult> GetBarberShopsByUser(int userId)
-    {
-        var barberShop = await _service.GetAllBarberShopsByUserId(userId);
-
-        return Ok(barberShop);
-    }
-    
-    [HttpGet]
-    public async Task<IActionResult> GetAllBarberShops()
-    {
-        var barberShops = await _service.GetAllBarberShops();
-        
-        return Ok(barberShops);
     }
     
     [HttpDelete("{barberShopId}")]
     public async Task<IActionResult> DeleteBarberShop(int barberShopId)
     {
-        var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+        var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? string.Empty);
 
         var success = await _service.DeleteBarberShop(barberShopId, userId);
 

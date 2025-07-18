@@ -43,7 +43,6 @@ public class AccountController : Controller
 
         return Ok(new { token, user = new { user.FirstName, user.Email } });
     }
-
     
     [HttpPost]
     public async Task<IActionResult> Logout()

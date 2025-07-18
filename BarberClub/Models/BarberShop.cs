@@ -19,5 +19,5 @@ public class BarberShop
     public int UserId { get; set; }
     
     [ForeignKey("UserId")]
-    public virtual User User { get; set; }
+    public virtual User Barber { get; set; }
 }

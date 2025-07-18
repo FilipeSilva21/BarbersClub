@@ -1,0 +1,69 @@
+/* /css/barbearias.css */
+
+/* Painel de Filtros */
+.filters-panel {
+    background-color: #f8f9fa; /* Um cinza bem claro */
+    border: 1px solid #dee2e6;
+}
+
+/* Reutilizando o estilo da barra de busca da sua home */
+.search-bar {
+    position: relative;
+}
+
+.search-bar .bi-search {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    color: #6c757d;
+}
+
+.search-bar .form-control {
+    padding-left: 40px;
+}
+
+/* Estilo para os cards das barbearias */
+.barbershop-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.barbershop-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+}
+
+.barbershop-card .card-img-top {
+    width: 100%;
+    height: 200px;
+    object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
+}
+
+.barbershop-card .card-title {
+    color: #343a40;
+}
+
+/* O mesmo botão dourado da sua home */
+.btn-gold {
+    background-color: #d4af37; /* Tom de dourado */
+    color: #fff;
+    border: none;
+    font-weight: bold;
+}
+
+.btn-gold:hover {
+    background-color: #c8a02b;
+    color: #fff;
+}
+
+/* Estilo da Paginação */
+.pagination .page-item.active .page-link {
+    background-color: #343a40; /* Cor escura para combinar */
+    border-color: #343a40;
+}
+
+.pagination .page-link {
+    color: #343a40;
+}

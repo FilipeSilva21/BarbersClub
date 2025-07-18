@@ -9,13 +9,9 @@ public interface IBarberShopService
     
     Task<BarberShop?> GetBarberShopById(int barberShopId);
     
-    Task<IEnumerable<BarberShop?>> GetBarberShopsByState(string state);
+    Task<IEnumerable<BarberShop?>> GetBarberShops();
     
-    Task<IEnumerable<BarberShop?>> GetBarberShopsByCity(string city);
-    
-    Task<IEnumerable<BarberShop?>> GetAllBarberShops();
-    
-    Task<IEnumerable<BarberShop?>> GetAllBarberShopsByUserId(int userId);
+    Task<IEnumerable<BarberShop?>> SearchBarberShops(string? barberShopName, string? state, string? city, string? barberName);
     
     Task<BarberShop?> UpdateBarberShop(int barberShopId, int userId, BarberShopUpdateRequest request);
     

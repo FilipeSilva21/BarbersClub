@@ -59,7 +59,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     };
 });
 
-builder.Services.AddScoped<IBarberShopService, BarberShopShopService>();
+builder.Services.AddScoped<IBarberShopService, BarberShopService>();
 
 var app = builder.Build(); 
 

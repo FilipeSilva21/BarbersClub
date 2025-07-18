@@ -1,0 +1,48 @@
+@{
+ViewData["Title"] = "Encontre Barbearias";
+}
+@section Styles {
+<link rel="stylesheet" href="~/css/NavBar/BarberShops.css" asp-append-version="true" /> 
+}
+
+<div id="barbershops-list-view" class="container mt-5">
+    <div class="text-center mb-5">
+        <h1 class="display-5 fw-bold">Encontre a Barbearia Perfeita</h1>
+        <p class="lead">Utilize os filtros abaixo para refinar sua busca.</p>
+    </div>
+
+    <div class="filters-panel p-4 mb-5 shadow-sm rounded">
+        <form id="search-form">
+            <div class="row g-3 align-items-end">
+                <div class="col-lg-4 col-md-12">
+                    <label for="searchTerm" class="form-label fw-semibold">Buscar por nome ou serviço</label>
+                    <input name="searchTerm" id="searchTerm" class="form-control" type="search" placeholder="Ex: Navalha de Ouro...">
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <label for="city" class="form-label fw-semibold">Cidade</label>
+                    <input name="city" id="city" type="text" class="form-control" placeholder="Ex: Salvador">
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <label for="barber" class="form-label fw-semibold">Barbeiro</label>
+                    <input name="barber" id="barber" type="text" class="form-control" placeholder="Ex: João Silva">
+                </div>
+                <div class="col-lg-2 col-md-12 text-end">
+                    <button class="btn btn-gold w-100" type="submit">
+                        <i class="bi bi-funnel-fill me-2"></i>Filtrar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="results-section">
+        <h3 class="fw-bold mb-4">Barbearias Encontradas</h3>
+        <div id="results-container" class="row g-4">
+            <p id="loading-message">Carregando barbearias...</p>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script src="~/js/NavBar/BarberShops.js" asp-append-version="true"></script>
+}

@@ -77,6 +77,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/73636858f7daab78f2cc49bdcbeaa9d9ef62f4b520b14958fcf6c4c276b2b53d/CookieAuthenticationOptions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f6f937e7fde51c3ca061c59112cdd35b76a72e9ef8821ac361c6ef71e90ea88/ControllerEndpointRouteBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BarberClub/Controllers/NavBarController.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
@@ -155,6 +156,8 @@
       <workItem from="1751843347189" duration="3405000" />
       <workItem from="1751939588555" duration="10372000" />
       <workItem from="1752032210710" duration="21351000" />
+      <workItem from="1752544950825" duration="1431000" />
+      <workItem from="1752798946460" duration="19391000" />
     </task>
     <task id="LOCAL-00001" summary="frontend connected to backend">
       <option name="closed" value="true" />

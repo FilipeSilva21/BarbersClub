@@ -56,7 +56,7 @@ public class AuthService(ProjectDbContext context, IConfiguration config): IAuth
     public async Task<BarberShop?> GetAllBarberShopsByUser(int userId)
     {
         return await context.BarberShops
-            .Include(u => u.User)
+            .Include(u => u.Barber)
             .FirstOrDefaultAsync(b => b.UserId == userId);
     }
 

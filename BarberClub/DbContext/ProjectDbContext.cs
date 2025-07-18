@@ -14,7 +14,7 @@ public class ProjectDbContext(DbContextOptions<ProjectDbContext> options) : Micr
 
         modelBuilder.Entity<User>()
             .HasMany(u => u.BarberShops)
-            .WithOne(b => b.User)
+            .WithOne(b => b.Barber)
             .HasForeignKey(b => b.UserId)
             .OnDelete(DeleteBehavior.Cascade);
 

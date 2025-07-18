@@ -40,7 +40,7 @@
         if (spinner) spinner.style.display = 'inline-block';
 
         try {
-            const response = await fetch('/auth/auth/register', {
+            const response = await fetch('/auth/Auth/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(requestData)
