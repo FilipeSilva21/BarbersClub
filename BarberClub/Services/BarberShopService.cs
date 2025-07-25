@@ -33,7 +33,9 @@ public class BarberShopService : IBarberShopService
 
         _context.BarberShops.Add(barberShop);
         await _context.SaveChangesAsync();
-
+        
+        await _context.Entry(barberShop).Reference(b => b.Barber).LoadAsync();
+ 
         return barberShop;
     }
 

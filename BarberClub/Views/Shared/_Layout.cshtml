@@ -46,12 +46,35 @@
                     }
                 </ul>
 
-                <ul class="navbar-nav ms-auto" id="user-menu">
+                <ul class="navbar-nav ms-auto d-flex align-items-center" id="user-menu">
+
+                    <li class="nav-item me-2">
+                        <a class="btn btn-outline-gold" asp-controller="BarberShop" asp-action="Register">
+                            Tem uma barbearia? Cadastre-a aqui!
+                        </a>
+                    </li>
+
+                    @if (User.Identity is { IsAuthenticated: true })
+                    {
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle"></i> Olá, @User.Identity.Name!
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+                            <li><a class="dropdown-item" asp-controller="Account" asp-action="Dashboard">Meu Dashboard</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><button class="dropdown-item" onclick="logout()">Sair</button></li>
+                        </ul>
+                    </li>
+                    }
+                    else
+                    {
                     <li class="nav-item">
-                        <a class="btn btn-outline-gold" href="/Account/Login">
+                        <a class="btn btn-gold" asp-controller="Account" asp-action="Login">
                             <i class="bi bi-box-arrow-in-right"></i> Entrar
                         </a>
                     </li>
+                    }
                 </ul>
             </div>
         </div>

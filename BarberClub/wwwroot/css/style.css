@@ -54,16 +54,19 @@ body {
 
 /* Botão de "Entrar" customizado */
 .btn-outline-gold {
-    color: var(--bc-gold);
-    border-color: var(--bc-gold);
-    font-weight: 500;
-    transition: all 0.3s ease;
+    /* Cor do texto e da borda */
+    color: #c5a86a; /* Use sua cor dourada aqui */
+    border-color: #c5a86a;
+    background-color: transparent; /* Fundo transparente */
 }
 
+/* Estilo para quando o mouse passa por cima */
 .btn-outline-gold:hover {
-    background-color: var(--bc-gold);
-    color: var(--bc-dark);
-    border-color: var(--bc-gold);
+    /* Cor do fundo muda para dourado */
+    background-color: #c5a86a;
+
+    /* Cor do texto muda para uma cor escura para criar contraste */
+    color: #121212;
 }
 
 /* ===== RODAPÉ ===== */

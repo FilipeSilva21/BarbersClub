@@ -1,0 +1,107 @@
+/* Estilo geral da página para centralizar o conteúdo */
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: var(--bc-dark, #121212);
+    color: var(--bc-text-primary, #f0f0f0);
+}
+
+/* Container principal do formulário */
+.auth-container {
+    width: 100%;
+    max-width: 500px;
+    padding: 2rem;
+}
+
+/* Estilo do formulário */
+form {
+    background-color: var(--bc-surface, #1e1e1e);
+    padding: 2.5rem;
+    border-radius: 10px;
+    border: 1px solid #333;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+form h2 {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--bc-gold, #c5a86a);
+}
+
+form .form-label {
+    font-weight: 500;
+    color: var(--bc-text-secondary, #a0a0a0);
+}
+
+form .form-control {
+    background-color: #2a2a2a;
+    border: 1px solid #444;
+    color: #fff;
+    border-radius: 5px;
+    padding: 0.75rem 1rem;
+}
+
+form .form-control:focus {
+    background-color: #2a2a2a;
+    border-color: var(--bc-gold, #c5a86a);
+    box-shadow: 0 0 0 0.25rem rgba(197, 168, 106, 0.25);
+    color: #fff;
+}
+
+/* Placeholder com cor mais suave */
+form .form-control::placeholder {
+    color: #6c757d;
+}
+
+/* Mensagem de erro */
+.error-message {
+    color: #dc3545;
+    font-size: 0.9rem;
+    min-height: 1.2rem; /* Evita que o layout "pule" quando a mensagem aparece */
+}
+
+/* Estilo do botão principal */
+.btn-primary {
+    background-color: var(--bc-gold, #c5a86a);
+    color: var(--bc-dark, #121212);
+    border: none;
+    padding: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--bc-gold-hover, #e4d5b7);
+    color: var(--bc-dark, #121212);
+}
+
+/* Oculta o spinner por padrão */
+.spinner-border {
+    display: none;
+}
+
+/* Mostra o spinner quando o botão estiver desabilitado (durante o loading) */
+.btn-primary:disabled .spinner-border {
+    display: inline-block;
+}
+
+.btn-outline-gold {
+    /* Cor do texto e da borda */
+    color: #c5a86a; /* Use sua cor dourada aqui */
+    border-color: #c5a86a;
+    background-color: transparent; /* Fundo transparente */
+}
+
+/* Estilo para quando o mouse passa por cima */
+.btn-outline-gold:hover {
+    /* Cor do fundo muda para dourado */
+    background-color: #c5a86a;
+
+    /* Cor do texto muda para uma cor escura para criar contraste */
+    color: #121212;
+}

@@ -1,7 +1,7 @@
 using BarberClub.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BarberClub.Controllers;
+namespace BarberClub.Controllers.WebControllers;
 
 public class NavBarController : Controller
 {
@@ -14,7 +14,7 @@ public class NavBarController : Controller
 
     [HttpGet]
     [Route("/NavBar/BarberShop")]
-    public async Task<IActionResult> BarberShop()
+    public IActionResult BarberShop()
     {
         return View("~/Views/NavBar/BarberShop.cshtml");
     }

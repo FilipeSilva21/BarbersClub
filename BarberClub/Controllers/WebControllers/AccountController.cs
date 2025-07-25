@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BarberClub.Controllers;
+namespace BarberClub.Controllers.WebControllers;
 
 public class AccountController : Controller
 {

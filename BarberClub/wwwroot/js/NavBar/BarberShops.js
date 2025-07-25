@@ -43,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function renderResults(shops) {
-        console.log("Dados recebidos da API:", shops);
         
         if (!shops || shops.length === 0) {
             resultsContainer.innerHTML = '<div class="col-12 text-center text-white-50"><p class="fs-4">Nenhuma barbearia encontrada.</p></div>';
