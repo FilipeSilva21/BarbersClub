@@ -103,3 +103,31 @@ main .container {
     padding-top: 2rem;
     padding-bottom: 2rem;
 }
+
+/* Adicione este bloco ao seu arquivo style.css */
+
+/* Botão Dourado Sólido (o que faltava) */
+.btn-gold {
+    background-color: var(--bc-gold, #c5a86a);
+    color: var(--bc-dark, #121212);
+    border-color: var(--bc-gold, #c5a86a);
+    font-weight: 500;
+}
+
+.btn-gold:hover {
+    background-color: var(--bc-gold-hover, #e4d5b7);
+    border-color: var(--bc-gold-hover, #e4d5b7);
+    color: var(--bc-dark, #121212);
+}
+
+.nav-link-gold {
+    color: var(--bc-gold, #c5a86a); /* Cor dourada do seu tema */
+    font-weight: 500;
+    font-size: 0.9rem; /* Um pouco menor que o texto normal */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.nav-link-gold:hover {
+    color: var(--bc-gold-hover, #e4d5b7); /* Cor mais clara ao passar o mouse */
+}

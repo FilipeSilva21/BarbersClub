@@ -36,21 +36,6 @@
   color: #6c757d;
 }
 
-.btn-gold {
-  background-color: var(--bc-gold, #c5a86a);
-  color: var(--bc-dark, #121212);
-  border: none;
-  border-radius: 50px;
-  font-weight: 500;
-  height: 50px;
-  transition: background-color 0.3s ease;
-}
-
-.btn-gold:hover {
-  background-color: var(--bc-gold-hover, #e4d5b7);
-  color: var(--bc-dark, #121212);
-}
-
 .featured-section {
   background-color: #1a1a1a;
 }
