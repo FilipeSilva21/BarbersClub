@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         const formData = new FormData(form);
-        const actionUrl = '/barberShopApi/register'; // URL da API
+        const actionUrl = '/barbershopApi/register'; // URL da API
 
         const formObject = {};
         formData.forEach((value, key) => {
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             if (response.ok) {
-                successModal.show(); 
+                successModal.show();
             } else {
                 try {
                     const errorData = await response.json();

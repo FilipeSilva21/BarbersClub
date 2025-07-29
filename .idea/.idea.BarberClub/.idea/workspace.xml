@@ -9,39 +9,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6d0fe01-8bb2-4d5d-8b8f-9d6258a8d21b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/BarberClub/wwwroot/css/Account/Login.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BarberClub/wwwroot/css/Account/Register.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BarberClub/wwwroot/css/home.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BarberClub/wwwroot/css/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BarberClub/wwwroot/js/Account/Login.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BarberClub/wwwroot/js/Account/Register.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BarberClub/wwwroot/js/Auth.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BarberClub/wwwroot/js/home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/BarberClub/CopilotIndices/17.14.794.21998/CodeChunks.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/BarberClub/CopilotIndices/17.14.794.21998/SemanticSymbols.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/BarberClub/DesignTimeBuild/.dtbcache.v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/BarberClub/FileContentIndex/d83e84f9-71b1-4030-a983-46af96e70a0f.vsidx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/BarberClub/v17/.futdcache.v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/BarberClub/v17/.suo" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/BarberClub/v17/DocumentLayout.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/ProjectEvaluation/barberclub.metadata.v9.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/ProjectEvaluation/barberclub.projects.v9.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/ProjectEvaluation/barberclub.strings.v9.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Controllers/AccountController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Controllers/AccountController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Controllers/AuthController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Controllers/AuthController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/DTOs/UserRegisterRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/DTOs/UserRegisterRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/UserDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Migrations/UserDbContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Models/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Models/User.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Services/AuthService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Services/AuthService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Services/IAuthService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Services/IAuthService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Views/Account/Login.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Views/Account/Login.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Views/Account/Register.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Views/Account/Register.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Views/Home/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Views/Home/Index.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Views/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Views/Shared/_Layout.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/css/site.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/wwwroot/js/script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/js/site.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/js/BarberShop/Create.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/wwwroot/js/BarberShop/Create.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,6 +64,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master",
     "last_opened_file_path": "C:/Users/filip/Downloads/.net projects/BarberClub",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
@@ -168,7 +137,7 @@
       <workItem from="1753639998575" duration="2047000" />
       <workItem from="1753650827796" duration="908000" />
       <workItem from="1753748019832" duration="3029000" />
-      <workItem from="1753757959485" duration="10179000" />
+      <workItem from="1753757959485" duration="10581000" />
     </task>
     <task id="LOCAL-00001" summary="frontend connected to backend">
       <option name="closed" value="true" />
@@ -186,7 +155,15 @@
       <option name="project" value="LOCAL" />
       <updated>1751781047434</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="refactoring controllers">
+      <option name="closed" value="true" />
+      <created>1753769466542</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1753769466542</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -198,7 +175,8 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="frontend connected to backend" />
     <MESSAGE value="frontend connected to backend v2" />
-    <option name="LAST_COMMIT_MESSAGE" value="frontend connected to backend v2" />
+    <MESSAGE value="refactoring controllers" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactoring controllers" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
