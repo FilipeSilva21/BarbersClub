@@ -9,7 +9,7 @@
 }
 
 <div class="auth-container">
-    <form asp-action="Create" asp-controller="BarberShop" method="post" id="barberShopForm">
+    <form asp-action="Create" asp-controller="BarberShopApi" method="post" id="barberShopForm">
         <h2>Cadastre sua Barbearia</h2>
         <p class="text-muted">Preencha as informações abaixo para adicionar sua barbearia à plataforma.</p>
 
@@ -59,7 +59,7 @@
             <div class="modal-header border-0"><h5 class="modal-title">Sucesso!</h5></div>
             <div class="modal-body">Sua barbearia foi cadastrada com sucesso!</div>
             <div class="modal-footer border-0">
-                <a id="redirectButton" href="@Url.Action("Index", "Dashboard")" class="btn btn-primary">Ok, ir para o Dashboard</a>
+                <a id="redirectButton" href="@Url.Action("Index", "Home")" class="btn btn-primary">Ok, ir para o Dashboard</a>
             </div>
         </div>
     </div>

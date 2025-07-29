@@ -7,15 +7,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BarberClub.Controllers.ServiceControllers;
 
-[Route("barbershop/[controller]")]
+[Route("barberShopApi")]
 [ApiController]
-public class BarberShopController(IBarberShopService barberShopService): ControllerBase
+public class BarberShopApiController(IBarberShopService barberShopService): ControllerBase
 {
     
-    [HttpPost ("/barberShopApi/register")]
-    [Authorize] 
+    [HttpPost ("register")] 
+    [Authorize]
     public async Task<IActionResult> RegisterBarberShop([FromBody] BarberShopRegisterRequest request)
     {
+        Console.WriteLine(request + "1");
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
@@ -37,11 +38,11 @@ public class BarberShopController(IBarberShopService barberShopService): Control
         {
             return NotFound($"Autor com ID {userId} não encontrado no banco de dados.");
         }
-
+        Console.WriteLine(request + "2");
         return Ok(barberShop);
     }
 
-    [HttpGet("/barberShop/getAll")]
+    [HttpGet("getAll")]
     public async Task<IActionResult> GetBarberShops()
     {
         var barberShops = await barberShopService.GetBarberShops();
@@ -49,7 +50,7 @@ public class BarberShopController(IBarberShopService barberShopService): Control
         return Ok(barberShops);
     }
     
-    [HttpGet("/barberShop/{barberShopId}")]
+    [HttpGet("{barberShopId}")]
     public async Task<IActionResult> GetBarberShopById(int barberShopId)
     {
         var barberShop = await barberShopService.GetBarberShopById(barberShopId);
@@ -60,7 +61,7 @@ public class BarberShopController(IBarberShopService barberShopService): Control
         return Ok(barberShop);
     }
     
-    [HttpGet("/barberShop/search")]
+    [HttpGet("search")]
     public async Task<IActionResult> SearchBarberShops(
         [FromQuery] string? city,
         [FromQuery] string? state,
@@ -72,7 +73,7 @@ public class BarberShopController(IBarberShopService barberShopService): Control
         return Ok(barberShop);
     }
     
-    [HttpDelete("/barberShop/{barberShopId}")]
+    [HttpDelete("{barberShopId}")]
     public async Task<IActionResult> DeleteBarberShop(int barberShopId)
     {
         var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? string.Empty);

@@ -18,4 +18,11 @@ public class NavBarController : Controller
     {
         return View("~/Views/NavBar/BarberShop.cshtml");
     }
+    
+    [HttpGet]
+    [Route("/NavBar/Dashboard")]
+    public IActionResult Dashboard()
+    {
+        return View("~/Views/NavBar/Dashboard.cshtml");
+    }
 }

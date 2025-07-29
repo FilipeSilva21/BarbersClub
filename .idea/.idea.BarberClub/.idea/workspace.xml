@@ -75,9 +75,8 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/73636858f7daab78f2cc49bdcbeaa9d9ef62f4b520b14958fcf6c4c276b2b53d/CookieAuthenticationOptions.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f6f937e7fde51c3ca061c59112cdd35b76a72e9ef8821ac361c6ef71e90ea88/ControllerEndpointRouteBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BarberClub/Controllers/NavBarController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///AIAssistantSnippet.." root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///AIAssistantSnippet.." root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
@@ -104,7 +103,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.sourceCode.C#",
+    "settings.editor.selected.configurable": "settings.sync",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -164,7 +163,12 @@
       <workItem from="1753483192911" duration="1714000" />
       <workItem from="1753491467827" duration="419000" />
       <workItem from="1753492664747" duration="2467000" />
-      <workItem from="1753544317768" duration="6815000" />
+      <workItem from="1753544317768" duration="7560000" />
+      <workItem from="1753630373845" duration="396000" />
+      <workItem from="1753639998575" duration="2047000" />
+      <workItem from="1753650827796" duration="908000" />
+      <workItem from="1753748019832" duration="3029000" />
+      <workItem from="1753757959485" duration="10179000" />
     </task>
     <task id="LOCAL-00001" summary="frontend connected to backend">
       <option name="closed" value="true" />
