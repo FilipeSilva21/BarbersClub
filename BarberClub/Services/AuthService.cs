@@ -50,7 +50,7 @@ public class AuthService(ProjectDbContext context, IConfiguration config): IAuth
             return (null, null);
     
         var token = GenerateToken(user);
-        return (token, user); 
+        return (await token, user); 
     }
 
     public async Task<BarberShop?> GetAllBarberShopsByUser(int userId)
@@ -60,13 +60,16 @@ public class AuthService(ProjectDbContext context, IConfiguration config): IAuth
             .FirstOrDefaultAsync(b => b.UserId == userId);
     }
 
-    private string GenerateToken(User users)
+    private async Task<string> GenerateToken(User users)
     {
+        var hasBarberShops = await context.BarberShops.AnyAsync(b => b.UserId == users.UserId);
+        
         var claims = new List<Claim>
         {
             new Claim("firstName", users.FirstName),
             new Claim(ClaimTypes.Email, users.Email),
             new Claim(ClaimTypes.NameIdentifier, users.UserId.ToString()),
+            new Claim("hasBarberShops", hasBarberShops.ToString()),
             new Claim(ClaimTypes.Role, users.Role.ToString())
         };
 
@@ -83,6 +86,7 @@ public class AuthService(ProjectDbContext context, IConfiguration config): IAuth
             expires: DateTime.Now.AddDays(1),
             signingCredentials: creds
         );
+        
         return new JwtSecurityTokenHandler().WriteToken(tokenDescriptor);
     }
 }

@@ -1,4 +1,4 @@
-﻿// Em wwwroot/js/Account/Auth.js
+﻿// Em wwwroot/js/Auth/Auth.js
 
 function decodeJwtPayload(token) {
     try {
@@ -12,31 +12,41 @@ function decodeJwtPayload(token) {
         return null;
     }
 }
-
 function checkAuthentication() {
     const userMenu = document.getElementById('user-menu');
     if (!userMenu) return;
 
     const token = localStorage.getItem('jwt_token');
 
-    const currentPagePath = window.location.pathname;
+    const currentPagePath = window.location.pathname.toLowerCase(); 
     const registerPath = "/barbershop/register";
+    const dashboardPath = "/navbar/dashboard";
 
     let registerButtonHtml = '';
 
     if (token) {
         const payload = decodeJwtPayload(token);
+        console.log("Conteúdo do Token (Payload):", payload);
+        const userHasBarberShops = payload.hasBarberShops === 'True';
 
-        if (currentPagePath.toLowerCase() !== registerPath.toLowerCase()) {
+        if (userHasBarberShops && currentPagePath !== dashboardPath) {
             registerButtonHtml = `
             <li class="nav-item me-3">
-                <a class="nav-link-gold" href="/barbershop/register">
+                <a class="btn btn-gold" href="/NavBar/Dashboard">
+                    <i class="bi bi-speedometer2"></i> Dashboard
+                </a>
+            </li>
+        `;
+        } else if (!userHasBarberShops && currentPagePath !== registerPath) {
+            registerButtonHtml = `
+            <li class="nav-item me-3">
+                <a class="nav-link-gold" href="/barbershops/register">
                     Tem uma barbearia? <br> Cadastre-a aqui!
                 </a>
             </li>
         `;
         }
-        
+
         if (payload && payload.firstName) {
             userMenu.innerHTML = registerButtonHtml + `
                 <li class="nav-item dropdown">
@@ -46,7 +56,6 @@ function checkAuthentication() {
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="/Account/Profile">Meu Perfil</a></li>
-                        <li><a class="dropdown-item" href="/Account/Dashboard">Meu Dashboard</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
                             <button type="button" class="dropdown-item" onclick="logout()">
@@ -58,9 +67,19 @@ function checkAuthentication() {
             `;
         }
     } else {
+        if (currentPagePath !== registerPath) {
+            registerButtonHtml = `
+            <li class="nav-item me-3">
+                <a class="nav-link-gold" href="/barbershop/register">
+                    Tem uma barbearia? <br> Cadastre-a aqui!
+                </a>
+            </li>
+        `;
+        }
+
         userMenu.innerHTML = registerButtonHtml + `
             <li class="nav-item">
-                <a class="btn btn-gold" href="/Account/Login">
+                <a class="btn btn-gold" href="/Auth/Login">
                     <i class="bi bi-box-arrow-in-right"></i> Entrar
                 </a>
             </li>

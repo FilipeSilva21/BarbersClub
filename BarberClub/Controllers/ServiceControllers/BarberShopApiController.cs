@@ -16,7 +16,6 @@ public class BarberShopApiController(IBarberShopService barberShopService): Cont
     [Authorize]
     public async Task<IActionResult> RegisterBarberShop([FromBody] BarberShopRegisterRequest request)
     {
-        Console.WriteLine(request + "1");
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
@@ -68,7 +67,7 @@ public class BarberShopApiController(IBarberShopService barberShopService): Cont
         [FromQuery] string? barberName,
         [FromQuery] string? barberShopName)
     {
-        var barberShop = await barberShopService.SearchBarberShops(barberShopName, city, state, barberName);
+        var barberShop = await barberShopService.SearchBarberShops(barberShopName, state, city, barberName);
         
         return Ok(barberShop);
     }

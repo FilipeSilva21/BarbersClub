@@ -8,7 +8,7 @@ namespace BarberClub.Controllers.ServiceControllers;
 
 [Route("auth/[controller]")]
 [ApiController]
-public class AuthController(IAuthService authService): ControllerBase
+public class AuthApiController(IAuthService authService): ControllerBase
 {
     [HttpPost ("register")]
     public async Task<ActionResult<User>> Register(UserRegisterRequest request)
@@ -16,7 +16,7 @@ public class AuthController(IAuthService authService): ControllerBase
         var user = await authService.RegisterAsync(request);
 
         if (user is null)
-            return BadRequest("Email ja cadastrado");
+            return BadRequest(new { message = "Email já cadastrado" });
         
         return Ok(user);
     }
@@ -33,27 +33,12 @@ public class AuthController(IAuthService authService): ControllerBase
 
         return Ok(new
         {
-            token = token,
+            token,
             user = new
             {
                 name = user.FirstName,
                 email = user.Email
             }
         });
-    }
-
-
-    [Authorize]
-    [HttpGet ("home")]
-    public IActionResult AuthenticationOnlyEndpoint()
-    {
-        return Ok("Bem-vindo ao BarberClub!");
-    }
-    
-    [Authorize(Roles = "Admin")]
-    [HttpGet ("admin")]
-    public IActionResult AdminOnlyEndpoint()
-    {
-        return Ok("Painel de controle");
     }
 }

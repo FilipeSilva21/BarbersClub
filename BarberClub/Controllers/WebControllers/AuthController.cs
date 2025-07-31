@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BarberClub.Controllers.WebControllers;
 
-public class AccountController(IAuthService authService) : Controller
+public class AuthController(IAuthService authService) : Controller
 {
     [HttpGet]
     public IActionResult Login()

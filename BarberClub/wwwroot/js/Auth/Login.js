@@ -6,9 +6,7 @@
     const submitButton = form.querySelector('button[type="submit"]');
     const spinner = submitButton.querySelector('.spinner-border');
     if (spinner) spinner.style.display = 'inline-block';
-
-
-    // Pega a URL de redirecionamento do atributo data no formulário
+    
     const redirectUrl = form.dataset.redirectUrl;
 
     form.addEventListener('submit', async function (event) {
@@ -21,7 +19,7 @@
         const spinner = submitButton ? submitButton.querySelector('.spinner-border') : null;
 
         try {
-            const response = await fetch('/Account/login', {
+            const response = await fetch('/Auth/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password })
@@ -39,8 +37,8 @@
             console.error('Erro de conexão:', error);
             errorMessageDiv.textContent = 'Erro de conexão com o servidor.';
         } finally {
-            submitButton.disabled = false;
-            spinner.style.display = 'none';
+            spinner.classList.remove('d-none'); 
+            spinner.classList.add('d-none');
         }
     });
 });

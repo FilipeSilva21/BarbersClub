@@ -17,7 +17,10 @@ public class BarberShop
     public string PhoneNumber { get; set; } = string.Empty;
     
     public int UserId { get; set; }
-    
     [ForeignKey("UserId")]
     public virtual User Barber { get; set; }
+    
+    public virtual ICollection<Service> Services { get; set; }
+    
+    public virtual ICollection<Rating> Ratings { get; set; }
 }

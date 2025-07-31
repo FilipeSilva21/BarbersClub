@@ -10,6 +10,7 @@ public interface IBarberShopService
     Task<BarberShop?> GetBarberShopById(int barberShopId);
     
     Task<IEnumerable<BarberShop?>> GetBarberShops();
+    Task<IEnumerable<User>> GetClientsByBarberShop(int barberShopId);
     
     Task<IEnumerable<BarberShop?>> SearchBarberShops(string? barberShopName, string? state, string? city, string? barberName);
     

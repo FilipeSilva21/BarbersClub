@@ -13,14 +13,21 @@ public class NavBarController : Controller
     }
 
     [HttpGet]
-    [Route("/NavBar/BarberShop")]
+    [Route("/barbershops")]
     public IActionResult BarberShop()
     {
-        return View("~/Views/NavBar/BarberShop.cshtml");
+        return View("~/Views/NavBar/BarberShop/ShowBarberShops.cshtml");
     }
     
     [HttpGet]
-    [Route("/NavBar/Dashboard")]
+    [Route("/barbershops/register")]
+    public IActionResult RegisterBarberShop()
+    {
+        return View("~/Views/NavBar/BarberShop/RegisterBarberShop.cshtml");    
+    }
+    
+    [HttpGet]
+    [Route("/navbar/dashboard")]
     public IActionResult Dashboard()
     {
         return View("~/Views/NavBar/Dashboard.cshtml");

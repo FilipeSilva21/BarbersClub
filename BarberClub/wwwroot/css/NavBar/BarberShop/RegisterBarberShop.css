@@ -1,11 +1,11 @@
 /* Estilo geral da página para centralizar o conteúdo */
-body {
+
+
+main {
     display: flex;
-    align-items: center;
     justify-content: center;
-    min-height: 100vh;
-    background-color: var(--bc-dark, #121212);
-    color: var(--bc-text-primary, #f0f0f0);
+    align-items: center;
+    /* 'flex-grow: 1' já é herdado do layout, o que é perfeito. */
 }
 
 /* Container principal do formulário */

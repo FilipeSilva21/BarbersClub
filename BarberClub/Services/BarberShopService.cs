@@ -78,6 +78,17 @@ public class BarberShopService : IBarberShopService
         return await query.ToListAsync();
     }
 
+    public async Task<IEnumerable<User>> GetClientsByBarberShop(int barberShopId)
+    {
+        var clients = await _context.Services
+            .Where(s => s.BarberShopId == barberShopId)
+            .Select(s => s.Client)
+            .Distinct()
+            .ToListAsync();
+
+        return clients;
+    }
+    
     public Task<BarberShop?> UpdateBarberShop(int barberShopId, int userId, BarberShopUpdateRequest request)
     {
         throw new NotImplementedException();

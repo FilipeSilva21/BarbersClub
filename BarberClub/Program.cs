@@ -43,6 +43,12 @@ builder.Services.AddDbContext<ProjectDbContext>(options =>
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 
+builder.Services.AddScoped<IBarberShopService, BarberShopService>();
+
+builder.Services.AddScoped<IServiceService, ServiceService>();
+
+builder.Services.AddScoped<IRatingService, RatingService>();
+
 builder.Services.AddAuthentication(options =>
     {
         options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -63,8 +69,6 @@ builder.Services.AddAuthentication(options =>
             )
         };
     });
-
-builder.Services.AddScoped<IBarberShopService, BarberShopService>();
 
 var app = builder.Build(); 
 

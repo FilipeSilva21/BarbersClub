@@ -1,8 +1,10 @@
 ﻿using BarberClub.Models.Enums;
 using BarberClub.Models.Enums;
+using Microsoft.EntityFrameworkCore;
 
 namespace BarberClub.Models;
 
+[Index(nameof(Email), IsUnique = true)]
 public class User
 {
     public int UserId { get; set; }
@@ -18,4 +20,8 @@ public class User
     public Roles Role { get; set; }
     
     public virtual ICollection<BarberShop> BarberShops { get; set; }
+    
+    public virtual ICollection<Service> Services { get; set; }
+    
+    public virtual ICollection<Rating> Ratings { get; set; }
 }

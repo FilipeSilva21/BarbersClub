@@ -3,7 +3,7 @@
 }
 
 @section Styles {
-    <link rel="stylesheet" href="~/css/Account/Login.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Auth/Login.css" asp-append-version="true" />
 }
 
 
@@ -25,13 +25,14 @@
         <div id="errorMessage" class="error-message mb-3"></div>
 
         <button type="submit" class="btn btn-primary w-100 d-flex align-items-center justify-content-center">
+            <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
             <span>Entrar</span>
         </button>
 
-        <a href="@Url.Action("Register", "Account")" class="auth-link">Ainda não tem uma conta? Cadastre-se</a>
+        <a href="@Url.Action("Register", "Auth")" class="auth-link">Ainda não tem uma conta? Cadastre-se</a>
     </form>
 </div>
 
 @section Scripts {
-    <script src="~/js/Account/Login.js" asp-append-version="true"></script>
+    <script src="~/js/Auth/Login.js" asp-append-version="true"></script>
 }

@@ -12,13 +12,11 @@ document.addEventListener('DOMContentLoaded', function () {
         try {
             const urlParams = new URLSearchParams();
 
-            // Adiciona os parâmetros à URL apenas se eles tiverem valor e não forem vazios
             if (params.barberShopName) urlParams.append('barberShopName', params.barberShopName);
             if (params.city) urlParams.append('city', params.city);
             if (params.state) urlParams.append('state', params.state);
             if (params.barber) urlParams.append('barberName', params.barber);
 
-            // Verifica se algum parâmetro foi de fato adicionado à URL
             const hasSearchParams = Array.from(urlParams.values()).some(v => v);
 
             const endpoint = hasSearchParams
@@ -77,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const params = {
             barberShopName: formData.get('searchTerm'),
             city: formData.get('city'),
-            state: formData.get('state'), // Adicionado o filtro de estado que faltava
+            state: formData.get('state'), 
             barber: formData.get('barber')
         };
 

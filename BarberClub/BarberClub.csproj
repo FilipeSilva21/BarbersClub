@@ -23,4 +23,14 @@
       <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.12.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Views\BarberShop\RegisterBarberShop.cshtml" />
+      <_ContentIncludedByDefault Remove="wwwroot\js\BarberShop\RegisterBarberShop.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\BarberShop\RegisterBarberShop.css" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <AdditionalFiles Include="Views\NavBar\BarberShop\RegisterBarberShop.cshtml" />
+    </ItemGroup>
+
 </Project>

@@ -2,7 +2,7 @@
 ViewData["Title"] = "Encontre Barbearias";
 }
 @section Styles {
-<link rel="stylesheet" href="~/css/NavBar/BarberShops.css" asp-append-version="true" /> 
+<link rel="stylesheet" href="~/css/NavBar/BarberShop/ShowBarberShops.css" asp-append-version="true" /> 
 }
 
 <div id="barbershops-list-view" class="container mt-5">
@@ -14,7 +14,7 @@ ViewData["Title"] = "Encontre Barbearias";
     <div class="filters-panel p-4 mb-5 shadow-sm rounded">
         <form id="search-form">
             <div class="row g-3 align-items-end">
-                <div class="col-lg-4 col-md-12">
+                <div class="col-lg-6 col-md-12">
                     <label for="searchTerm" class="form-label fw-semibold">Buscar por nome ou serviço</label>
                     <input name="searchTerm" id="searchTerm" class="form-control" type="search" placeholder="Ex: Navalha de Ouro...">
                 </div>
@@ -44,5 +44,5 @@ ViewData["Title"] = "Encontre Barbearias";
 </div>
 
 @section Scripts {
-<script src="~/js/NavBar/BarberShops.js" asp-append-version="true"></script>
+<script src="~/js/NavBar/BarberShop/ShowBarberShops.js" asp-append-version="true"></script>
 }

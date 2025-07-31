@@ -1,17 +1,13 @@
-﻿/*
- * CSS Específico para as páginas de Autenticação (Login, Cadastro, etc.)
- * Este estilo será aplicado sobre o style.css e o Bootstrap.
-*/
+﻿/* wwwroot/css/Login.css */ 
 
-/* O container principal que centraliza o formulário */
 .auth-container {
-    background-color: var(--bc-surface, #1e1e1e); /* Usa a variável do style.css ou um fallback */
-    padding: 2.5rem;
+    background-color: var(--bc-surface, #1e1e1e);
+    padding: 3.5rem 2.5rem;
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     width: 100%;
     max-width: 450px;
-    margin: 2rem auto; /* Adiciona margem vertical para não colar no header/footer */
+    margin: 2rem auto; 
     text-align: center;
 }
 
