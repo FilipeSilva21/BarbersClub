@@ -23,4 +23,6 @@ public class BarberShop
     public virtual ICollection<Service> Services { get; set; }
     
     public virtual ICollection<Rating> Ratings { get; set; }
+    
+    public virtual ICollection<Image> Images { get; set; }
 }

@@ -1,7 +1,8 @@
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 using BarberClub.DbContext;
 using BarberClub.DTOs;
 using BarberClub.Models;
+using BarberClub.Services.Interfaces;
 
 namespace BarberClub.Services;
 
@@ -21,6 +22,7 @@ public class ServiceService : IServiceService
             Date = request.Date,
             Time = request.Time,
             Services = request.Services,
+            Desciption = request.Description,
             BarberShopId = request.BarberShopId,
             UserId = request.UserId
         };
@@ -28,7 +30,6 @@ public class ServiceService : IServiceService
         _context.Services.Add(newService);
         await _context.SaveChangesAsync();
 
-        // Carrega os dados relacionados para retornar no DTO
         await _context.Entry(newService).Reference(s => s.BarberShop).LoadAsync();
         await _context.Entry(newService).Reference(s => s.Client).LoadAsync();
         
@@ -49,7 +50,7 @@ public class ServiceService : IServiceService
     {
         return await _context.Services
             .Where(s => s.BarberShopId == barberShopId)
-            .Include(s => s.Client) // Inclui dados do cliente
+            .Include(s => s.Client) 
             .OrderByDescending(s => s.Date)
             .Select(s => new ServiceViewResponse()
             {
@@ -64,18 +65,19 @@ public class ServiceService : IServiceService
             })
             .ToListAsync();
     }
+
+    public async Task<IEnumerable<Service?>> GetServicesAsync()
+    {
+        return await _context.Services.ToListAsync();
+    }
     
-    // Implementação similar para GetServicesByUserAsync
     public async Task<IEnumerable<ServiceViewResponse>> GetServicesByUserAsync(int userId)
     {
          return await _context.Services
             .Where(s => s.UserId == userId)
-            .Include(s => s.BarberShop) // Inclui dados da barbearia
+            .Include(s => s.BarberShop) 
             .OrderByDescending(s => s.Date)
-            .Select(s => new ServiceViewResponse()
-            {
-                 // Mapeamento similar ao anterior
-            })
+            .Select(s => new ServiceViewResponse())
             .ToListAsync();
     }
 }

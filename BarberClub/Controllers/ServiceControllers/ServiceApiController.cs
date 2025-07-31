@@ -1,5 +1,6 @@
 using BarberClub.DTOs;
 using BarberClub.Services;
+using BarberClub.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BarberClub.Controllers.ServiceControllers;
@@ -20,6 +21,14 @@ public class ServicesApiController : ControllerBase
     {
         var createdService = await _serviceService.CreateServiceAsync(request);
         return CreatedAtAction(nameof(GetServicesByBarberShop), new { barberShopId = createdService.BarberShopId }, createdService);
+    }
+    
+    [HttpGet]
+    public async Task<IActionResult> GetBarberShops()
+    {
+        var barberShops = await _serviceService.GetServicesAsync();
+
+        return Ok(barberShops);
     }
 
     [HttpGet("barbershop/{barberShopId}")]

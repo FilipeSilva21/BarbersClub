@@ -14,7 +14,7 @@ public class BarberShopService : IBarberShopService
         _context = context;
     }
     
-    public async Task<BarberShop?> RegisterBarberShop(int userId, BarberShopRegisterRequest request)
+    public async Task<BarberShop?> RegisterBarberShopAsync(int userId, BarberShopRegisterRequest request)
     {
         var userExists= await _context.Users.AnyAsync(u => u.UserId == userId);
         
@@ -39,19 +39,19 @@ public class BarberShopService : IBarberShopService
         return barberShop;
     }
 
-    public async Task<BarberShop?> GetBarberShopById(int barberShopId)
+    public async Task<BarberShop?> GetBarberShopByIdAsync(int barberShopId)
     {
         return await _context.BarberShops
             .Include(b => b.Barber)
             .FirstOrDefaultAsync(b => b.BarberShopId == barberShopId);
     }
 
-    public async Task<IEnumerable<BarberShop?>> GetBarberShops()
+    public async Task<IEnumerable<BarberShop?>> GetBarberShopsAsync()
     {
         return await _context.BarberShops.ToListAsync();
     }
 
-    public async Task<IEnumerable<BarberShop?>> SearchBarberShops(string? barberShopName, string? state, string? city, string? barberName)
+    public async Task<IEnumerable<BarberShop?>> SearchBarberShopsAsync(string? barberShopName, string? state, string? city, string? barberName)
     {
         IQueryable<BarberShop> query = _context.BarberShops; 
 
@@ -78,7 +78,7 @@ public class BarberShopService : IBarberShopService
         return await query.ToListAsync();
     }
 
-    public async Task<IEnumerable<User>> GetClientsByBarberShop(int barberShopId)
+    public async Task<IEnumerable<User>> GetClientsByBarberShopAsync(int barberShopId)
     {
         var clients = await _context.Services
             .Where(s => s.BarberShopId == barberShopId)
@@ -89,12 +89,12 @@ public class BarberShopService : IBarberShopService
         return clients;
     }
     
-    public Task<BarberShop?> UpdateBarberShop(int barberShopId, int userId, BarberShopUpdateRequest request)
+    public Task<BarberShop?> UpdateBarberShopAsync(int barberShopId, int userId, BarberShopUpdateRequest request)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<bool> DeleteBarberShop(int barberShopId, int userId)
+    public async Task<bool> DeleteBarberShopAsync(int barberShopId, int userId)
     {
         var barberShop = await _context.BarberShops.FindAsync(barberShopId);
 

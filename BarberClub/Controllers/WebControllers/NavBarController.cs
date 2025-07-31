@@ -26,6 +26,12 @@ public class NavBarController : Controller
         return View("~/Views/NavBar/BarberShop/RegisterBarberShop.cshtml");    
     }
     
+    [HttpGet("barbershop/details/{barberShopId}")]
+    public IActionResult Details(int barberShopId)
+    {
+        return View(); 
+    }
+    
     [HttpGet]
     [Route("/navbar/dashboard")]
     public IActionResult Dashboard()

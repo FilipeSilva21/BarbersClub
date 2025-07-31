@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const endpoint = hasSearchParams
                 ? `/barberShopApi/search?${urlParams}`
-                : '/barberShopApi/getAll';
+                : '/barberShopApi';
 
             const response = await fetch(endpoint);
 

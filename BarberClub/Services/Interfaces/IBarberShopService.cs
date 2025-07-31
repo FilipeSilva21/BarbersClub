@@ -5,16 +5,16 @@ namespace BarberClub.Services;
 
 public interface IBarberShopService
 {
-    Task<BarberShop?> RegisterBarberShop(int userId, BarberShopRegisterRequest request);
+    Task<BarberShop?> RegisterBarberShopAsync(int userId, BarberShopRegisterRequest request);
     
-    Task<BarberShop?> GetBarberShopById(int barberShopId);
+    Task<BarberShop?> GetBarberShopByIdAsync(int barberShopId);
     
-    Task<IEnumerable<BarberShop?>> GetBarberShops();
-    Task<IEnumerable<User>> GetClientsByBarberShop(int barberShopId);
+    Task<IEnumerable<BarberShop?>> GetBarberShopsAsync();
+    Task<IEnumerable<User>> GetClientsByBarberShopAsync(int barberShopId);
     
-    Task<IEnumerable<BarberShop?>> SearchBarberShops(string? barberShopName, string? state, string? city, string? barberName);
+    Task<IEnumerable<BarberShop?>> SearchBarberShopsAsync(string? barberShopName, string? state, string? city, string? barberName);
     
-    Task<BarberShop?> UpdateBarberShop(int barberShopId, int userId, BarberShopUpdateRequest request);
+    Task<BarberShop?> UpdateBarberShopAsync(int barberShopId, int userId, BarberShopUpdateRequest request);
     
-    Task<bool> DeleteBarberShop(int barberShopId, int userId);
+    Task<bool> DeleteBarberShopAsync(int barberShopId, int userId);
 }

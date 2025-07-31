@@ -104,6 +104,10 @@ namespace BarberClub.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Desciption")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("RatingId")
                         .HasColumnType("int");
 

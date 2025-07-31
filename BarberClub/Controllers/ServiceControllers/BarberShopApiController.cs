@@ -31,7 +31,7 @@ public class BarberShopApiController(IBarberShopService barberShopService): Cont
             return BadRequest("ID de usuário inválido no token.");
         }
         
-        var barberShop = await barberShopService.RegisterBarberShop(userId, request);
+        var barberShop = await barberShopService.RegisterBarberShopAsync(userId, request);
 
         if (barberShop == null)
         {
@@ -41,10 +41,10 @@ public class BarberShopApiController(IBarberShopService barberShopService): Cont
         return Ok(barberShop);
     }
 
-    [HttpGet("getAll")]
+    [HttpGet]
     public async Task<IActionResult> GetBarberShops()
     {
-        var barberShops = await barberShopService.GetBarberShops();
+        var barberShops = await barberShopService.GetBarberShopsAsync();
 
         return Ok(barberShops);
     }
@@ -52,7 +52,7 @@ public class BarberShopApiController(IBarberShopService barberShopService): Cont
     [HttpGet("{barberShopId}")]
     public async Task<IActionResult> GetBarberShopById(int barberShopId)
     {
-        var barberShop = await barberShopService.GetBarberShopById(barberShopId);
+        var barberShop = await barberShopService.GetBarberShopByIdAsync(barberShopId);
         
         if (barberShop == null)
             return NotFound();
@@ -67,7 +67,7 @@ public class BarberShopApiController(IBarberShopService barberShopService): Cont
         [FromQuery] string? barberName,
         [FromQuery] string? barberShopName)
     {
-        var barberShop = await barberShopService.SearchBarberShops(barberShopName, state, city, barberName);
+        var barberShop = await barberShopService.SearchBarberShopsAsync(barberShopName, state, city, barberName);
         
         return Ok(barberShop);
     }
@@ -77,7 +77,7 @@ public class BarberShopApiController(IBarberShopService barberShopService): Cont
     {
         var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? string.Empty);
 
-        var success = await barberShopService.DeleteBarberShop(barberShopId, userId);
+        var success = await barberShopService.DeleteBarberShopAsync(barberShopId, userId);
 
         if (!success)
             return NotFound();

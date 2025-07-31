@@ -4,6 +4,7 @@ using System.Text;
 using BarberClub.DbContext;
 using BarberClub.DTOs;
 using BarberClub.Models;
+using BarberClub.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;

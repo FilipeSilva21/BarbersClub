@@ -1,5 +1,6 @@
 using BarberClub.DTOs;
 using BarberClub.Services;
+using BarberClub.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;

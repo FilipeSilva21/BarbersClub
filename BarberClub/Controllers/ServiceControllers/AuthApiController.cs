@@ -1,6 +1,7 @@
 using BarberClub.DTOs;
 using BarberClub.Models;
 using BarberClub.Services;
+using BarberClub.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

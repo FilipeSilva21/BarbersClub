@@ -1,7 +1,7 @@
 ﻿using BarberClub.DTOs;
 using BarberClub.Models;
 
-namespace BarberClub.Services;
+namespace BarberClub.Services.Interfaces;
 
 public interface IAuthService
 {

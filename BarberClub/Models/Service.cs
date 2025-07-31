@@ -13,6 +13,10 @@ public class Service
 
     public Enums.Services Services { get; set; }
     
+    public String Desciption { get; set; } = string.Empty;
+    
+    public Decimal Price { get; set; }
+    
     public int? RatingId { get; set; }
     [ForeignKey("RatingId")]
     public virtual Rating? Rating { get; set; }
