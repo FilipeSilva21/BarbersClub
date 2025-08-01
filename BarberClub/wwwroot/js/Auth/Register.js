@@ -52,7 +52,7 @@
         const requestData = { firstName, lastName, email, password, confirmPassword, role };
 
         try {
-            const response = await fetch('/auth/Auth/register', {
+            const response = await fetch('/auth/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(requestData),

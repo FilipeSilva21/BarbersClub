@@ -1,15 +1,16 @@
 using BarberClub.Services;
+using BarberClub.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BarberClub.Controllers.WebControllers;
 
 public class NavBarController : Controller
 {
-    private readonly IBarberShopService _service;
+    private readonly IBarberShopService _context;
     
     public NavBarController (IBarberShopService barberShopService)
     {
-        _service = barberShopService;
+        _context = barberShopService;
     }
 
     [HttpGet]
@@ -27,9 +28,16 @@ public class NavBarController : Controller
     }
     
     [HttpGet("barbershop/details/{barberShopId}")]
-    public IActionResult Details(int barberShopId)
+    public async Task<IActionResult> Details(int barberShopId) 
     {
-        return View(); 
+        var barberShop = await _context.GetBarberShopByIdAsync(barberShopId);
+
+        if (barberShop == null)
+        {
+            return NotFound();
+        }
+
+        return View("~/Views/NavBar/BarberShop/BarberShopDetails.cshtml", barberShop);
     }
     
     [HttpGet]

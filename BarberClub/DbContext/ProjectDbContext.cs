@@ -9,6 +9,8 @@ public class ProjectDbContext(DbContextOptions<ProjectDbContext> options) : Micr
     public DbSet<BarberShop> BarberShops { get; set; }
     public DbSet<Rating> Ratings { get; set; }
     public DbSet<Service> Services { get; set; }
+    
+    public DbSet<Image> Images { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -55,5 +57,28 @@ public class ProjectDbContext(DbContextOptions<ProjectDbContext> options) : Micr
             .WithMany(bs => bs.Ratings) 
             .HasForeignKey(r => r.BarberShopId)
             .OnDelete(DeleteBehavior.Cascade); 
+        
+        var imageEntity = modelBuilder.Entity<Image>();
+
+        imageEntity
+            .HasOne(i => i.BarberShop)
+            .WithMany(bs => bs.Images) 
+            .HasForeignKey(i => i.BarberShopId)
+            .OnDelete(DeleteBehavior.Cascade); 
+
+        imageEntity
+            .HasOne(i => i.Service)
+            .WithMany(s => s.Images) 
+            .HasForeignKey(i => i.ServiceId)
+            .OnDelete(DeleteBehavior.NoAction);
+        
+        modelBuilder.Entity<BarberShop>()
+            .Property(e => e.OfferedServices)
+            .HasConversion(
+                v => string.Join(',', v.Select(e => (int)e)),
+                v => v.Split(',', StringSplitOptions.RemoveEmptyEntries)
+                    .Select(s => (Models.Enums.Services)Enum.Parse(typeof(Models.Enums.Services), s))
+                    .ToList()
+            );
     }
 }

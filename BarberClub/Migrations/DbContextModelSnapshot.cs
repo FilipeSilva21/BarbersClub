@@ -38,11 +38,15 @@ namespace BarberClub.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Instagram")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PhoneNumber")
+                    b.Property<string>("OfferedServices")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -53,11 +57,42 @@ namespace BarberClub.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
+                    b.Property<string>("WhatsApp")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("BarberShopId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("BarberShops");
+                });
+
+            modelBuilder.Entity("BarberClub.Models.Image", b =>
+                {
+                    b.Property<int>("ImageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ImageId"));
+
+                    b.Property<int>("BarberShopId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ServiceId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ImageId");
+
+                    b.HasIndex("BarberShopId");
+
+                    b.HasIndex("ServiceId");
+
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("BarberClub.Models.Rating", b =>
@@ -104,9 +139,12 @@ namespace BarberClub.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Desciption")
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int?>("RatingId")
                         .HasColumnType("int");
@@ -178,6 +216,25 @@ namespace BarberClub.Migrations
                     b.Navigation("Barber");
                 });
 
+            modelBuilder.Entity("BarberClub.Models.Image", b =>
+                {
+                    b.HasOne("BarberClub.Models.BarberShop", "BarberShop")
+                        .WithMany("Images")
+                        .HasForeignKey("BarberShopId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BarberClub.Models.Service", "Service")
+                        .WithMany("Images")
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("BarberShop");
+
+                    b.Navigation("Service");
+                });
+
             modelBuilder.Entity("BarberClub.Models.Rating", b =>
                 {
                     b.HasOne("BarberClub.Models.BarberShop", "BarberShop")
@@ -224,9 +281,16 @@ namespace BarberClub.Migrations
 
             modelBuilder.Entity("BarberClub.Models.BarberShop", b =>
                 {
+                    b.Navigation("Images");
+
                     b.Navigation("Ratings");
 
                     b.Navigation("Services");
+                });
+
+            modelBuilder.Entity("BarberClub.Models.Service", b =>
+                {
+                    b.Navigation("Images");
                 });
 
             modelBuilder.Entity("BarberClub.Models.User", b =>

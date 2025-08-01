@@ -19,7 +19,7 @@ function checkAuthentication() {
     const token = localStorage.getItem('jwt_token');
 
     const currentPagePath = window.location.pathname.toLowerCase(); 
-    const registerPath = "/barbershop/register";
+    const registerPath = "/barbershopApi/register";
     const dashboardPath = "/navbar/dashboard";
 
     let registerButtonHtml = '';
@@ -27,7 +27,7 @@ function checkAuthentication() {
     if (token) {
         const payload = decodeJwtPayload(token);
         console.log("Conteúdo do Token (Payload):", payload);
-        const userHasBarberShops = payload.hasBarberShops === 'True';
+        const userHasBarberShops = String(payload.hasBarberShops).toLowerCase() === 'true';
 
         if (userHasBarberShops && currentPagePath !== dashboardPath) {
             registerButtonHtml = `

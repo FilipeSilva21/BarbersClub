@@ -2,6 +2,7 @@ using System.Collections;
 using Microsoft.EntityFrameworkCore;
 using BarberClub.DTOs;
 using BarberClub.Models;
+using BarberClub.Services.Interfaces;
 
 namespace BarberClub.Services;
 
@@ -14,10 +15,10 @@ public class BarberShopService : IBarberShopService
         _context = context;
     }
     
-    public async Task<BarberShop?> RegisterBarberShopAsync(int userId, BarberShopRegisterRequest request)
+    public async Task<BarberShop?> RegisterBarberShopAsync(int userId, DTOs.BarberShopRegisterRequest request)
     {
-        var userExists= await _context.Users.AnyAsync(u => u.UserId == userId);
-        
+        var userExists = await _context.Users.AnyAsync(u => u.UserId == userId);
+    
         if (!userExists)
             return null;
 
@@ -28,22 +29,26 @@ public class BarberShopService : IBarberShopService
             State = request.State,
             City = request.City,
             Address = request.Address,
-            PhoneNumber = request.PhoneNumber
+            Instagram = request.Instagram,
+            WhatsApp = request.WhatsApp,
+            OfferedServices = request.OfferedServices?.Distinct().ToList() ?? new List<Models.Enums.Services>()
         };
 
         _context.BarberShops.Add(barberShop);
         await _context.SaveChangesAsync();
-        
+    
         await _context.Entry(barberShop).Reference(b => b.Barber).LoadAsync();
- 
+
         return barberShop;
     }
 
     public async Task<BarberShop?> GetBarberShopByIdAsync(int barberShopId)
     {
         return await _context.BarberShops
-            .Include(b => b.Barber)
-            .FirstOrDefaultAsync(b => b.BarberShopId == barberShopId);
+                .Include(bs => bs.Barber)    
+                .Include(bs => bs.Services)  
+                .Include(bs => bs.Ratings)   
+                .FirstOrDefaultAsync(b => b.BarberShopId == barberShopId);
     }
 
     public async Task<IEnumerable<BarberShop?>> GetBarberShopsAsync()

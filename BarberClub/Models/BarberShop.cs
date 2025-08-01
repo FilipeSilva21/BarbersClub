@@ -14,8 +14,11 @@ public class BarberShop
     
     public string City { get; set; } = string.Empty;
     
-    public string PhoneNumber { get; set; } = string.Empty;
+    public string WhatsApp { get; set; } = string.Empty;
     
+    public string Instagram { get; set; } = string.Empty;
+    
+    public List<Enums.Services> OfferedServices { get; set; } = new();
     public int UserId { get; set; }
     [ForeignKey("UserId")]
     public virtual User Barber { get; set; }

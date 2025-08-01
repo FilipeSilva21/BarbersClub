@@ -22,7 +22,7 @@ public class ServiceService : IServiceService
             Date = request.Date,
             Time = request.Time,
             Services = request.Services,
-            Desciption = request.Description,
+            Description = request.Description,
             BarberShopId = request.BarberShopId,
             UserId = request.UserId
         };
@@ -65,6 +65,8 @@ public class ServiceService : IServiceService
             })
             .ToListAsync();
     }
+    
+    
 
     public async Task<IEnumerable<Service?>> GetServicesAsync()
     {
