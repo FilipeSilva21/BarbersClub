@@ -17,9 +17,7 @@ public class Service
     
     public Decimal Price { get; set; }
     
-    public int? RatingId { get; set; }
-    [ForeignKey("RatingId")]
-    public virtual Rating? Rating { get; set; }
+    public virtual ICollection<Rating> Ratings { get; set; } = new List<Rating>();
     
     public int BarberShopId { get; set; }
     [ForeignKey("BarberShopId")]
@@ -28,5 +26,5 @@ public class Service
     public int UserId { get; set; }
     [ForeignKey("UserId")]
     public virtual User Client { get; set; }
-    public virtual ICollection<Image> Images { get; set; }
+    public virtual ICollection<Image> Images { get; set; } = new List<Image>(); 
 }

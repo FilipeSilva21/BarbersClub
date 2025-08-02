@@ -7,6 +7,8 @@ public record ServiceRegisterRequest
     public Models.Enums.Services Services { get; set; }
     
     public string Description { get; set; } = string.Empty;
+    
+    public Decimal Price { get; set; }
     public int BarberShopId { get; set; }
     public int UserId { get; set; }
 }

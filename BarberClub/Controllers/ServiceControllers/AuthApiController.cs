@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BarberClub.Controllers.ServiceControllers;
 
-[Route("auth")]
+[Route("api/auth")]
 [ApiController]
 public class AuthApiController(IAuthService authService): ControllerBase
 {

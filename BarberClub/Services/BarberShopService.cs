@@ -31,6 +31,9 @@ public class BarberShopService : IBarberShopService
             Address = request.Address,
             Instagram = request.Instagram,
             WhatsApp = request.WhatsApp,
+            WorkingDays = request.WorkingDays,
+            OpeningHours = request.OpeningHours,
+            ClosingHours = request.ClosingHours,
             OfferedServices = request.OfferedServices?.Distinct().ToList() ?? new List<Models.Enums.Services>()
         };
 
@@ -114,4 +117,12 @@ public class BarberShopService : IBarberShopService
 
         return true;
     }    
+    
+    public async Task<IEnumerable<BarberShop?>> GetBarberShopsByUserIdAsync(int userId)
+    {
+        return await _context.BarberShops
+            .Where(b => b.UserId == userId)
+            .Include(b => b.Ratings)
+            .ToListAsync();
+    }
 }

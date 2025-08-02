@@ -1,3 +1,5 @@
+using BarberClub.Models;
+
 namespace BarberClub.DTOs;
 
 public record ServiceViewResponse
@@ -10,4 +12,7 @@ public record ServiceViewResponse
     public string BarberShopName { get; set; }
     public int ClientId { get; set; }
     public string ClientName { get; set; }
+    public Decimal Price { get; set; }
+    public string Description { get; set; }
+    public BarberShop BarberShop { get; set; }
 }

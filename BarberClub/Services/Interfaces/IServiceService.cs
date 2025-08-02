@@ -8,5 +8,5 @@ public interface IServiceService
     Task<ServiceViewResponse> CreateServiceAsync(ServiceRegisterRequest request);
     Task<IEnumerable<Service?>> GetServicesAsync();
     Task<IEnumerable<ServiceViewResponse>> GetServicesByBarberShopAsync(int barberShopId);
-    Task<IEnumerable<ServiceViewResponse>> GetServicesByUserAsync(int userId);
+    Task<List<ServiceViewResponse>> GetServicesByUserAsync(int userId);
 }

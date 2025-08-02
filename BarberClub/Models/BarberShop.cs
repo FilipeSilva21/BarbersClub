@@ -18,6 +18,12 @@ public class BarberShop
     
     public string Instagram { get; set; } = string.Empty;
     
+    public string? WorkingDays { get; set; } 
+    
+    public string? OpeningHours { get; set; } 
+    
+    public string? ClosingHours { get; set; }
+    
     public List<Enums.Services> OfferedServices { get; set; } = new();
     public int UserId { get; set; }
     [ForeignKey("UserId")]

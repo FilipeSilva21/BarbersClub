@@ -1,3 +1,5 @@
+using BarberClub.Models;
+
 namespace BarberClub.DTOs;
 
 public record RatingViewResponse
@@ -6,4 +8,7 @@ public record RatingViewResponse
     public decimal RatingValue { get; set; }
     public string Comment { get; set; }
     public string ClientName { get; set; }
+    public DateTime? CreatedAt { get; set; }
+    public int UserId { get; set; }
+    public BarberShop BarberShop { get; set; }
 }

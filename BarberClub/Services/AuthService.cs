@@ -51,6 +51,9 @@ public class AuthService(ProjectDbContext context, IConfiguration config): IAuth
             return (null, null);
     
         var token = GenerateToken(user);
+        
+        Console.WriteLine("Entrou nessa desgraca" + token);
+        
         return (await token, user); 
     }
 
@@ -61,25 +64,37 @@ public class AuthService(ProjectDbContext context, IConfiguration config): IAuth
             .FirstOrDefaultAsync(b => b.UserId == userId);
     }
 
-    private async Task<string> GenerateToken(User users)
+    private async Task<string> GenerateToken(User user)
     {
-        var hasBarberShops = await context.BarberShops.AnyAsync(b => b.UserId == users.UserId);
-        
+        var barberShopIds = await context.BarberShops
+            .Where(b => b.UserId == user.UserId)
+            .Select(b => b.BarberShopId)
+            .ToListAsync();
+
         var claims = new List<Claim>
         {
-            new Claim("firstName", users.FirstName),
-            new Claim(ClaimTypes.Email, users.Email),
-            new Claim(ClaimTypes.NameIdentifier, users.UserId.ToString()),
-            new Claim("hasBarberShops", hasBarberShops.ToString()),
-            new Claim(ClaimTypes.Role, users.Role.ToString())
+            new Claim("firstName", user.FirstName),
+            new Claim(ClaimTypes.Email, user.Email),
+            new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
+            new Claim(ClaimTypes.Role, user.Role.ToString()),
+
+            new Claim("hasBarberShops", barberShopIds.Any().ToString())
         };
 
-        var key = new SymmetricSecurityKey(
-            Encoding.UTF8.GetBytes(config.GetValue<string>("AppSettings:Token")!)
-        );
+        foreach (var id in barberShopIds)
+        {
+            claims.Add(new Claim("barberShopId", id.ToString()));
+        }
 
+        var tokenKeyString = config.GetValue<string>("AppSettings:Token");
+        if (string.IsNullOrEmpty(tokenKeyString))
+        {
+            throw new InvalidOperationException("A chave do token ('AppSettings:Token') não está configurada.");
+        }
+    
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKeyString));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
-        
+    
         var tokenDescriptor = new JwtSecurityToken(
             issuer: config.GetValue<string>("AppSettings:Issuer"),
             audience: config.GetValue<string>("AppSettings:Audience"),
@@ -87,7 +102,7 @@ public class AuthService(ProjectDbContext context, IConfiguration config): IAuth
             expires: DateTime.Now.AddDays(1),
             signingCredentials: creds
         );
-        
+    
         return new JwtSecurityTokenHandler().WriteToken(tokenDescriptor);
     }
 }

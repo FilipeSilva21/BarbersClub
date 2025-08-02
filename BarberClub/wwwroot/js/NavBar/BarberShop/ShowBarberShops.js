@@ -20,8 +20,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const hasSearchParams = Array.from(urlParams.values()).some(v => v);
 
             const endpoint = hasSearchParams
-                ? `/barberShopApi/search?${urlParams}`
-                : '/barberShopApi';
+                ? `/api/barberShop/search?${urlParams}`
+                : '/api/barberShop';
 
             const response = await fetch(endpoint);
 
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 throw new Error(`Erro na rede: ${response.statusText}`);
             }
 
-            const responseData = await response.json(); // Pega o objeto completo
+            const responseData = await response.json(); 
             renderResults(responseData.$values);
 
         } catch (error) {

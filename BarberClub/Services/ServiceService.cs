@@ -23,6 +23,7 @@ public class ServiceService : IServiceService
             Time = request.Time,
             Services = request.Services,
             Description = request.Description,
+            Price = request.Price,
             BarberShopId = request.BarberShopId,
             UserId = request.UserId
         };
@@ -40,6 +41,8 @@ public class ServiceService : IServiceService
             Time = newService.Time,
             ServiceType = newService.Services.ToString(),
             BarberShopId = newService.BarberShopId,
+            Price  = newService.Price,
+            Description =  newService.Description,
             BarberShopName = newService.BarberShop.Name,
             ClientId = newService.UserId,
             ClientName = newService.Client.FirstName
@@ -73,7 +76,7 @@ public class ServiceService : IServiceService
         return await _context.Services.ToListAsync();
     }
     
-    public async Task<IEnumerable<ServiceViewResponse>> GetServicesByUserAsync(int userId)
+    public async Task<List<ServiceViewResponse>> GetServicesByUserAsync(int userId)
     {
          return await _context.Services
             .Where(s => s.UserId == userId)

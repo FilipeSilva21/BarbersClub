@@ -50,6 +50,8 @@ builder.Services.AddScoped<IServiceService, ServiceService>();
 
 builder.Services.AddScoped<IRatingService, RatingService>();
 
+builder.Services.AddScoped<IDashboardStatsService, DashboardStatsService>();
+
 builder.Services.AddAuthentication(options =>
     {
         options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

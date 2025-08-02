@@ -19,7 +19,7 @@ function checkAuthentication() {
     const token = localStorage.getItem('jwt_token');
 
     const currentPagePath = window.location.pathname.toLowerCase(); 
-    const registerPath = "/barbershopApi/register";
+    const registerPath = "/api/barbershop/register";
     const dashboardPath = "/navbar/dashboard";
 
     let registerButtonHtml = '';

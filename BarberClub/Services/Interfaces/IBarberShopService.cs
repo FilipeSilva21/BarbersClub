@@ -9,6 +9,8 @@ public interface IBarberShopService
     
     Task<BarberShop?> GetBarberShopByIdAsync(int barberShopId);
     
+    Task<IEnumerable<BarberShop?>> GetBarberShopsByUserIdAsync(int userId);
+    
     Task<IEnumerable<BarberShop?>> GetBarberShopsAsync();
     Task<IEnumerable<User>> GetClientsByBarberShopAsync(int barberShopId);
     

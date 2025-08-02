@@ -15,63 +15,69 @@ public class ProjectDbContext(DbContextOptions<ProjectDbContext> options) : Micr
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+    
+        // --- Configuração de User ---
+        modelBuilder.Entity<User>(userEntity =>
+        {
+            userEntity.HasIndex(u => u.Email).IsUnique();
+            userEntity.Property(u => u.Role).HasConversion<string>();
 
-        var userEntity = modelBuilder.Entity<User>();
+            // User (Barber) -> BarberShops (1-N)
+            userEntity.HasMany(u => u.BarberShops)
+                .WithOne(b => b.Barber)
+                .HasForeignKey(b => b.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
 
-        userEntity.HasIndex(u => u.Email).IsUnique();
+        // --- Configuração de Service ---
+        modelBuilder.Entity<Service>(serviceEntity =>
+        {
+            // Service -> Client (User) (N-1)
+            serviceEntity.HasOne(s => s.Client)
+                .WithMany(u => u.Services) // Lado oposto da relação
+                .HasForeignKey(s => s.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-        userEntity
-            .Property(u => u.Role)
-            .HasConversion<string>();
+            // Service -> BarberShop (N-1)
+            serviceEntity.HasOne(s => s.BarberShop)
+                .WithMany(bs => bs.Services) // Lado oposto da relação
+                .HasForeignKey(s => s.BarberShopId)
+                .OnDelete(DeleteBehavior.Cascade); // Cascade é o padrão para chaves obrigatórias
+        });
 
-        userEntity
-            .HasMany(u => u.BarberShops)
-            .WithOne(b => b.Barber)
-            .HasForeignKey(b => b.UserId)
-            .OnDelete(DeleteBehavior.Cascade); 
-        
-        
-        var serviceEntity = modelBuilder.Entity<Service>();
+        // --- Configuração de Rating ---
+        modelBuilder.Entity<Rating>(ratingEntity =>
+        {
+            // Rating -> Client (User) (N-1)
+            ratingEntity.HasOne(r => r.Client)
+                .WithMany(u => u.Ratings) // Lado oposto da relação
+                .HasForeignKey(r => r.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-        serviceEntity
-            .HasOne(s => s.Client)
-            .WithMany(u => u.Services) 
-            .HasForeignKey(s => s.UserId)
-            .OnDelete(DeleteBehavior.Restrict); 
+            // Rating -> BarberShop (N-1)
+            ratingEntity.HasOne(r => r.BarberShop)
+                .WithMany(bs => bs.Ratings) // Lado oposto da relação
+                .HasForeignKey(r => r.BarberShopId)
+                .OnDelete(DeleteBehavior.Cascade);
 
-        serviceEntity
-            .HasOne(s => s.BarberShop)
-            .WithMany(bs => bs.Services) 
-            .HasForeignKey(s => s.BarberShopId); 
+            // Rating -> Service (N-1)
+            ratingEntity.HasOne(r => r.Service)
+                .WithMany(s => s.Ratings) // Lado oposto da relação
+                .HasForeignKey(r => r.ServiceId)
+                .OnDelete(DeleteBehavior.Restrict);
+        });
 
-        var ratingEntity = modelBuilder.Entity<Rating>();
+        // --- Configuração de Image ---
+        modelBuilder.Entity<Image>(imageEntity =>
+        {
+            // Image -> Service (N-1)
+            imageEntity.HasOne(i => i.Service)
+                .WithMany(s => s.Images) // Lado oposto da relação
+                .HasForeignKey(i => i.ServiceId)
+                .OnDelete(DeleteBehavior.Cascade); // Cascade é mais comum aqui
+        });
 
-        ratingEntity
-            .HasOne(r => r.Client)
-            .WithMany(u => u.Ratings)
-            .HasForeignKey(r => r.UserId)
-            .OnDelete(DeleteBehavior.Restrict);
-
-        ratingEntity
-            .HasOne(r => r.BarberShop)
-            .WithMany(bs => bs.Ratings) 
-            .HasForeignKey(r => r.BarberShopId)
-            .OnDelete(DeleteBehavior.Cascade); 
-        
-        var imageEntity = modelBuilder.Entity<Image>();
-
-        imageEntity
-            .HasOne(i => i.BarberShop)
-            .WithMany(bs => bs.Images) 
-            .HasForeignKey(i => i.BarberShopId)
-            .OnDelete(DeleteBehavior.Cascade); 
-
-        imageEntity
-            .HasOne(i => i.Service)
-            .WithMany(s => s.Images) 
-            .HasForeignKey(i => i.ServiceId)
-            .OnDelete(DeleteBehavior.NoAction);
-        
+        // --- Configuração de Conversão de Enum em BarberShop ---
         modelBuilder.Entity<BarberShop>()
             .Property(e => e.OfferedServices)
             .HasConversion(

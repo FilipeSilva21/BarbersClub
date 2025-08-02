@@ -9,25 +9,49 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6d0fe01-8bb2-4d5d-8b8f-9d6258a8d21b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/BarberClub/Views/NavBar/BarberShop/BarberShopDetails.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BarberClub/wwwroot/css/NavBar/BarberShop/BarberShopDetails.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BarberClub/wwwroot/js/NavBar/BarberShop/BarberShopDetails.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BarberClub/Controllers/ServiceControllers/DashboardStatsControllerApi.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BarberClub/DTOs/DashboardStats.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BarberClub/DTOs/DashboardStatsResponse.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BarberClub/Services/DashboardStatsService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BarberClub/Services/Interfaces/IDashBoardService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarberClub/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarberClub/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BarberClub/Controllers/ServiceControllers/AuthApiController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Controllers/ServiceControllers/AuthApiController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BarberClub/Controllers/ServiceControllers/BarberShopApiController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Controllers/ServiceControllers/BarberShopApiController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarberClub/Controllers/ServiceControllers/RatingApiController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Controllers/ServiceControllers/RatingApiController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarberClub/Controllers/ServiceControllers/ServiceApiController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Controllers/ServiceControllers/ServiceApiController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarberClub/Controllers/WebControllers/HomeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Controllers/WebControllers/HomeController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BarberClub/Controllers/WebControllers/NavBarController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Controllers/WebControllers/NavBarController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BarberClub/DTOs/BarberShopRegisterRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/DTOs/BarberShopRegisterRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarberClub/DTOs/RatingViewResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/DTOs/RatingViewResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarberClub/DTOs/ServiceRegisterRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/DTOs/ServiceRegisterRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarberClub/DTOs/ServiceViewResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/DTOs/ServiceViewResponse.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BarberClub/DbContext/ProjectDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/DbContext/ProjectDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/DbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Migrations/DbContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/20250709063026_Initial.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/20250709063026_Initial.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/20250709092544_complete address.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/20250709092544_complete address.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/20250718052446_barberShop Table modification.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/20250718052446_barberShop Table modification.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/DbContextModelSnapshot.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/BarberClub/Models/BarberShop.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Models/BarberShop.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarberClub/Models/Image.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Models/Image.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarberClub/Models/Rating.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Models/Rating.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BarberClub/Models/Service.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Models/Service.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarberClub/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarberClub/Services/AuthService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Services/AuthService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BarberClub/Services/BarberShopService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Services/BarberShopService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BarberClub/Services/Interfaces/IBarberShopService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Services/Interfaces/IBarberShopService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarberClub/Services/Interfaces/IServiceService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Services/Interfaces/IServiceService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BarberClub/Services/ServiceService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Services/ServiceService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BarberClub/Views/NavBar/BarberShop/RegisterBarberShop.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Views/NavBar/BarberShop/RegisterBarberShop.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarberClub/Views/NavBar/Dashboard.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Views/NavBar/Dashboard.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarberClub/Views/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Views/Shared/_Layout.cshtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/js/Auth/Auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/wwwroot/js/Auth/Auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/js/Auth/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/wwwroot/js/Auth/Login.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/js/Auth/Register.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/wwwroot/js/Auth/Register.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/js/NavBar/BarberShop/RegisterBarberShop.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/wwwroot/js/NavBar/BarberShop/RegisterBarberShop.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/js/NavBar/BarberShop/ShowBarberShops.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/wwwroot/js/NavBar/BarberShop/ShowBarberShops.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/js/NavBar/DashBoard.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/wwwroot/js/NavBar/DashBoard.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +87,18 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///AIAssistantSnippet.." root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///AIAssistantSnippet.." root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///AIAssistantSnippet.." root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b95edcc1c50e44ebbf7efbbca83c493ee8e928/33/7ae8931a/String.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b95edcc1c50e44ebbf7efbbca83c493ee8e928/b8/2f5fb1bf/ExceptionDispatchInfo.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b95edcc1c50e44ebbf7efbbca83c493ee8e928/e2/5ff74217/DateTime.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="JsbtTreeLayoutManager">
+    <layout place="tools.popupGrunt">
+      <scroll-view-position x="0" y="0" />
+    </layout>
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
@@ -77,26 +112,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Launch Settings Profile.BarberClub: http.executor": "Run",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "DefaultHtmlFileTemplate": "HTML File",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/filip/Downloads/.net projects/BarberClub",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Launch Settings Profile.BarberClub: http.executor&quot;: &quot;Run&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/filip/Downloads/.net projects/BarberClub&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="BarberClub: http" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/BarberClub/BarberClub.csproj" />
@@ -149,7 +184,8 @@
       <workItem from="1753896494852" duration="848000" />
       <workItem from="1753901878201" duration="18838000" />
       <workItem from="1753977520421" duration="5116000" />
-      <workItem from="1753984950505" duration="13994000" />
+      <workItem from="1753984950505" duration="32231000" />
+      <workItem from="1754090188342" duration="8752000" />
     </task>
     <task id="LOCAL-00001" summary="frontend connected to backend">
       <option name="closed" value="true" />
@@ -199,7 +235,15 @@
       <option name="project" value="LOCAL" />
       <updated>1753986921386</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="token jwt fixed, barbershop details implemented and images and services added">
+      <option name="closed" value="true" />
+      <created>1754018590863</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1754018590863</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -215,7 +259,8 @@
     <MESSAGE value="funcional add barbershops refactored" />
     <MESSAGE value="refactoring and adding features" />
     <MESSAGE value="service and rating services and controllers fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="service and rating services and controllers fixed" />
+    <MESSAGE value="token jwt fixed, barbershop details implemented and images and services added" />
+    <option name="LAST_COMMIT_MESSAGE" value="token jwt fixed, barbershop details implemented and images and services added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -14,7 +14,7 @@
 
     const successModal = new bootstrap.Modal(successModalElement);
     const redirectButton = document.getElementById('redirectButton');
-    const loginUrl = form.dataset.loginUrl || '/Auth/Login';
+    const loginUrl = form.dataset.loginUrl || '/api/auth/login';
     redirectButton.href = loginUrl;
 
     form.addEventListener('submit', async function (event) {
@@ -27,7 +27,7 @@
         const email = document.getElementById('email')?.value.trim();
         const password = document.getElementById('password')?.value;
         const confirmPassword = document.getElementById('confirmPassword')?.value;
-        const role = "User"; 
+        const role = "User";
 
         if (!firstName || !email || !password) {
             errorMessageDiv.textContent = 'Por favor, preencha todos os campos obrigatórios.';
@@ -41,48 +41,46 @@
             return;
         }
 
-        spinner.classList.remove('d-none'); 
-        spinner.classList.add('d-none');
+        spinner.classList.remove('d-none');
+        submitButton.disabled = true;
 
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => {
-            controller.abort();
-        }, 15000); 
+        const timeoutId = setTimeout(() => controller.abort(), 15000);
 
         const requestData = { firstName, lastName, email, password, confirmPassword, role };
 
         try {
-            const response = await fetch('/auth/register', {
+            const response = await fetch('/api/auth/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(requestData),
-                signal: controller.signal 
+                signal: controller.signal
             });
 
             clearTimeout(timeoutId);
 
             if (response.ok) {
-                spinner.style.display = 'none';
+                spinner.classList.add('d-none');
+                submitButton.disabled = false;
                 successModal.show();
             } else {
-                const errorData = await response.json().catch(() => ({ message: "Ocorreu um erro no servidor. Tente novamente." }));
+                const errorData = await response.json().catch(() => ({ message: "Ocorreu um erro no servidor." }));
                 errorMessageDiv.textContent = errorData.message;
                 errorMessageDiv.style.display = 'block';
-                submitButton.disabled = false;
-                spinner.style.display = 'none';
             }
         } catch (error) {
             clearTimeout(timeoutId);
 
             if (error.name === 'AbortError') {
-                errorMessageDiv.textContent = 'O servidor demorou muito para responder. Tente novamente mais tarde.';
+                errorMessageDiv.textContent = 'O servidor demorou muito para responder.';
             } else {
                 console.error('Erro na requisição:', error);
-                errorMessageDiv.textContent = 'Erro de conexão. Verifique sua internet.';
+                errorMessageDiv.textContent = 'Erro de conexão.';
             }
             errorMessageDiv.style.display = 'block';
+        } finally {
+            spinner.classList.add('d-none');
             submitButton.disabled = false;
-            spinner.style.display = 'none';
         }
     });
 });

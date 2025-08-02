@@ -13,6 +13,12 @@ public record BarberShopRegisterRequest()
     public string Instagram { get; set; } = string.Empty;
     
     public string WhatsApp { get; set; } = string.Empty;
+
+    public string? WorkingDays { get; set; }
+
+    public string? OpeningHours { get; set; } 
+    
+    public string? ClosingHours { get; set; }
     
     public List<Models.Enums.Services> OfferedServices { get; set; } = new();
 }

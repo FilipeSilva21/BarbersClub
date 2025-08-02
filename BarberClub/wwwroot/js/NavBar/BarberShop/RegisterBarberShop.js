@@ -1,8 +1,9 @@
-// Em wwwroot/js/BarberShop/Create.js
+// Em wwwroot/js/NavBar/BarberShop/RegisterBarberShop.js
 
 document.addEventListener('DOMContentLoaded', function () {
-
     const form = document.getElementById('barberShopForm');
+    if (!form) return;
+
     const submitButton = form.querySelector('button[type="submit"]');
     const spinner = submitButton.querySelector('.spinner-border');
     const errorMessageDiv = document.getElementById('errorMessage');
@@ -18,7 +19,6 @@ document.addEventListener('DOMContentLoaded', function () {
         errorMessageDiv.classList.add('d-none');
 
         const token = localStorage.getItem('jwt_token');
-
         if (!token) {
             errorMessageDiv.textContent = 'Você precisa estar logado para realizar esta ação.';
             errorMessageDiv.classList.remove('d-none');
@@ -27,13 +27,9 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        // --- INÍCIO DA ALTERAÇÃO ---
-
-        // 1. Coleta os serviços marcados em um array.
         const offeredServices = Array.from(form.querySelectorAll('input[name="OfferedServices"]:checked'))
             .map(checkbox => checkbox.value);
 
-        // 2. Monta o objeto de dados com os outros campos e o array de serviços.
         const formObject = {
             name: form.querySelector('input[name="Name"]').value,
             address: form.querySelector('input[name="Address"]').value,
@@ -41,12 +37,12 @@ document.addEventListener('DOMContentLoaded', function () {
             state: form.querySelector('input[name="State"]').value,
             whatsApp: form.querySelector('input[name="WhatsApp"]').value,
             instagram: form.querySelector('input[name="Instagram"]').value,
-            offeredServices: offeredServices // A propriedade deve ter o mesmo nome da sua classe C#
+            openingHours: form.querySelector('input[name="OpeningHours"]').value,
+            closingHours: form.querySelector('input[name="ClosingHours"]').value,
+            offeredServices: offeredServices
         };
 
-        // --- FIM DA ALTERAÇÃO ---
-
-        const actionUrl = '/barbershopApi/register';
+        const actionUrl = '/api/barbershop/register';
 
         try {
             const response = await fetch(actionUrl, {
@@ -59,33 +55,30 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             if (response.ok) {
+                const responseData = await response.json();
                 if (responseData.token) {
                     localStorage.setItem('jwt_token', responseData.token);
                 }
-                
                 successModal.show();
+                successModalElement.addEventListener('hidden.bs.modal', function () {
+                    window.location.href = '/NavBar/Dashboard';
+                }, { once: true });
             } else {
-                try {
-                    const errorData = await response.json();
-                    let message = 'Ocorreu um erro. Tente novamente.';
+                const errorData = await response.json();
+                let message = 'Ocorreu um erro. Tente novamente.';
 
-                    if (errorData && errorData.errors) {
-                        message = Object.values(errorData.errors).flat().join('\n');
-                    } else if (errorData && errorData.message) {
-                        message = errorData.message;
-                    } else if (typeof errorData === 'string'){
-                        message = errorData;
-                    }
-                    errorMessageDiv.textContent = message;
-                    errorMessageDiv.classList.remove('d-none');
-                } catch(e) {
-                    errorMessageDiv.textContent = `Erro ${response.status}: Ocorreu uma falha ao processar a requisição.`;
-                    errorMessageDiv.classList.remove('d-none');
+                if (errorData && errorData.errors) {
+                    message = Object.values(errorData.errors).flat().join('\n');
+                } else if (errorData && errorData.message) {
+                    message = errorData.message;
                 }
+
+                errorMessageDiv.textContent = message;
+                errorMessageDiv.classList.remove('d-none');
             }
         } catch (error) {
             console.error('Erro de rede:', error);
-            errorMessageDiv.textContent = 'Não foi possível conectar ao servidor. Verifique sua conexão.';
+            errorMessageDiv.textContent = 'Não foi possível conectar ao servidor.';
             errorMessageDiv.classList.remove('d-none');
         } finally {
             submitButton.disabled = false;

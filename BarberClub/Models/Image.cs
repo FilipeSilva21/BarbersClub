@@ -8,10 +8,6 @@ public class Image
     
     public string ImagePath { get; set; } = string.Empty;
     
-    public int BarberShopId { get; set; }
-    [ForeignKey("BarberShopId")]
-    public virtual BarberShop BarberShop { get; set; }
-    
     public int ServiceId { get; set; }
     [ForeignKey("ServiceId")]
     public virtual Service Service { get; set; }

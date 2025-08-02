@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BarberClub.Controllers.ServiceControllers;
 
-[Route("servicesApi")]
+[Route("api/services")]
 [ApiController]
 public class ServicesApiController : ControllerBase
 {
