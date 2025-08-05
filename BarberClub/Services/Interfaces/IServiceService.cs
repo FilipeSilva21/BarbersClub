@@ -15,4 +15,6 @@ public interface IServiceService
         string? serviceType,
         DateTime? startDate,
         DateTime? endDate);
+
+    Task<IEnumerable<string>> GetBookedTimesAsync(int barberShopId, DateTime date);
 }

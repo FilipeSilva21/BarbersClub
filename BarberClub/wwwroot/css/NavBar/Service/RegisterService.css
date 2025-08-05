@@ -1,19 +1,29 @@
-/* wwwroot/css/Service/RegisterService.css */
+/* ==========================================================================
+   Estilos para a Página de Agendamento de Serviço
+   - Tema: Dark com detalhes em dourado
+   - Componente Principal: .card-register-service
+   ========================================================================== */
 
-/* Estilo para o card principal do formulário */
+/* --------------------------------------------------------------------------
+   1. Estrutura Principal do Card
+   -------------------------------------------------------------------------- */
+
 .card-register-service {
     background-color: var(--bc-surface, #1e1e1e);
     border: 1px solid #444;
-    border-radius: 0.75rem; /* Bordas um pouco mais arredondadas */
+    border-radius: 0.75rem;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-    overflow: hidden; /* Garante que os cantos arredondados do header funcionem */
+    overflow: hidden; /* Garante que os cantos arredondados sejam aplicados corretamente */
 }
 
-/* Estilo para o cabeçalho do card */
 .card-register-service .card-header {
-    background-color: #252525; /* Um tom ligeiramente diferente para destaque */
+    background-color: #252525;
     border-bottom: 1px solid var(--bc-gold, #c5a86a);
 }
+
+/* --------------------------------------------------------------------------
+   2. Tipografia
+   -------------------------------------------------------------------------- */
 
 .card-register-service .card-header h1 {
     color: var(--bc-gold-hover, #e4d5b7);
@@ -24,13 +34,17 @@
     font-size: 0.9rem;
 }
 
-/* Estilo para os labels dos campos do formulário */
 .card-register-service .form-label {
     color: var(--bc-text-primary, #f0f0f0);
+    font-weight: 600; /* Um pouco mais de destaque para os labels */
     margin-bottom: 0.5rem;
 }
 
-/* Estilo padrão para todos os campos de input e select */
+/* --------------------------------------------------------------------------
+   3. Elementos de Formulário (Inputs, Selects, etc.)
+   -------------------------------------------------------------------------- */
+
+/* Estilo base para todos os campos */
 .card-register-service .form-control,
 .card-register-service .form-select {
     background-color: #2a2a2a;
@@ -39,47 +53,107 @@
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Remove a seta padrão do input de número no Chrome/Safari/Edge */
-.card-register-service .form-control[type=number]::-webkit-inner-spin-button,
-.card-register-service .form-control[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-/* Estilo para o estado de foco dos inputs e selects */
+/* Estilo para estado de foco */
 .card-register-service .form-control:focus,
 .card-register-service .form-select:focus {
+    background-color: #2a2a2a; /* Garante que o fundo não mude */
     border-color: var(--bc-gold, #c5a86a);
     box-shadow: 0 0 0 0.25rem rgba(197, 168, 106, 0.25);
-    background-color: #2a2a2a;
+    color: var(--bc-text-primary, #f0f0f0);
 }
 
-/* Deixa o texto do placeholder visível */
+/* Cor do texto do placeholder */
 .card-register-service .form-control::placeholder {
     color: #8a8a8a;
+    opacity: 1; /* Garante visibilidade no Firefox */
 }
 
-/* Estilo para o ícone do seletor de data em navegadores Webkit (Chrome, Safari) */
-.card-register-service input[type="date"]::-webkit-calendar-picker-indicator,
-.card-register-service input[type="time"]::-webkit-calendar-picker-indicator {
-    filter: invert(1) brightness(0.8); /* Inverte a cor do ícone para branco */
-    cursor: pointer;
-}
-
-/* Estilo para as opções do select no dropdown */
+/* Estilo para as opções dentro do <select> */
 .card-register-service .form-select option {
     background-color: #2a2a2a;
     color: var(--bc-text-primary, #f0f0f0);
 }
 
-/* Estilo do botão de envio */
+/* -- Ajustes Específicos de Navegador -- */
+
+/* Ícone do calendário para inputs de data e hora em modo escuro */
+.card-register-service input[type="date"]::-webkit-calendar-picker-indicator,
+.card-register-service input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(1) brightness(0.9) sepia(0.5) hue-rotate(10deg); /* Ícone branco com um leve tom dourado */
+    cursor: pointer;
+}
+
+/* Remove as setas de incremento/decremento de inputs numéricos */
+.card-register-service input[type=number]::-webkit-inner-spin-button,
+.card-register-service input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.card-register-service input[type=number] {
+    -moz-appearance: textfield; /* Para Firefox */
+}
+
+
+/* --------------------------------------------------------------------------
+   4. Botões e Ações
+   -------------------------------------------------------------------------- */
+
 .card-register-service .btn-gold {
-    padding: 0.75rem;
+    padding: 0.75rem 1.5rem;
     font-size: 1.1rem;
+    font-weight: 600;
+    /* As cores do botão (background, text) já devem estar definidas na sua classe .btn-gold global.
+       Caso não estejam, adicione aqui:
+       background-color: var(--bc-gold, #c5a86a);
+       color: var(--bc-surface, #1e1e1e);
+       border-color: var(--bc-gold, #c5a86a);
+    */
+}
+
+/* Ajusta o spinner para alinhar com o texto do botão */
+.card-register-service .btn-gold .spinner-border {
+    margin-right: 0.75rem;
+    vertical-align: text-bottom;
+}
+
+
+/* --------------------------------------------------------------------------
+   5. Estilos para o Modal de Sucesso
+      (Para manter a consistência visual com o formulário)
+   -------------------------------------------------------------------------- */
+
+.modal-content {
+    background-color: var(--bc-surface, #1e1e1e);
+    border: 1px solid #444;
+    color: var(--bc-text-primary, #f0f0f0);
+}
+
+.modal-header {
+    border-bottom: 1px solid var(--bc-gold, #c5a86a);
+}
+
+.modal-header .modal-title {
+    color: var(--bc-gold-hover, #e4d5b7);
+}
+
+.modal-footer {
+    border-top: 1px solid #444;
+}
+
+/* Estiliza o botão 'X' de fechar para o tema escuro */
+.modal-header .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+/* Faz o botão primário do modal ter o mesmo estilo do botão de agendar */
+.modal-footer .btn-primary {
+    background-color: var(--bc-gold, #c5a86a);
+    border-color: var(--bc-gold, #c5a86a);
+    color: #1e1e1e;
     font-weight: 600;
 }
 
-/* Ajusta o spinner dentro do botão */
-.card-register-service .btn-gold .spinner-border {
-    margin-right: 0.5rem;
+.modal-footer .btn-primary:hover {
+    background-color: var(--bc-gold-hover, #e4d5b7);
+    border-color: var(--bc-gold-hover, #e4d5b7);
 }

@@ -1,5 +1,4 @@
-// Em wwwroot/js/Service/RegisterService.js
-
+// Sua função de autenticação (sem alterações)
 function getAuthHeaders() {
     const token = localStorage.getItem('jwt_token');
     if (!token) {
@@ -12,24 +11,27 @@ function getAuthHeaders() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+    // Suas constantes de elementos existentes
     const form = document.getElementById('registerServiceForm');
     const barberShopIdInput = document.getElementById('barberShopId');
     const userIdInput = document.getElementById('userId');
     const servicesSelect = document.getElementById('services');
-    const priceInput = document.getElementById('price'); 
+    const priceInput = document.getElementById('price');
     const errorMessageDiv = document.getElementById('errorMessage');
     const submitButton = form.querySelector('button[type="submit"]');
     const spinner = submitButton.querySelector('.spinner-border');
     const buttonText = submitButton.querySelector('.button-text');
     const successModalElement = document.getElementById('successModal');
+    const dateInput = document.getElementById('date');
+    const timeSelect = document.getElementById('time');
 
-    if (!form || !barberShopIdInput || !userIdInput || !servicesSelect || !priceInput || !errorMessageDiv || !submitButton) {
+    if (!form || !barberShopIdInput || !userIdInput || !servicesSelect || !priceInput || !errorMessageDiv || !submitButton || !dateInput || !timeSelect) {
         console.error('Um ou mais elementos essenciais do formulário não foram encontrados no DOM.');
         return;
     }
 
     const successModal = new bootstrap.Modal(successModalElement);
-    
+
     if (typeof PRESELECTED_BARBERSHOP_ID !== 'undefined' && PRESELECTED_BARBERSHOP_ID) {
         barberShopIdInput.value = PRESELECTED_BARBERSHOP_ID;
     }
@@ -61,6 +63,63 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    // Define a data mínima como hoje
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.setAttribute('min', today);
+
+    dateInput.addEventListener('change', async function() {
+        const selectedDate = this.value;
+        const barberShopId = barberShopIdInput.value;
+
+        if (!selectedDate || !barberShopId) {
+            timeSelect.innerHTML = '<option value="">Selecione uma data primeiro</option>';
+            timeSelect.disabled = true;
+            return;
+        }
+
+        // Feedback visual para o usuário
+        timeSelect.disabled = true;
+        timeSelect.innerHTML = '<option value="">Carregando horários...</option>';
+
+        try {
+            // Chamada para a API que criamos
+            const response = await fetch(`/api/services/bookedTimes?barberShopId=${barberShopId}&date=${selectedDate}`);
+            if (!response.ok) throw new Error('Falha ao buscar horários.');
+
+            const bookedTimes = await response.json();
+            populateAvailableTimeSlots(bookedTimes);
+        } catch (error) {
+            console.error('Erro ao buscar horários:', error);
+            timeSelect.innerHTML = '<option value="">Erro ao carregar</option>';
+        }
+    });
+
+    function populateAvailableTimeSlots(bookedTimes) {
+        timeSelect.innerHTML = '';
+        const operatingHours = { start: 8, end: 18 };
+        let availableSlotsCount = 0;
+
+        for (let hour = operatingHours.start; hour <= operatingHours.end; hour++) {
+            const timeSlot = `${String(hour).padStart(2, '0')}:00`;
+            const isBooked = bookedTimes.some(booked => booked.startsWith(timeSlot));
+
+            if (!isBooked) {
+                const option = document.createElement('option');
+                option.value = timeSlot;
+                option.textContent = timeSlot;
+                timeSelect.appendChild(option);
+                availableSlotsCount++;
+            }
+        }
+
+        if (availableSlotsCount === 0) {
+            timeSelect.innerHTML = '<option value="" disabled>Nenhum horário disponível</option>';
+            timeSelect.disabled = true;
+        } else {
+            timeSelect.innerHTML = `<option value="" selected disabled>Selecione um horário</option>${timeSelect.innerHTML}`;
+            timeSelect.disabled = false;
+        }
+    }
     form.addEventListener('submit', async function(event) {
         event.preventDefault();
         errorMessageDiv.classList.add('d-none');
@@ -80,7 +139,6 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        // Ativa o estado de carregamento
         buttonText.textContent = 'Agendando...';
         spinner.classList.remove('d-none');
         submitButton.disabled = true;
@@ -88,20 +146,19 @@ document.addEventListener('DOMContentLoaded', function () {
         try {
             const response = await fetch('/api/services', {
                 method: 'POST',
-                headers: {
-                    ...getAuthHeaders(),
-                    'Content-Type': 'application/json'
-                },
+                headers: { ...getAuthHeaders(), 'Content-Type': 'application/json' },
                 body: JSON.stringify(requestData)
             });
 
             if (response.ok) {
                 form.reset();
-                priceInput.value = ''; 
+                priceInput.value = '';
+                timeSelect.innerHTML = '<option value="">Selecione uma data primeiro</option>';
+                timeSelect.disabled = true;
                 successModal.show();
             } else {
-                const error = await response.json().catch(() => ({ message: 'Ocorreu um erro desconhecido.' }));
-                errorMessageDiv.textContent = error.message;
+                const errorData = await response.json().catch(() => ({ message: 'Ocorreu um erro ao agendar.' }));
+                errorMessageDiv.textContent = errorData.title || errorData.message || 'Erro desconhecido.';
                 errorMessageDiv.classList.remove('d-none');
             }
         } catch (error) {

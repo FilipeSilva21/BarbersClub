@@ -44,4 +44,24 @@ public class ServiceApiController(IServiceService serviceService) : ControllerBa
         var services = await serviceService.GetServicesByUserAsync(userId);
         return Ok(services);
     }
+    
+    [HttpGet("bookedTimes")]
+    public async Task<IActionResult> GetBookedTimes([FromQuery] int barberShopId, [FromQuery] DateTime date)
+    {
+        if (barberShopId <= 0)
+        {
+            return BadRequest("O ID da barbearia é inválido.");
+        }
+
+        try
+        {
+            var bookedTimes = await serviceService.GetBookedTimesAsync(barberShopId, date);
+            
+            return Ok(bookedTimes);
+        }
+        catch (Exception)
+        {
+            return StatusCode(500, "Ocorreu um erro interno ao buscar os horários.");
+        }
+    }
 }

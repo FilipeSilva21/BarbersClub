@@ -117,11 +117,10 @@ public class ServiceService(ProjectDbContext context) : IServiceService
             query = query.Where(s => s.Date.Date <= endDate.Value.Date);
         }
 
-        // 3. Ordena os resultados e transforma os dados no ViewModel/DTO para enviar ao frontend.
         var result = await query
-            .Include(s => s.BarberShop) // Garante que os dados da barbearia sejam carregados
-            .Include(s => s.Client)   // Garante que os dados do cliente sejam carregados
-            .OrderByDescending(s => s.Date) // Ordena pelos mais recentes primeiro
+            .Include(s => s.BarberShop) 
+            .Include(s => s.Client)  
+            .OrderByDescending(s => s.Date)
             .Select(s => new ServiceViewResponse()
             {
                 ServiceId = s.ServiceId,
@@ -131,9 +130,9 @@ public class ServiceService(ProjectDbContext context) : IServiceService
                 BarberShopId = s.BarberShopId,
                 BarberShopName = s.BarberShop.Name,
                 ClientId = s.UserId,
-                ClientName = s.Client.FirstName // ou $"{s.Client.FirstName} {s.Client.LastName}"
+                ClientName = s.Client.FirstName 
             })
-            .AsNoTracking() // Otimização para consultas de apenas leitura
+            .AsNoTracking() 
             .ToListAsync();
 
         return result;
@@ -158,5 +157,19 @@ public class ServiceService(ProjectDbContext context) : IServiceService
                 ClientName = s.Client.FirstName
             })
             .ToListAsync();
+    }
+    
+    public async Task<IEnumerable<string>> GetBookedTimesAsync(int barberShopId, DateTime date)
+    {
+        var bookedTimeSpans = await context.Services
+            .Where(s => s.BarberShopId == barberShopId && s.Date.Date == date.Date)
+            .Select(s => s.Time) 
+            .ToListAsync();
+
+        var bookedTimes = bookedTimeSpans
+            .Select(ts => ts.ToString("hh\\:mm\\:ss")) 
+            .ToList();
+
+        return bookedTimes;
     }
 }

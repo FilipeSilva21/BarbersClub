@@ -9,51 +9,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6d0fe01-8bb2-4d5d-8b8f-9d6258a8d21b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/BarberClub/Controllers/ServiceControllers/DashboardStatsControllerApi.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BarberClub/Controllers/ServiceControllers/UserApiController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BarberClub/Controllers/WebControllers/BarberShopController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BarberClub/Controllers/WebControllers/ServiceController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BarberClub/DTOs/DashboardStats.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BarberClub/DTOs/DashboardStatsResponse.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BarberClub/DTOs/OfferedServiceResponse.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BarberClub/Models/Enums/WorkingDays.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BarberClub/Models/OfferedServices.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BarberClub/Services/DashboardStatsService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BarberClub/Services/Interfaces/IUserService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BarberClub/Services/UserService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BarberClub/Views/NavBar/Service/RegisterService.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BarberClub/wwwroot/css/NavBar/Service/RegisterService.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BarberClub/wwwroot/css/NavBar/Service/ShowServices.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BarberClub/wwwroot/js/NavBar/Service/RegisterService.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BarberClub/wwwroot/js/NavBar/Service/ShowServices.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarberClub/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarberClub/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Controllers/ServiceControllers/AuthApiController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Controllers/ServiceControllers/AuthApiController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BarberClub/Controllers/ServiceControllers/ServiceApiController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Controllers/ServiceControllers/ServiceApiController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Controllers/WebControllers/AuthController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Controllers/WebControllers/AuthController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Controllers/WebControllers/NavBarController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Controllers/WebControllers/NavBarController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/DTOs/BarberShopRegisterRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/DTOs/BarberShopRegisterRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/DTOs/ServiceRegisterRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/DTOs/ServiceRegisterRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/DTOs/ServiceViewResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/DTOs/ServiceViewResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/DbContext/ProjectDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/DbContext/ProjectDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Models/BarberShop.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Models/BarberShop.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Models/Service.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Models/Service.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Services/AuthService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Services/AuthService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Services/BarberShopService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Services/BarberShopService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BarberClub/Services/Interfaces/IServiceService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Services/Interfaces/IServiceService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BarberClub/Services/ServiceService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Services/ServiceService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Views/Auth/Register.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Views/Auth/Register.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Views/NavBar/BarberShop/BarberShopDetails.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Views/NavBar/BarberShop/BarberShopDetails.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Views/NavBar/BarberShop/RegisterBarberShop.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Views/NavBar/BarberShop/RegisterBarberShop.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Views/NavBar/Dashboard.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Views/NavBar/Dashboard.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarberClub/Views/NavBar/Service/RegisterService.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Views/NavBar/Service/RegisterService.cshtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BarberClub/Views/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/Views/Shared/_Layout.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/css/NavBar/BarberShop/RegisterBarberShop.css" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/wwwroot/css/NavBar/BarberShop/RegisterBarberShop.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/js/Auth/Auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/wwwroot/js/Auth/Auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/js/Auth/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/wwwroot/js/Auth/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/js/NavBar/BarberShop/RegisterBarberShop.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/wwwroot/js/NavBar/BarberShop/RegisterBarberShop.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/js/NavBar/BarberShop/ShowBarberShops.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/wwwroot/js/NavBar/BarberShop/ShowBarberShops.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/js/NavBar/DashBoard.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/wwwroot/js/NavBar/DashBoard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/js/NavBar/Service/RegisterService.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarberClub/wwwroot/js/NavBar/Service/RegisterService.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -189,7 +151,7 @@
       <workItem from="1754170035517" duration="2494000" />
       <workItem from="1754195148056" duration="15800000" />
       <workItem from="1754271823160" duration="3137000" />
-      <workItem from="1754279061548" duration="20819000" />
+      <workItem from="1754279061548" duration="25114000" />
     </task>
     <task id="LOCAL-00001" summary="frontend connected to backend">
       <option name="closed" value="true" />
@@ -255,7 +217,15 @@
       <option name="project" value="LOCAL" />
       <updated>1754105558049</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="commit de 3 dias atrasado👍">
+      <option name="closed" value="true" />
+      <created>1754359063598</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1754359063598</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -263,6 +233,17 @@
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="frontend connected to backend" />
@@ -273,7 +254,8 @@
     <MESSAGE value="service and rating services and controllers fixed" />
     <MESSAGE value="token jwt fixed, barbershop details implemented and images and services added" />
     <MESSAGE value="barbershop details added" />
-    <option name="LAST_COMMIT_MESSAGE" value="barbershop details added" />
+    <MESSAGE value="commit de 3 dias atrasado" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit de 3 dias atrasado" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
