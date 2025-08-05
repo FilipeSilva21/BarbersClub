@@ -1,0 +1,64 @@
+@{
+    ViewData["Title"] = "Histórico de Serviços";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/NavBar/Service/ShowServices.css" asp-append-version="true" /> 
+}
+
+<div id="services-list-view" class="container mt-5">
+    <div class="text-center mb-5">
+        <h1 class="display-5 fw-bold">Serviços Agendados</h1>
+        <p class="lead">Utilize os filtros abaixo para encontrar serviços específicos.</p>
+    </div>
+
+    <div class="filters-panel p-4 mb-5 shadow-sm rounded">
+        <form id="search-form">
+            <div class="row g-3 align-items-end">
+                <div class="col-lg-3 col-md-6">
+                    <label for="barberShopName" class="form-label fw-semibold">Nome da Barbearia</label>
+                    <input name="barberShopName" id="barberShopName" class="form-control" type="search" placeholder="Ex: Navalha de Ouro">
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <label for="clientName" class="form-label fw-semibold">Nome do Cliente</label>
+                    <input name="clientName" id="clientName" type="text" class="form-control" placeholder="Ex: Carlos Souza">
+                </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <label for="ServiceType" class="form-label fw-semibold">Tipo de Serviço</label>
+                    <select id="ServiceType" name="serviceType" class="form-select">
+                        <option value="">Todos</option>
+                        <option value="CorteSocial">Corte Social</option>
+                        <option value="CorteDiversificado">Corte Diversificado</option>
+                        <option value="Barba">Barba</option>
+                        <option value="Sombrancelha">Sobrancelha</option>
+                        <option value="CorteSocialEBarba">Corte Social e Barba</option>
+                        </select>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <label for="startDate" class="form-label fw-semibold">De:</label>
+                    <input name="startDate" id="startDate" type="date" class="form-control">
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <label for="endDate" class="form-label fw-semibold">Até:</label>
+                    <input name="endDate" id="endDate" type="date" class="form-control">
+                </div>
+                <div class="col-lg-2 col-md-12 text-end">
+                    <button class="btn btn-gold w-100" type="submit">
+                        <i class="bi bi-funnel-fill me-2"></i>Filtrar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="results-section">
+        <h3 class="fw-bold mb-4">Serviços Encontrados</h3>
+        <div id="results-container" class="row g-4">
+            <p id="loading-message" class="text-center">Carregando serviços...</p>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/NavBar/Service/ShowServices.js" asp-append-version="true"></script>
+}
