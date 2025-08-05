@@ -1,23 +1,16 @@
-using System.Collections;
 using Microsoft.EntityFrameworkCore;
 using BarberClub.DTOs;
 using BarberClub.Models;
+using BarberClub.Models.Enums;
 using BarberClub.Services.Interfaces;
 
 namespace BarberClub.Services;
 
-public class BarberShopService : IBarberShopService
+public class BarberShopService(DbContext.ProjectDbContext context) : IBarberShopService
 {
-    private readonly DbContext.ProjectDbContext _context;
-
-    public BarberShopService(DbContext.ProjectDbContext context)
+    public async Task<BarberShop?> RegisterBarberShopAsync(int userId, BarberShopRegisterRequest request)
     {
-        _context = context;
-    }
-    
-    public async Task<BarberShop?> RegisterBarberShopAsync(int userId, DTOs.BarberShopRegisterRequest request)
-    {
-        var userExists = await _context.Users.AnyAsync(u => u.UserId == userId);
+        var userExists = await context.Users.AnyAsync(u => u.UserId == userId);
     
         if (!userExists)
             return null;
@@ -31,37 +24,53 @@ public class BarberShopService : IBarberShopService
             Address = request.Address,
             Instagram = request.Instagram,
             WhatsApp = request.WhatsApp,
-            WorkingDays = request.WorkingDays,
             OpeningHours = request.OpeningHours,
             ClosingHours = request.ClosingHours,
-            OfferedServices = request.OfferedServices?.Distinct().ToList() ?? new List<Models.Enums.Services>()
+            WorkingDays = request.WorkingDays?.Distinct().ToList() ?? new List<WorkingDays>()
         };
 
-        _context.BarberShops.Add(barberShop);
-        await _context.SaveChangesAsync();
-    
-        await _context.Entry(barberShop).Reference(b => b.Barber).LoadAsync();
+        if (request.OfferedServices != null)
+        {
+            foreach (var serviceDto in request.OfferedServices)
+            {
+                if (Enum.TryParse<Models.Enums.Services>(serviceDto.ServiceType, ignoreCase:true, out var serviceEnum))
+                {
+                    barberShop.OfferedServices.Add(new OfferedService
+                    {
+                        ServiceType = serviceEnum,
+                        Price = serviceDto.Price,
+                        BarberShop = barberShop
+                    });
+                }
+            }
+        }
+        
+        context.BarberShops.Add(barberShop);
+        await context.SaveChangesAsync();
+        await context.Entry(barberShop).Reference(b => b.Barber).LoadAsync();
 
         return barberShop;
     }
 
     public async Task<BarberShop?> GetBarberShopByIdAsync(int barberShopId)
     {
-        return await _context.BarberShops
+        return await context.BarberShops
                 .Include(bs => bs.Barber)    
                 .Include(bs => bs.Services)  
-                .Include(bs => bs.Ratings)   
+                .Include(bs => bs.Ratings)
+                .Include(bs => bs.OfferedServices)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(b => b.BarberShopId == barberShopId);
     }
 
     public async Task<IEnumerable<BarberShop?>> GetBarberShopsAsync()
     {
-        return await _context.BarberShops.ToListAsync();
+        return await context.BarberShops.ToListAsync();
     }
 
     public async Task<IEnumerable<BarberShop?>> SearchBarberShopsAsync(string? barberShopName, string? state, string? city, string? barberName)
     {
-        IQueryable<BarberShop> query = _context.BarberShops; 
+        IQueryable<BarberShop> query = context.BarberShops; 
 
         if (!string.IsNullOrEmpty(barberShopName))
         {
@@ -88,7 +97,7 @@ public class BarberShopService : IBarberShopService
 
     public async Task<IEnumerable<User>> GetClientsByBarberShopAsync(int barberShopId)
     {
-        var clients = await _context.Services
+        var clients = await context.Services
             .Where(s => s.BarberShopId == barberShopId)
             .Select(s => s.Client)
             .Distinct()
@@ -104,7 +113,7 @@ public class BarberShopService : IBarberShopService
 
     public async Task<bool> DeleteBarberShopAsync(int barberShopId, int userId)
     {
-        var barberShop = await _context.BarberShops.FindAsync(barberShopId);
+        var barberShop = await context.BarberShops.FindAsync(barberShopId);
 
         if (barberShop == null)
             return false;
@@ -112,15 +121,15 @@ public class BarberShopService : IBarberShopService
         if (barberShop.UserId != userId)
             return false;
 
-        _context.BarberShops.Remove(barberShop);
-        await _context.SaveChangesAsync();
+        context.BarberShops.Remove(barberShop);
+        await context.SaveChangesAsync();
 
         return true;
     }    
     
     public async Task<IEnumerable<BarberShop?>> GetBarberShopsByUserIdAsync(int userId)
     {
-        return await _context.BarberShops
+        return await context.BarberShops
             .Where(b => b.UserId == userId)
             .Include(b => b.Ratings)
             .ToListAsync();

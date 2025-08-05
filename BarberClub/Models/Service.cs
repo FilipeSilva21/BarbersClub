@@ -9,7 +9,7 @@ public class Service
     
     public DateTime Date { get; set; }
     
-    public DateTime Time { get; set; }
+    public TimeSpan Time { get; set; }
 
     public Enums.Services Services { get; set; }
     

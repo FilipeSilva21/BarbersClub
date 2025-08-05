@@ -1,7 +1,10 @@
+using System.Security.Claims;
 using BarberClub.DTOs;
 using BarberClub.Models;
 using BarberClub.Services;
 using BarberClub.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,19 +30,27 @@ public class AuthApiController(IAuthService authService): ControllerBase
     {
         var (token, user) = await authService.LoginAsync(request);
 
-        if (token is null || user is null)
+        if (token == null || user == null)
         {
             return Unauthorized(new { message = "Email ou senha inválidos." });
         }
 
-        return Ok(new
+        var claims = new List<Claim>
         {
-            token,
-            user = new
-            {
-                name = user.FirstName,
-                email = user.Email
-            }
-        });
+            new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
+            new Claim(ClaimTypes.Name, user.FirstName),
+            new Claim(ClaimTypes.Email, user.Email),
+            new Claim(ClaimTypes.Role, user.Role.ToString())
+        };
+
+        var claimsIdentity = new ClaimsIdentity(
+            claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+        await HttpContext.SignInAsync(
+            CookieAuthenticationDefaults.AuthenticationScheme, 
+            new ClaimsPrincipal(claimsIdentity), 
+            new AuthenticationProperties { IsPersistent = true }); 
+        
+        return Ok(new { token });
     }
 }

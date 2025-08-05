@@ -26,13 +26,13 @@
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
+                                <a class="nav-link" href="/">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/auth/login">Serviços</a>
+                                <a class="nav-link" asp-controller="Service" asp-action="Services">Serviços</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/barbershops">Barbearias</a>
+                                <a class="nav-link" asp-controller="BarberShop" asp-action="BarberShop">Barbearias</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Contato</a>
@@ -42,7 +42,6 @@
                         <ul class="navbar-nav ms-auto d-flex align-items-center" id="user-menu">
                             <!-- JavaScript irá preencher com base no JWT -->
                         </ul>
-                        
                     </div>
                 </div>
             </nav>

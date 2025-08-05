@@ -1,0 +1,85 @@
+/* wwwroot/css/Service/RegisterService.css */
+
+/* Estilo para o card principal do formulário */
+.card-register-service {
+    background-color: var(--bc-surface, #1e1e1e);
+    border: 1px solid #444;
+    border-radius: 0.75rem; /* Bordas um pouco mais arredondadas */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    overflow: hidden; /* Garante que os cantos arredondados do header funcionem */
+}
+
+/* Estilo para o cabeçalho do card */
+.card-register-service .card-header {
+    background-color: #252525; /* Um tom ligeiramente diferente para destaque */
+    border-bottom: 1px solid var(--bc-gold, #c5a86a);
+}
+
+.card-register-service .card-header h1 {
+    color: var(--bc-gold-hover, #e4d5b7);
+}
+
+.card-register-service .card-header p {
+    color: var(--bc-text-secondary, #a0a0a0);
+    font-size: 0.9rem;
+}
+
+/* Estilo para os labels dos campos do formulário */
+.card-register-service .form-label {
+    color: var(--bc-text-primary, #f0f0f0);
+    margin-bottom: 0.5rem;
+}
+
+/* Estilo padrão para todos os campos de input e select */
+.card-register-service .form-control,
+.card-register-service .form-select {
+    background-color: #2a2a2a;
+    border: 1px solid #555;
+    color: var(--bc-text-primary, #f0f0f0);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Remove a seta padrão do input de número no Chrome/Safari/Edge */
+.card-register-service .form-control[type=number]::-webkit-inner-spin-button,
+.card-register-service .form-control[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Estilo para o estado de foco dos inputs e selects */
+.card-register-service .form-control:focus,
+.card-register-service .form-select:focus {
+    border-color: var(--bc-gold, #c5a86a);
+    box-shadow: 0 0 0 0.25rem rgba(197, 168, 106, 0.25);
+    background-color: #2a2a2a;
+}
+
+/* Deixa o texto do placeholder visível */
+.card-register-service .form-control::placeholder {
+    color: #8a8a8a;
+}
+
+/* Estilo para o ícone do seletor de data em navegadores Webkit (Chrome, Safari) */
+.card-register-service input[type="date"]::-webkit-calendar-picker-indicator,
+.card-register-service input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(1) brightness(0.8); /* Inverte a cor do ícone para branco */
+    cursor: pointer;
+}
+
+/* Estilo para as opções do select no dropdown */
+.card-register-service .form-select option {
+    background-color: #2a2a2a;
+    color: var(--bc-text-primary, #f0f0f0);
+}
+
+/* Estilo do botão de envio */
+.card-register-service .btn-gold {
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* Ajusta o spinner dentro do botão */
+.card-register-service .btn-gold .spinner-border {
+    margin-right: 0.5rem;
+}

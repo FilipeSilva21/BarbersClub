@@ -1,13 +1,13 @@
-@using System.Collections
-@model BarberClub.Models.BarberShop;
+@using System.Globalization
+@model BarberClub.Models.BarberShop
 
 @{
     ViewData["Title"] = Model.Name;
 
-    // Calcula a média das avaliações, se houver
     var averageRating = Model.Ratings != null && Model.Ratings.Any()
         ? Model.Ratings.Average(r => r.RatingValue).ToString("F1")
         : "N/A";
+    var ratingCount = Model.Ratings?.Count() ?? 0;
 }
 
 @section Styles {
@@ -24,22 +24,23 @@
         <div class="average-rating fs-4">
             <i class="bi bi-star-fill text-gold"></i>
             <span>@averageRating</span>
-            <span class="text-white-50">(@Model.Ratings.Count() avaliações)</span>
+            <span class="text-white-50">(@ratingCount avaliações)</span>
         </div>
     </header>
 
     <div class="row g-5">
         <div class="col-lg-7">
             <div class="details-card p-0 mb-4">
-                <img src="@((IEnumerable)Model.Images?.FirstOrDefault() ?? "https://via.placeholder.com/800x500")" alt="Foto da Barbearia @Model.Name" class="img-fluid rounded-top">
+                <img src="@(Model.Images?.FirstOrDefault()?.ImagePath ?? "https://via.placeholder.com/800x500")" alt="Foto da Barbearia @Model.Name" class="img-fluid rounded-top">
             </div>
 
             <div class="details-card">
                 <h3 class="fw-bold mb-3">Informações</h3>
                 <ul class="list-unstyled info-list">
                     <li><i class="bi bi-telephone-fill me-3"></i>@Model.WhatsApp</li>
-                    <li><i class="bi bi-person-fill me-3"></i>Barbeiro Responsável: @Model.Barber.FirstName @Model.Barber.LastName</li>
-                    <li><i class="bi bi-clock-fill me-3"></i>Horário: Seg-Sáb, 9:00 - 20:00</li>
+                    <li><i class="bi bi-person-fill me-3"></i>Barbeiro: @Model.Barber?.FirstName @Model.Barber?.LastName</li>
+                    <li><i class="bi bi-calendar-week-fill me-3"></i>Funciona: @(Model.WorkingDays != null ? string.Join(", ", Model.WorkingDays) : "Não informado")</li>
+                    <li><i class="bi bi-clock-fill me-3"></i>Horário: @Model.OpeningHours - @Model.ClosingHours</li>
                 </ul>
             </div>
         </div>
@@ -47,15 +48,20 @@
         <div class="col-lg-5">
 
             <div class="details-card mb-4">
-                <h3 class="fw-bold mb-4">Serviços Oferecidos</h3>
+                <h3 class="fw-bold mb-4">Serviços e Preços</h3>
                 @if (Model.OfferedServices != null && Model.OfferedServices.Any())
                 {
                     <ul class="list-unstyled services-list">
-                        @foreach (var service in Model.OfferedServices)
+                        @foreach (var offeredService in Model.OfferedServices.OrderBy(s => s.Price))
                         {
-                            <li>
-                                <i class="bi bi-check-lg text-gold me-2"></i>
-                                @System.Text.RegularExpressions.Regex.Replace(service.ToString(), "(\\B[A-Z])", " $1")
+                            <li class="d-flex justify-content-between align-items-center mb-2">
+                                <span>
+                                    <i class="bi bi-scissors text-gold me-2"></i>
+                                    @System.Text.RegularExpressions.Regex.Replace(offeredService.ServiceType.ToString(), "(\\B[A-Z])", " $1")
+                                </span>
+                                <span class="fw-bold text-gold">
+                                    @offeredService.Price.ToString("C", CultureInfo.GetCultureInfo("pt-BR"))
+                                </span>
                             </li>
                         }
                     </ul>
@@ -64,7 +70,12 @@
                 {
                     <p class="text-white-50">Nenhum serviço cadastrado ainda.</p>
                 }
-                <a href="/booking/create/@Model.BarberShopId" class="btn btn-gold w-100 mt-4">Agendar Horário</a>
+                <a asp-controller="Service" 
+                   asp-action="CreateServiceForBarberShop" 
+                   asp-route-barberShopId="@Model.BarberShopId" 
+                   class="btn btn-gold w-100 mt-4">
+                    Agendar Horário
+                </a>
             </div>
             <div class="details-card">
                 <h3 class="fw-bold mb-4">Avaliações de Clientes</h3>
@@ -73,22 +84,12 @@
                     <div class="ratings-list">
                         @foreach (var rating in Model.Ratings.Take(5))
                         {
-                            <div class="rating-item">
-                                <div class="rating-score">
-                                    @for (int i = 1; i <= 5; i++)
-                                    {
-                                        <i class="bi @(i <= rating.RatingValue ? "bi-star-fill" : "bi-star")"></i>
-                                    }
-                                </div>
-                                <p class="rating-comment">"@rating.Comment"</p>
-                                <small class="text-white-50">- Usuário Anônimo</small>
-                            </div>
-                        }
+                            }
                     </div>
                 }
                 else
                 {
-                    <p class="text-white-50">Esta barbearia ainda não possui avaliações. Seja o primeiro a avaliar!</p>
+                    <p class="text-white-50">Esta barbearia ainda não possui avaliações.</p>
                 }
             </div>
         </div>

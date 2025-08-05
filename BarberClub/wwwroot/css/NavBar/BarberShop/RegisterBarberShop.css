@@ -104,4 +104,20 @@ form .form-control::placeholder {
 
     /* Cor do texto muda para uma cor escura para criar contraste */
     color: #121212;
+
+.services-checkbox-group {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid #444;
+    max-height: 200px;
+    overflow-y: auto;
+}
+    
+.form-check-inline { 
+    margin-right: 1.5rem; 
+}
+
+.working-days-group {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid #444;
+}
 }

@@ -77,7 +77,6 @@ public class AuthService(ProjectDbContext context, IConfiguration config): IAuth
             new Claim(ClaimTypes.Email, user.Email),
             new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
             new Claim(ClaimTypes.Role, user.Role.ToString()),
-
             new Claim("hasBarberShops", barberShopIds.Any().ToString())
         };
 
@@ -86,23 +85,23 @@ public class AuthService(ProjectDbContext context, IConfiguration config): IAuth
             claims.Add(new Claim("barberShopId", id.ToString()));
         }
 
-        var tokenKeyString = config.GetValue<string>("AppSettings:Token");
+        var tokenKeyString = config.GetValue<string>("Jwt:SecretKey");
         if (string.IsNullOrEmpty(tokenKeyString))
         {
-            throw new InvalidOperationException("A chave do token ('AppSettings:Token') não está configurada.");
+            throw new InvalidOperationException("A chave do token ('Jwt:SecretKey') não está configurada.");
         }
-    
+
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKeyString));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
-    
+
         var tokenDescriptor = new JwtSecurityToken(
-            issuer: config.GetValue<string>("AppSettings:Issuer"),
-            audience: config.GetValue<string>("AppSettings:Audience"),
+            issuer: config.GetValue<string>("Jwt:Issuer"),
+            audience: config.GetValue<string>("Jwt:Audience"),
             claims: claims,
             expires: DateTime.Now.AddDays(1),
             signingCredentials: creds
         );
-    
+
         return new JwtSecurityTokenHandler().WriteToken(tokenDescriptor);
     }
 }

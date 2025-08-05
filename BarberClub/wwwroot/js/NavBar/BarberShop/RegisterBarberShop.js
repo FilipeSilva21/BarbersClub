@@ -10,6 +10,20 @@ document.addEventListener('DOMContentLoaded', function () {
     const successModalElement = document.getElementById('successModal');
     const successModal = new bootstrap.Modal(successModalElement);
 
+    // --- LÓGICA DE UI ---
+    // Habilita/desabilita os campos de preço com base no checkbox
+    document.querySelectorAll('.service-checkbox').forEach(checkbox => {
+        checkbox.addEventListener('change', function () {
+            const priceInput = form.querySelector(`.service-price-input[data-service-type="${this.value}"]`);
+            if (priceInput) {
+                priceInput.disabled = !this.checked;
+                if (!this.checked) {
+                    priceInput.value = ''; // Limpa o valor se o serviço for desmarcado
+                }
+            }
+        });
+    });
+    
     form.addEventListener('submit', async function (event) {
         event.preventDefault();
 
@@ -27,8 +41,27 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        const offeredServices = Array.from(form.querySelectorAll('input[name="OfferedServices"]:checked'))
-            .map(checkbox => checkbox.value);
+        // --- COLETA DE DADOS CORRIGIDA ---
+        const offeredServices = [];
+        // CORREÇÃO APLICADA AQUI: Busca pela classe '.service-checkbox' em vez do 'name'
+        form.querySelectorAll('.service-checkbox:checked').forEach(checkbox => {
+            const serviceType = checkbox.value;
+            const priceInput = form.querySelector(`.service-price-input[data-service-type="${serviceType}"]`);
+
+            if (priceInput) {
+                const price = parseFloat(priceInput.value);
+                // Adiciona à lista apenas se o preço for um número válido e maior que zero
+                if (!isNaN(price) && price > 0) {
+                    offeredServices.push({
+                        serviceType: serviceType,
+                        price: price
+                    });
+                }
+            }
+        });
+
+        const workingDays = Array.from(form.querySelectorAll('input[name="WorkingDays"]:checked'))
+            .map(cb => cb.value);
 
         const formObject = {
             name: form.querySelector('input[name="Name"]').value,
@@ -39,7 +72,8 @@ document.addEventListener('DOMContentLoaded', function () {
             instagram: form.querySelector('input[name="Instagram"]').value,
             openingHours: form.querySelector('input[name="OpeningHours"]').value,
             closingHours: form.querySelector('input[name="ClosingHours"]').value,
-            offeredServices: offeredServices
+            offeredServices: offeredServices, 
+            workingDays: workingDays
         };
 
         const actionUrl = '/api/barbershop/register';
@@ -55,22 +89,26 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             if (response.ok) {
-                const responseData = await response.json();
+                // Não é comum um endpoint de registro retornar um novo token, mas mantendo a lógica.
+                const responseData = await response.json().catch(() => ({}));
                 if (responseData.token) {
                     localStorage.setItem('jwt_token', responseData.token);
                 }
                 successModal.show();
-                successModalElement.addEventListener('hidden.bs.modal', function () {
-                    window.location.href = '/NavBar/Dashboard';
-                }, { once: true });
+
+                const redirectButton = document.getElementById('redirectButton');
+                if(redirectButton) {
+                    redirectButton.addEventListener('click', () => {
+                        window.location.href = '/navbar/dashboard'; // Redireciona para o dashboard
+                    });
+                }
+
             } else {
-                const errorData = await response.json();
-                let message = 'Ocorreu um erro. Tente novamente.';
+                const errorData = await response.json().catch(() => ({ message: 'Ocorreu um erro. Tente novamente.'}));
+                let message = errorData.message;
 
                 if (errorData && errorData.errors) {
                     message = Object.values(errorData.errors).flat().join('\n');
-                } else if (errorData && errorData.message) {
-                    message = errorData.message;
                 }
 
                 errorMessageDiv.textContent = message;

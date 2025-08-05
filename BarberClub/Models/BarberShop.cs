@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations.Schema;
+using BarberClub.Models.Enums;
 
 namespace BarberClub.Models;
 
@@ -18,20 +19,21 @@ public class BarberShop
     
     public string Instagram { get; set; } = string.Empty;
     
-    public string? WorkingDays { get; set; } 
-    
     public string? OpeningHours { get; set; } 
     
     public string? ClosingHours { get; set; }
-    
-    public List<Enums.Services> OfferedServices { get; set; } = new();
-    public int UserId { get; set; }
-    [ForeignKey("UserId")]
-    public virtual User Barber { get; set; }
     
     public virtual ICollection<Service> Services { get; set; }
     
     public virtual ICollection<Rating> Ratings { get; set; }
     
     public virtual ICollection<Image> Images { get; set; }
+    
+    public List<WorkingDays> WorkingDays { get; set; } = new();
+    
+    public virtual ICollection<OfferedService> OfferedServices { get; set; } = new List<OfferedService>();
+    
+    public int UserId { get; set; }
+    [ForeignKey("UserId")]
+    public virtual User Barber { get; set; }
 }

@@ -1,99 +1,88 @@
+@model BarberClub.DTOs.DashboardStatsResponse
+
 @{
-    ViewData["Title"] = "Dashboard da Barbearia";
+    ViewData["Title"] = "Meu Dashboard";
 }
 
 @section Styles {
     <link rel="stylesheet" href="~/css/NavBar/Dashboard.css" asp-append-version="true" />
 }
 
-<div class="dashboard-container container-fluid mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="display-5 fw-bold">Dashboard: <span id="barbershop-name" class="text-gold">Carregando...</span></h1>
-        <a href="/BarberShop/EditProfile" class="btn btn-outline-gold">
-            <i class="bi bi-pencil-square me-2"></i>Editar Perfil da Barbearia
-        </a>
-    </div>
+<div id="dashboard-view" class="container my-5">
+    
+    @* A verificação agora é apenas se o Model não é nulo *@
+    @if (Model != null)
+    {
+        <header class="d-flex justify-content-between align-items-center mb-5">
+            <div>
+                @* Acessa os dados diretamente do Model *@
+                <h1 class="display-5 fw-bold">@Model.BarberShop.Name</h1>
+                <p class="lead text-white-50">Bem-vindo ao seu painel de controle.</p>
+            </div>
+            <a href="@Url.Action("Register", "BarberShops")" class="btn btn-gold">
+                <i class="bi bi-plus-circle me-2"></i>Adicionar Nova Barbearia
+            </a>
+        </header>
 
-    <div class="row g-4 mb-5">
-        <div class="col-lg-3 col-md-6">
-            <div class="stat-card h-100">
-                <div class="stat-icon"><i class="bi bi-calendar-check"></i></div>
-                <div class="stat-info">
-                    <span class="stat-title">Agendamentos Hoje</span>
-                    <span id="appointments-today" class="stat-value">0</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="stat-card h-100">
-                <div class="stat-icon"><i class="bi bi-cash-coin"></i></div>
-                <div class="stat-info">
-                    <span class="stat-title">Faturamento do Dia</span>
-                    <span id="revenue-today" class="stat-value">R$ 0,00</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="stat-card h-100">
-                <div class="stat-icon"><i class="bi bi-people-fill"></i></div>
-                <div class="stat-info">
-                    <span class="stat-title">Novos Clientes (Mês)</span>
-                    <span id="new-clients-month" class="stat-value">0</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="stat-card h-100">
-                <div class="stat-icon"><i class="bi bi-star-fill"></i></div>
-                <div class="stat-info">
-                    <span class="stat-title">Avaliação Média</span>
-                    <span id="average-rating" class="stat-value">...</span>
-                </div>
-            </div>
-        </div>
-    </div>
+        @* O loop foreach foi removido, pois agora exibimos apenas um card *@
+        <div class="card bg-dark-card text-white mb-4">
+            <div class="card-body">
+                <div class="row g-4">
+                    <div class="col-lg-8">
+                        <h3 class="card-title fw-bold text-gold">Detalhes da Barbearia</h3>
+                        <p class="card-text text-white-50 mb-4">
+                            <i class="bi bi-geo-alt-fill me-2"></i>@Model.BarberShop.Address, @Model.BarberShop.City - @Model.BarberShop.State
+                        </p>
 
-    <div class="row g-4">
-        <div class="col-lg-8">
-            <div class="dashboard-panel">
-                <h4 class="panel-title">Próximos Agendamentos</h4>
-                <div class="table-responsive">
-                    <table class="table table-appointments">
-                        <thead>
-                            <tr>
-                                <th>Cliente</th>
-                                <th>Serviço</th>
-                                <th>Horário</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody id="appointments-table-body">
-                            <tr><td colspan="4" class="text-center p-5">Carregando agendamentos...</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+                        <h5 class="fw-semibold">Informações de Contato</h5>
+                        <ul class="list-unstyled mb-4">
+                            <li><i class="bi bi-whatsapp me-2"></i>@Model.BarberShop.WhatsApp</li>
+                            @if(!string.IsNullOrEmpty(Model.BarberShop.Instagram))
+                            {
+                                <li><i class="bi bi-instagram me-2"></i>@@@Model.BarberShop.Instagram</li>
+                            }
+                        </ul>
 
-        <div class="col-lg-4">
-            <div class="dashboard-panel">
-                <h4 class="panel-title">Ações Rápidas</h4>
-                <div class="list-group list-group-flush quick-actions-list">
-                    <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-calendar-plus me-3"></i>Novo Agendamento</a>
-                    <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-person-plus me-3"></i>Adicionar Cliente</a>
-                    <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-journal-text me-3"></i>Gerenciar Serviços</a>
-                    <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-graph-up me-3"></i>Ver Relatórios</a>
+                        <h5 class="fw-semibold">Horário de Funcionamento</h5>
+                            @* <p><i class="bi bi-clock me-2"></i>@(Model.BarberShop.WorkingDays ?? "Seg-Sáb"), @(Model.BarberShop.OpeningHours) - @(Model.BarberShop.ClosingHours)</p>*@
+                        <div class="mt-4">
+                            <a href="/BarberShops/Edit/@Model.BarberShop.BarberShopId" class="btn btn-outline-light me-2">
+                                <i class="bi bi-pencil-square me-2"></i>Editar Informações
+                            </a>
+                            <a href="/Appointments/List/@Model.BarberShop.BarberShopId" class="btn btn-outline-light">
+                                <i class="bi bi-calendar-check me-2"></i>Ver Agendamentos
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <h5 class="fw-semibold">Estatísticas Rápidas</h5>
+                        <ul class="list-group list-group-flush bg-transparent mb-4">
+                            <li class="list-group-item bg-transparent text-white d-flex justify-content-between">
+                                <span>Avaliação Média</span>
+                                <span class="fw-bold text-gold"><i class="bi bi-star-fill"></i> @Model.Stats.AverageRating.ToString("F1")</span>
+                            </li>
+                            <li class="list-group-item bg-transparent text-white d-flex justify-content-between">
+                                <span>Agendamentos Hoje</span>
+                                <span class="fw-bold">@Model.Stats.ServicesToday</span>
+                            </li>
+                            <li class="list-group-item bg-transparent text-white d-flex justify-content-between">
+                                <span>Faturamento Hoje</span>
+                                <span class="fw-bold">@Model.Stats.RevenueToday.ToString("C")</span>
+                            </li>
+                        </ul>
+                    </div>
+
                 </div>
             </div>
-            <div class="dashboard-panel mt-4">
-                 <h4 class="panel-title">Faturamento Semanal</h4>
-                 <canvas id="revenue-chart"></canvas>
-            </div>
         </div>
-    </div>
+    }
+    else
+    {
+        <div class="text-center p-5 bg-dark-card rounded">
+            <h3 class="fw-bold">Nenhuma barbearia encontrada!</h3>
+            <p class="text-white-50">Parece que você ainda não cadastrou seu negócio. Comece agora mesmo!</p>
+            <a href="@Url.Action("RegisterBarberShop", "NavBar")" class="btn btn-gold btn-lg mt-3">Cadastrar Minha Barbearia</a>
+        </div>
+    }
 </div>
-
-@section Scripts {
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="~/js/NavBar/Dashboard.js" asp-append-version="true"></script>
-}

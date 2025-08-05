@@ -40,6 +40,7 @@ public class AuthController(IAuthService authService) : Controller
     public async Task<IActionResult> Logout()
     {
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-        return RedirectToAction("Index", "Home");
+    
+        return Ok(new { message = "Logout bem-sucedido." });
     }
 }

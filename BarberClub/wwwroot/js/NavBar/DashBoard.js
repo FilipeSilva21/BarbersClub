@@ -1,52 +1,53 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Função principal para carregar todos os dados do dashboard
+
     async function loadDashboardData() {
-        // Simulação de chamada de API. Substitua pela sua chamada real.
-        // Você precisará criar os endpoints no seu back-end.
         try {
-            // Exemplo de como você buscaria os dados
-            // const response = await fetch('/api/dashboard/stats');
-            // const data = await response.json();
+            const token = localStorage.getItem('jwt_token');
 
-            // Usando dados de exemplo por enquanto
-            const mockData = {
-                barberShopName: "Navalha de Ouro",
-                stats: {
-                    appointmentsToday: 8,
-                    revenueToday: 320.00,
-                    newClientsMonth: 15,
-                    averageRating: 4.9
-                },
-                upcomingAppointments: [
-                    { client: "Carlos Pereira", service: "Corte + Barba", time: "14:30", status: "Confirmado" },
-                    { client: "Lucas Almeida", service: "Corte Degradê", time: "15:00", status: "Confirmado" },
-                    { client: "Mariana Costa", service: "Corte Feminino", time: "16:00", status: "Aguardando" }
-                ],
-                weeklyRevenue: [150, 220, 300, 250, 400, 500, 350]
-            };
+            if (!token) {
+                console.error("Usuário não autenticado. Token não encontrado.");
+                document.body.innerHTML = '<div class="alert alert-danger text-center">Acesso negado. Por favor, faça o login novamente.</div>';
+                return;
+            }
 
-            populateDashboard(mockData);
+            const response = await fetch('/api/dashboard/stats', { // <-- Certifique-se que esta URL está correta
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                // Lança um erro se a resposta não for bem-sucedida (ex: 404, 500)
+                throw new Error(`Erro ao buscar dados: ${response.status}`);
+            }
+
+            // 3. Pega os dados reais da resposta da API
+            const data = await response.json();
+
+            // 4. Usa os dados reais para popular o dashboard
+            populateDashboard(data);
 
         } catch (error) {
             console.error("Erro ao carregar dados do dashboard:", error);
-            // Mostrar mensagem de erro na tela
+            document.body.innerHTML = '<div class="alert alert-danger text-center">Não foi possível carregar os dados do dashboard. Tente novamente mais tarde.</div>';
         }
     }
 
+    // Nenhuma alteração necessária daqui para baixo, pois a estrutura dos dados é a mesma
+
     function populateDashboard(data) {
-        // Preenche o nome da barbearia
         document.getElementById('barbershop-name').textContent = data.barberShopName;
 
-        // Preenche os cartões de estatísticas
         document.getElementById('appointments-today').textContent = data.stats.appointmentsToday;
         document.getElementById('revenue-today').textContent = `R$ ${data.stats.revenueToday.toFixed(2)}`;
         document.getElementById('new-clients-month').textContent = data.stats.newClientsMonth;
         document.getElementById('average-rating').textContent = data.stats.averageRating.toFixed(1);
 
-        // Preenche a tabela de agendamentos
         const appointmentsTableBody = document.getElementById('appointments-table-body');
-        appointmentsTableBody.innerHTML = ''; // Limpa a mensagem de "carregando"
-        if (data.upcomingAppointments.length > 0) {
+        appointmentsTableBody.innerHTML = '';
+        if (data.upcomingAppointments && data.upcomingAppointments.length > 0) {
             data.upcomingAppointments.forEach(apt => {
                 const row = `
                     <tr>
@@ -62,7 +63,6 @@ document.addEventListener('DOMContentLoaded', function() {
             appointmentsTableBody.innerHTML = '<tr><td colspan="4" class="text-center p-5">Nenhum agendamento para hoje.</td></tr>';
         }
 
-        // Inicializa o gráfico
         initializeChart(data.weeklyRevenue);
     }
 
@@ -89,6 +89,5 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Carrega os dados quando a página estiver pronta
     loadDashboardData();
 });

@@ -11,6 +11,7 @@ public class ProjectDbContext(DbContextOptions<ProjectDbContext> options) : Micr
     public DbSet<Service> Services { get; set; }
     
     public DbSet<Image> Images { get; set; }
+    public DbSet<OfferedService> OfferedServices { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -34,35 +35,34 @@ public class ProjectDbContext(DbContextOptions<ProjectDbContext> options) : Micr
         {
             // Service -> Client (User) (N-1)
             serviceEntity.HasOne(s => s.Client)
-                .WithMany(u => u.Services) // Lado oposto da relação
+                .WithMany(u => u.Services) 
                 .HasForeignKey(s => s.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             // Service -> BarberShop (N-1)
             serviceEntity.HasOne(s => s.BarberShop)
-                .WithMany(bs => bs.Services) // Lado oposto da relação
+                .WithMany(bs => bs.Services) 
                 .HasForeignKey(s => s.BarberShopId)
-                .OnDelete(DeleteBehavior.Cascade); // Cascade é o padrão para chaves obrigatórias
+                .OnDelete(DeleteBehavior.Cascade); 
         });
 
         // --- Configuração de Rating ---
         modelBuilder.Entity<Rating>(ratingEntity =>
         {
-            // Rating -> Client (User) (N-1)
             ratingEntity.HasOne(r => r.Client)
-                .WithMany(u => u.Ratings) // Lado oposto da relação
+                .WithMany(u => u.Ratings) 
                 .HasForeignKey(r => r.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             // Rating -> BarberShop (N-1)
             ratingEntity.HasOne(r => r.BarberShop)
-                .WithMany(bs => bs.Ratings) // Lado oposto da relação
+                .WithMany(bs => bs.Ratings) 
                 .HasForeignKey(r => r.BarberShopId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             // Rating -> Service (N-1)
             ratingEntity.HasOne(r => r.Service)
-                .WithMany(s => s.Ratings) // Lado oposto da relação
+                .WithMany(s => s.Ratings) 
                 .HasForeignKey(r => r.ServiceId)
                 .OnDelete(DeleteBehavior.Restrict);
         });
@@ -72,19 +72,17 @@ public class ProjectDbContext(DbContextOptions<ProjectDbContext> options) : Micr
         {
             // Image -> Service (N-1)
             imageEntity.HasOne(i => i.Service)
-                .WithMany(s => s.Images) // Lado oposto da relação
+                .WithMany(s => s.Images) 
                 .HasForeignKey(i => i.ServiceId)
-                .OnDelete(DeleteBehavior.Cascade); // Cascade é mais comum aqui
+                .OnDelete(DeleteBehavior.Cascade); 
         });
-
-        // --- Configuração de Conversão de Enum em BarberShop ---
-        modelBuilder.Entity<BarberShop>()
-            .Property(e => e.OfferedServices)
-            .HasConversion(
-                v => string.Join(',', v.Select(e => (int)e)),
-                v => v.Split(',', StringSplitOptions.RemoveEmptyEntries)
-                    .Select(s => (Models.Enums.Services)Enum.Parse(typeof(Models.Enums.Services), s))
-                    .ToList()
-            );
+        
+        modelBuilder.Entity<OfferedService>(offeredServiceEntity =>
+        {
+            offeredServiceEntity.HasOne(os => os.BarberShop)
+                .WithMany(bs => bs.OfferedServices) 
+                .HasForeignKey(os => os.BarberShopId) 
+                .OnDelete(DeleteBehavior.Cascade); 
+        });
     }
 }

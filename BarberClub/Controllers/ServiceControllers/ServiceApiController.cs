@@ -1,5 +1,4 @@
 using BarberClub.DTOs;
-using BarberClub.Services;
 using BarberClub.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,41 +6,42 @@ namespace BarberClub.Controllers.ServiceControllers;
 
 [Route("api/services")]
 [ApiController]
-public class ServicesApiController : ControllerBase
+public class ServiceApiController(IServiceService serviceService) : ControllerBase
 {
-    private readonly IServiceService _serviceService;
-
-    public ServicesApiController(IServiceService serviceService)
-    {
-        _serviceService = serviceService;
-    }
-
     [HttpPost]
     public async Task<IActionResult> CreateService([FromBody] ServiceRegisterRequest request)
     {
-        var createdService = await _serviceService.CreateServiceAsync(request);
-        return CreatedAtAction(nameof(GetServicesByBarberShop), new { barberShopId = createdService.BarberShopId }, createdService);
+        var createdService = await serviceService.CreateServiceAsync(request);
+        
+        return CreatedAtAction(nameof(GetServicesByBarberShop), new
+        {
+            barberShopId = createdService.BarberShopId
+        }, createdService);
     }
     
-    [HttpGet]
-    public async Task<IActionResult> GetBarberShops()
+    [HttpGet] 
+    public async Task<IActionResult> GetServices(
+        [FromQuery] string? barberShopName,
+        [FromQuery] string? clientName,
+        [FromQuery] string? serviceType,
+        [FromQuery] DateTime? startDate,
+        [FromQuery] DateTime? endDate)
     {
-        var barberShops = await _serviceService.GetServicesAsync();
-
-        return Ok(barberShops);
+        var services = await serviceService.GetServicesAsync(barberShopName, clientName, serviceType, startDate, endDate);
+        return Ok(services);
     }
 
     [HttpGet("barbershop/{barberShopId}")]
     public async Task<IActionResult> GetServicesByBarberShop(int barberShopId)
     {
-        var services = await _serviceService.GetServicesByBarberShopAsync(barberShopId);
+        var services = await serviceService.GetServicesByBarberShopAsync(barberShopId);
         return Ok(services);
     }
 
     [HttpGet("user/{userId}")]
     public async Task<IActionResult> GetServicesByUser(int userId)
     {
-        var services = await _serviceService.GetServicesByUserAsync(userId);
+        var services = await serviceService.GetServicesByUserAsync(userId);
         return Ok(services);
     }
 }

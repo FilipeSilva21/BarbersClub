@@ -1,3 +1,5 @@
+using BarberClub.Models.Enums;
+
 namespace BarberClub.DTOs;
 
 public record BarberShopRegisterRequest()
@@ -14,11 +16,10 @@ public record BarberShopRegisterRequest()
     
     public string WhatsApp { get; set; } = string.Empty;
 
-    public string? WorkingDays { get; set; }
-
     public string? OpeningHours { get; set; } 
     
     public string? ClosingHours { get; set; }
     
-    public List<Models.Enums.Services> OfferedServices { get; set; } = new();
+    public List<OfferedServiceResponse> OfferedServices { get; set; } = new();
+    public List<WorkingDays> WorkingDays { get; set; } = new();
 }
