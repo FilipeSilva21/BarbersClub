@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function () {
         try {
             const urlParams = new URLSearchParams();
 
-            // Adiciona apenas os parâmetros que têm valor
             if (params.barberShopName) urlParams.append('barberShopName', params.barberShopName);
             if (params.city) urlParams.append('city', params.city);
             if (params.state) urlParams.append('state', params.state);
@@ -51,9 +50,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         const cardsHtml = shops.map(shop => {
-            // Usa a primeira imagem da lista ou uma imagem padrão
-            const imageUrl = (shop.images && shop.images.length > 0) ? shop.images[0].imagePath : 'https://via.placeholder.com/400x250';
-
+            const imageUrl = shop.profilePicUrl || '/images/default-barbershop.png';
+            
             // Calcula a média das avaliações
             const averageRating = (shop.ratings && shop.ratings.length > 0)
                 ? (shop.ratings.reduce((acc, r) => acc + r.ratingValue, 0) / shop.ratings.length).toFixed(1)

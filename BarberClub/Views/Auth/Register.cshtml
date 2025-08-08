@@ -1,39 +1,87 @@
-﻿@{
-ViewData["Title"] = "Cadastro";
+﻿@* 1. ADICIONADO: O @model aponta para o DTO que o formulário representa. *@
+@model BarberClub.DTOs.UserRegisterRequest
+
+@{
+    ViewData["Title"] = "Cadastro";
 }
 
 @section Styles {
     <link rel="stylesheet" href="~/css/Auth/Register.css" asp-append-version="true" />
+    <style>
+        /* Estilos para o componente de foto de perfil (adicionado para funcionar) */
+        .profile-picture-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto;
+            border-radius: 50%;
+            border: 3px solid #444;
+        }
+
+        #image-preview {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .picture-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            border-radius: 50%; background-color: rgba(0, 0, 0, 0.5);
+            color: white; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; cursor: pointer;
+            opacity: 0; transition: opacity 0.3s ease;
+        }
+
+        .profile-picture-container:hover .picture-overlay { opacity: 1; }
+        .picture-overlay i { font-size: 1.5rem; }
+        .picture-overlay span { font-size: 0.8rem; margin-top: 0.25rem; }
+    </style>
 }
 
 <div class="auth-container">
-    <form id="registerForm" data-login-url="@Url.Action("Login", "Auth")">
+    @* 2. ATUALIZADO: O form agora usa tag helpers e o 'enctype' para arquivos. *@
+    <form id="registerForm" method="post" enctype="multipart/form-data">
         <h2>Crie sua Conta</h2>
         <p class="text-muted">Junte-se ao clube para agendar horários ou cadastrar sua barbearia.</p>
 
+        <div class="mb-4 text-center">
+            <div class="profile-picture-container">
+                <img id="image-preview" src="/images/default-avatar.png" alt="Pré-visualização da Foto" />
+                <label asp-for="ProfilePic" class="picture-overlay">
+                    <i class="bi bi-camera-fill"></i>
+                    <span>Adicionar Foto (Opcional)</span>
+                </label>
+                @* Usando asp-for para garantir que o name="ProfilePicFile" seja gerado corretamente *@
+                @* O 'asp-for' vai gerar o id="ProfilePicFile" e name="ProfilePicFile" corretos *@
+                <input asp-for="ProfilePic" type="file" accept="image/*" class="d-none" />
+            </div>
+        </div>
+        
+        @* 3. ATUALIZADO: Todos os inputs agora usam 'asp-for' para gerar 'id' e 'name' corretos. *@
         <div class="mb-3 text-start">
-            <label for="firstName" class="form-label">Nome</label>
-            <input type="text" class="form-control" id="firstName" placeholder="Ex: seu_nome" required>
+            <label asp-for="FirstName" class="form-label">Nome</label>
+            <input asp-for="FirstName" type="text" class="form-control" placeholder="Ex: João" required>
         </div>
         
         <div class="mb-3 text-start">
-            <label for="lastName" class="form-label">Sobrenome</label>
-            <input type="text" class="form-control" id="lastName" placeholder="Ex: seu_sobrenome" required>
+            <label asp-for="LastName" class="form-label">Sobrenome</label>
+            <input asp-for="LastName" type="text" class="form-control" placeholder="Ex: Silva" required>
         </div>
 
         <div class="mb-3 text-start">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" placeholder="seuemail@exemplo.com" required>
+            <label asp-for="Email" class="form-label">Email</label>
+            <input asp-for="Email" type="email" class="form-control" placeholder="seuemail@exemplo.com" required>
         </div>
 
         <div class="mb-3 text-start">
-            <label for="password" class="form-label">Crie uma Senha</label>
-            <input type="password" class="form-control" id="password" required>
+            <label asp-for="Password" class="form-label">Crie uma Senha</label>
+            <input asp-for="Password" type="password" class="form-control" required>
         </div>
 
         <div class="mb-4 text-start">
-            <label for="confirmPassword" class="form-label">Confirme sua Senha</label>
-            <input type="password" class="form-control" id="confirmPassword" required>
+            <label asp-for="ConfirmPassword" class="form-label">Confirme sua Senha</label>
+            <input asp-for="ConfirmPassword" type="password" class="form-control" required>
         </div>
 
         <div id="errorMessage" class="error-message mb-3"></div>
@@ -45,18 +93,25 @@ ViewData["Title"] = "Cadastro";
     </form>
 </div>
 
+@* 4. CORRIGIDO: Estrutura do modal completa para funcionar com Bootstrap. *@
 <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content bg-dark text-white">
-            <div class="modal-header border-0"><h5 class="modal-title">Sucesso!</h5></div>
-            <div class="modal-body">Seu cadastro foi realizado com sucesso!</div>
+            <div class="modal-header border-0">
+                <h5 class="modal-title">Sucesso!</h5>
+            </div>
+            <div class="modal-body">
+                Seu cadastro foi realizado com sucesso!
+            </div>
             <div class="modal-footer border-0">
-                <a id="redirectButton" href="/auth/login" class="btn btn-primary">Ok, ir para Login</a>
+                <a href="@Url.Action("Login", "Auth")" class="btn btn-primary">Ok, ir para Login</a>
             </div>
         </div>
     </div>
 </div>
 
+
 @section Scripts {
-<script src="~/js/Auth/Register.js" asp-append-version="true"></script>
+    @* O JavaScript não precisa ser alterado. *@
+    <script src="~/js/Auth/Register.js" asp-append-version="true"></script>
 }

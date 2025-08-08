@@ -1,9 +1,10 @@
 using BarberClub.DTOs;
+using BarberClub.Models;
 
 namespace BarberClub.Services;
 
 public interface IRatingService
 {
-    Task<RatingViewResponse> CreateRatingAsync(RatingRegisterRequest request);
+    Task<Rating?> CreateRatingAsync(RatingRegisterRequest request);
     Task<IEnumerable<RatingViewResponse>> GetRatingsByBarberShopAsync(int barberShopId);
 }

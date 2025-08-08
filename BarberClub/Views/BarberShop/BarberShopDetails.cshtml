@@ -11,7 +11,7 @@
 }
 
 @section Styles {
-    <link rel="stylesheet" href="~/css/NavBar/BarberShop/BarberShopDetails.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/BarberShop/BarberShopDetails.css" asp-append-version="true" />
 }
 
 <div id="barbershop-details-view" class="container my-5">
@@ -31,7 +31,7 @@
     <div class="row g-5">
         <div class="col-lg-7">
             <div class="details-card p-0 mb-4">
-                <img src="@(Model.Images?.FirstOrDefault()?.ImagePath ?? "https://via.placeholder.com/800x500")" alt="Foto da Barbearia @Model.Name" class="img-fluid rounded-top">
+                <img src="@(Model.Images?.FirstOrDefault()?.Url ?? "https://via.placeholder.com/800x500")" alt="Foto da Barbearia @Model.Name" class="img-fluid rounded-top">
             </div>
 
             <div class="details-card">
@@ -97,5 +97,5 @@
 </div>
 
 @section Scripts {
-    <script src="~/js/NavBar/BarberShop/BarberShopDetails.js" asp-append-version="true"></script>
+    <script src="~/js/BarberShop/BarberShopDetails.js" asp-append-version="true"></script>
 }

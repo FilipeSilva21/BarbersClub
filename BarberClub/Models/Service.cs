@@ -5,7 +5,7 @@ namespace BarberClub.Models;
 
 public class Service
 {
-    public int ServiceId { get; set; }
+    public int? ServiceId { get; set; }
     
     public DateTime Date { get; set; }
     
@@ -17,6 +17,9 @@ public class Service
     
     public Decimal Price { get; set; }
     
+    public ServiceStatus Status { get; set; }
+    
+    public string? ServiceImageUrl { get; set; }
     public virtual ICollection<Rating> Ratings { get; set; } = new List<Rating>();
     
     public int BarberShopId { get; set; }
@@ -26,5 +29,4 @@ public class Service
     public int UserId { get; set; }
     [ForeignKey("UserId")]
     public virtual User Client { get; set; }
-    public virtual ICollection<Image> Images { get; set; } = new List<Image>(); 
 }

@@ -1,0 +1,79 @@
+@model BarberClub.DTOs.UserUpdateRequest
+@{
+    ViewData["Title"] = "Editar Perfil";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/navbar/EditProfile.css" asp-append-version="true" />
+}
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-xl-8">
+            <h2 class="text-center text-gold mb-4">Editar Perfil</h2>
+
+            <form method="post" asp-action="EditProfile" enctype="multipart/form-data">
+                @Html.AntiForgeryToken()
+                <div class="row">
+                    <div class="col-md-4 text-center mb-4">
+                        
+                        <div class="profile-picture-container">
+                            
+                            <img id="image-preview" 
+                                 src="@(string.IsNullOrEmpty(Model.CurrentProfilePicUrl) ? "/images/default-avatar.png" : Url.Content(Model.CurrentProfilePicUrl))" 
+                                 alt="Foto do Perfil" 
+                                 onerror="this.onerror=null; this.src='/images/default-avatar.png';" />
+                            
+                            <label asp-for="ProfilePictureFile" class="picture-overlay">
+                                <i class="bi bi-camera-fill"></i>
+                                <span>Alterar Foto</span>
+                            </label>
+                            
+                            <input asp-for="ProfilePictureFile" type="file" accept="image/*" class="d-none" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-8">
+                        <div class="card edit-card">
+                            <div class="card-body">
+                                <h5 class="card-title text-gold mb-3">Dados Pessoais</h5>
+                                <div class="form-floating mb-3">
+                                    <input asp-for="FirstName" type="text" class="form-control" required>
+                                    <label asp-for="FirstName">Nome</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input asp-for="LastName" type="text" class="form-control" required>
+                                    <label asp-for="LastName">Sobrenome</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input asp-for="Email" type="email" class="form-control" required>
+                                    <label asp-for="Email">Email</label>
+                                </div>
+
+                                <hr class="my-4 border-secondary">
+                                <h5 class="card-title text-gold mb-3">Alterar Senha</h5>
+                                <div class="form-floating mb-3">
+                                    <input asp-for="NewPassword" type="password" class="form-control">
+                                    <label asp-for="NewPassword">Nova Senha</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input asp-for="ConfirmPassword" type="password" class="form-control">
+                                    <label asp-for="ConfirmPassword">Confirmar Nova Senha</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end mt-4">
+                            <a asp-controller="UserProfile" asp-action="UserProfile" class="btn btn-secondary me-2">Cancelar</a>
+                            <button type="submit" class="btn btn-gold">Salvar Alterações</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/navbar/EditProfile.js" asp-append-version="true"></script>
+}

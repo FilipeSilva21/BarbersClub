@@ -15,7 +15,7 @@ namespace BarberClub.Controllers.ServiceControllers;
 public class AuthApiController(IAuthService authService): ControllerBase
 {
     [HttpPost ("register")]
-    public async Task<ActionResult<User>> Register(UserRegisterRequest request)
+    public async Task<ActionResult<User>> Register([FromForm] UserRegisterRequest request)
     {
         var user = await authService.RegisterAsync(request);
 
@@ -26,7 +26,7 @@ public class AuthApiController(IAuthService authService): ControllerBase
     }
     
     [HttpPost("login")]
-    public async Task<IActionResult> Login(UserLoginRequest request)
+    public async Task<IActionResult> Login([FromBody]UserLoginRequest request)
     {
         var (token, user) = await authService.LoginAsync(request);
 

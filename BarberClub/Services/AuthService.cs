@@ -11,7 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace BarberClub.Services;
 
-public class AuthService(ProjectDbContext context, IConfiguration config): IAuthService
+public class AuthService(ProjectDbContext context, IConfiguration config, IWebHostEnvironment webHostEnvironment): IAuthService
 {
     public async Task<User?> RegisterAsync(UserRegisterRequest request)
     {
@@ -31,6 +31,22 @@ public class AuthService(ProjectDbContext context, IConfiguration config): IAuth
         user.PasswordHashed = hashedPassword;
         user.Role = request.Role;
 
+        if (request.ProfilePic != null && request.ProfilePic.Length > 0)
+        {
+            string uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(request.ProfilePic.FileName);
+        
+            string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "images", "users");
+            Directory.CreateDirectory(uploadsFolder); 
+            
+            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                await request.ProfilePic.CopyToAsync(fileStream);
+            }
+
+            user.ProfilePicUrl = $"/images/users/{uniqueFileName}";
+        }
         context.Users.Add(user);
         await context.SaveChangesAsync();
         

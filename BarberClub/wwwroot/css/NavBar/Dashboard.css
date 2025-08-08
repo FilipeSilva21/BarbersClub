@@ -1,104 +1,111 @@
-/* /css/Dashboard/Dashboard.css */
+/* css/NavBar/Dashboard.css */
 
-.text-gold {
-    color: var(--bc-gold, #c5a86a);
+/* (Suas variáveis :root e a classe .dashboard-card permanecem as mesmas) */
+:root {
+    --bc-surface: #1e1e1e;
+    --bc-gold: #c5a86a;
+    --bc-border: #444;
+    --bc-text-primary: #f0f0f0;
+    --bc-text-secondary: #a0a0a0;
 }
 
-/* Cartões de Estatísticas (KPIs) */
-.stat-card {
+.dashboard-card {
+    background-color: var(--bc-surface);
+    border: 1px solid var(--bc-border);
+    border-radius: 12px;
+    padding: 2rem;
+    color: var(--bc-text-primary);
+}
+
+.panel-subtitle {
+    font-weight: 600;
+    color: var(--bc-text-primary);
+    margin-bottom: 0.75rem;
+}
+
+/* NOVO: Cabeçalho do Dashboard */
+.dashboard-header {
     display: flex;
     align-items: center;
-    background-color: var(--bc-surface, #1e1e1e);
-    border: 1px solid #444;
-    border-radius: 8px;
-    padding: 1.5rem;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
+    gap: 1.5rem;
 }
 
-.stat-card:hover {
-    background-color: #2a2a2a;
-    border-color: #555;
+.profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--bc-gold);
+    flex-shrink: 0; /* Impede que a imagem encolha */
 }
 
-.stat-icon {
-    font-size: 2.5rem;
-    color: var(--bc-gold, #c5a86a);
-    margin-right: 1.5rem;
-    line-height: 1;
+.profile-pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-.stat-info {
+.header-info .shop-name {
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.header-info .shop-address {
+    margin-bottom: 1rem;
+}
+
+.header-actions .btn {
+    font-size: 0.85rem;
+}
+
+/* NOVO: Lista de Informações Adicionais */
+.info-list {
+    list-style: none;
+    padding-left: 0;
+    font-size: 0.95rem;
+}
+
+.info-list li {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    color: var(--bc-text-secondary);
 }
 
-.stat-title {
-    font-size: 0.9rem;
-    color: var(--bc-text-secondary, #a0a0a0);
-    text-transform: uppercase;
+.info-list i {
+    color: var(--bc-gold);
+    margin-right: 0.75rem;
+    width: 20px;
+    text-align: center;
+}
+
+.info-list strong {
+    color: var(--bc-text-primary);
+    margin-right: 0.5rem;
+}
+
+
+/* NOVO: Grid de Estatísticas */
+.stats-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.stat-item {
+    background-color: rgba(0,0,0,0.2);
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid var(--bc-gold);
 }
 
 .stat-value {
-    font-size: 2rem;
+    font-size: 1.75rem;
     font-weight: 700;
-    color: var(--bc-text-primary, #f0f0f0);
-    line-height: 1.2;
+    color: var(--bc-text-primary);
 }
 
-/* Painéis principais (Agendamentos, Ações, etc.) */
-.dashboard-panel {
-    background-color: var(--bc-surface, #1e1e1e);
-    border: 1px solid #444;
-    border-radius: 8px;
-    padding: 1.5rem;
-    height: 100%;
-}
-
-.panel-title {
-    color: var(--bc-gold-hover, #e4d5b7);
-    margin-bottom: 1.5rem;
-    font-weight: 600;
-    border-bottom: 1px solid #444;
-    padding-bottom: 0.75rem;
-}
-
-/* Tabela de Agendamentos */
-.table-appointments {
-    color: var(--bc-text-primary, #f0f0f0);
-}
-
-.table-appointments thead {
-    color: var(--bc-text-secondary, #a0a0a0);
-}
-
-.table-appointments th, .table-appointments td {
-    border-color: #444;
-    vertical-align: middle;
-}
-
-.table-appointments tbody tr:hover {
-    background-color: #2a2a2a;
-}
-
-/* Lista de Ações Rápidas */
-.quick-actions-list .list-group-item {
-    background-color: transparent;
-    color: var(--bc-text-primary, #f0f0f0);
-    border: none;
-    border-bottom: 1px solid #444;
-    padding: 1rem 0;
-}
-
-.quick-actions-list .list-group-item:last-child {
-    border-bottom: none;
-}
-
-.quick-actions-list .list-group-item:hover {
-    background-color: rgba(197, 168, 106, 0.1);
-    color: var(--bc-gold-hover, #e4d5b7);
-}
-
-.quick-actions-list .list-group-item i {
-    color: var(--bc-gold, #c5a86a);
-    width: 25px; /* Alinhamento dos ícones */
+.stat-label {
+    font-size: 0.8rem;
+    color: var(--bc-text-secondary);
+    text-transform: uppercase;
 }

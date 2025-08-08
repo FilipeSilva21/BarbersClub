@@ -15,4 +15,6 @@ public record UserRegisterRequest()
     public string ConfirmPassword { get; set; } = string.Empty;
     
     public Roles Role { get; set; }
+    
+    public IFormFile? ProfilePic { get; set; }
 }

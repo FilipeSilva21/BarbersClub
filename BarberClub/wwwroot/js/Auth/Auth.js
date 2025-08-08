@@ -65,7 +65,7 @@ function renderAuthenticatedMenu(payload) {
                 Olá, ${payload.firstName}
             </a>
             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item nav-link-jwt" href="/Account/Profile">Meu Perfil</a></li> <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item nav-link-jwt" href="/profile">Meu Perfil</a></li> <li><hr class="dropdown-divider"></li>
                 <li>
                     <button type="button" class="dropdown-item" onclick="logout()">
                         <i class="bi bi-box-arrow-right me-2"></i>Sair

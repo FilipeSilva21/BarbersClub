@@ -3,10 +3,11 @@ using BarberClub.DTOs;
 using BarberClub.Models;
 using BarberClub.Models.Enums;
 using BarberClub.Services.Interfaces;
+using Microsoft.AspNetCore.Hosting;
 
 namespace BarberClub.Services;
 
-public class BarberShopService(DbContext.ProjectDbContext context) : IBarberShopService
+public class BarberShopService(DbContext.ProjectDbContext context, IWebHostEnvironment webHostEnvironment) : IBarberShopService
 {
     public async Task<BarberShop?> RegisterBarberShopAsync(int userId, BarberShopRegisterRequest request)
     {
@@ -27,8 +28,26 @@ public class BarberShopService(DbContext.ProjectDbContext context) : IBarberShop
             OpeningHours = request.OpeningHours,
             ClosingHours = request.ClosingHours,
             WorkingDays = request.WorkingDays?.Distinct().ToList() ?? new List<WorkingDays>()
+            
         };
 
+        if (request.ProfilePicFile != null && request.ProfilePicFile.Length > 0)
+        {
+            string uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(request.ProfilePicFile.FileName);
+        
+            string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "images", "barbershops");
+            Directory.CreateDirectory(uploadsFolder);
+        
+            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                await request.ProfilePicFile.CopyToAsync(fileStream);
+            }
+
+            barberShop.ProfilePicUrl = $"/images/barbershops/{uniqueFileName}";
+        }
+        
         if (request.OfferedServices != null)
         {
             foreach (var serviceDto in request.OfferedServices)

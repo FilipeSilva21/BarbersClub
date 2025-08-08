@@ -7,26 +7,21 @@ namespace BarberClub.Controllers.ServiceControllers;
 
 [Route("api/ratings")]
 [ApiController]
-public class RatingsApiController : ControllerBase
+public class RatingsApiController(IRatingService ratingService) : ControllerBase
 {
-    private readonly IRatingService _ratingService;
-
-    public RatingsApiController(IRatingService ratingService)
-    {
-        _ratingService = ratingService;
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> CreateRating([FromBody] RatingRegisterRequest request)
-    {
-        var createdRating = await _ratingService.CreateRatingAsync(request);
-        return Ok(createdRating);
-    }
-
-    [HttpGet("barbershop/{barberShopId}")]
-    public async Task<IActionResult> GetRatingsByBarberShop(int barberShopId)
-    {
-        var ratings = await _ratingService.GetRatingsByBarberShopAsync(barberShopId);
-        return Ok(ratings);
-    }
+    // [HttpPost]
+    // public async Task<IActionResult> CreateRating([FromBody] RatingRegisterRequest request)
+    // {
+    //     var createdRating = await ratingService.CreateRatingAsync(request);
+    //     
+    //     return Ok(createdRating);
+    // }
+    //
+    // [HttpGet("barbershop/{barberShopId}")]
+    // public async Task<IActionResult> GetRatingsByBarberShop(int barberShopId)
+    // {
+    //     var ratings = await ratingService.GetRatingsByBarberShopAsync(barberShopId);
+    //     
+    //     return Ok(ratings);
+    // }
 }

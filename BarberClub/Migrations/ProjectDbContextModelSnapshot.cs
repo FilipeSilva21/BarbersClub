@@ -52,6 +52,9 @@ namespace BarberClub.Migrations
                     b.Property<string>("OpeningHours")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ProfilePicUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("State")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -85,12 +88,15 @@ namespace BarberClub.Migrations
                     b.Property<int?>("BarberShopId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ImagePath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("ServiceId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("UploadedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ImageId");
 
@@ -133,7 +139,7 @@ namespace BarberClub.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RatingId"));
 
-                    b.Property<int>("BarberShopId")
+                    b.Property<int?>("BarberShopId")
                         .HasColumnType("int");
 
                     b.Property<string>("Comment")
@@ -184,8 +190,15 @@ namespace BarberClub.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("ServiceImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Services")
                         .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<TimeSpan>("Time")
                         .HasColumnType("time");
@@ -226,6 +239,9 @@ namespace BarberClub.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ProfilePicUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Role")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -256,7 +272,7 @@ namespace BarberClub.Migrations
                         .HasForeignKey("BarberShopId");
 
                     b.HasOne("BarberClub.Models.Service", "Service")
-                        .WithMany("Images")
+                        .WithMany()
                         .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -277,16 +293,13 @@ namespace BarberClub.Migrations
 
             modelBuilder.Entity("BarberClub.Models.Rating", b =>
                 {
-                    b.HasOne("BarberClub.Models.BarberShop", "BarberShop")
+                    b.HasOne("BarberClub.Models.BarberShop", null)
                         .WithMany("Ratings")
-                        .HasForeignKey("BarberShopId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BarberShopId");
 
                     b.HasOne("BarberClub.Models.Service", "Service")
                         .WithMany("Ratings")
                         .HasForeignKey("ServiceId")
-                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("BarberClub.Models.User", "Client")
@@ -294,8 +307,6 @@ namespace BarberClub.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.Navigation("BarberShop");
 
                     b.Navigation("Client");
 
@@ -334,8 +345,6 @@ namespace BarberClub.Migrations
 
             modelBuilder.Entity("BarberClub.Models.Service", b =>
                 {
-                    b.Navigation("Images");
-
                     b.Navigation("Ratings");
                 });
 

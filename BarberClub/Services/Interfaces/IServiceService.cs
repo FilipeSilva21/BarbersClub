@@ -14,7 +14,14 @@ public interface IServiceService
         string? clientName,
         string? serviceType,
         DateTime? startDate,
-        DateTime? endDate);
+        DateTime? endDate
+    );
 
     Task<IEnumerable<string>> GetBookedTimesAsync(int barberShopId, DateTime date);
+    
+    Task<bool> CancelServiceAsync(int serviceId, int userId);
+
+    Task<IEnumerable<ServiceViewResponse>> GetServicesByUserAndStatusAsync(int userId, string status);
+
+    Task<Service?> UpdateServiceAsync(int serviceId, ServiceUpdateRequest request);
 }

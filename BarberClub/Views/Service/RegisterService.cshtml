@@ -2,7 +2,7 @@
     ViewData["Title"] = "Agendar Novo Serviço";
 }
 @section Styles {
-    <link rel="stylesheet" href="~/css/navbar/Service/RegisterService.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Service/RegisterService.css" asp-append-version="true" />
 }
 
 <div class="container my-5">
@@ -89,5 +89,5 @@
         const CURRENT_USER_ID = @Json.Serialize(ViewBag.CurrentUserId ?? null);
         const AVAILABLE_SERVICES = @Json.Serialize(ViewBag.AvailableServices ?? new List<object>());
     </script>
-    <script src="~/js/NavBar/Service/RegisterService.js" asp-append-version="true"></script>
+    <script src="~/js/Service/RegisterService.js" asp-append-version="true"></script>
 }

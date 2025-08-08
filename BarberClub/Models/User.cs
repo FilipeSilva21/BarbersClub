@@ -19,6 +19,8 @@ public class User
     
     public Roles Role { get; set; }
     
+    public string? ProfilePicUrl { get; set; }
+    
     public virtual ICollection<BarberShop> BarberShops { get; set; }
     
     public virtual ICollection<Service> Services { get; set; }

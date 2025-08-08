@@ -27,10 +27,32 @@
       <_ContentIncludedByDefault Remove="Views\BarberShop\RegisterBarberShop.cshtml" />
       <_ContentIncludedByDefault Remove="wwwroot\js\BarberShop\RegisterBarberShop.js" />
       <_ContentIncludedByDefault Remove="wwwroot\css\BarberShop\RegisterBarberShop.css" />
+      <_ContentIncludedByDefault Remove="Views\NavBar\BarberShop\BarberShopDetails.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\NavBar\BarberShop\RegisterBarberShop.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\NavBar\BarberShop\ShowBarberShops.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\NavBar\Service\RegisterService.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\NavBar\Service\ShowServices.cshtml" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\NavBar\Service\RegisterService.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\NavBar\Service\ShowServices.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\NavBar\BarberShop\BarberShopDetails.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\NavBar\BarberShop\RegisterBarberShop.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\NavBar\BarberShop\ShowBarberShops.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\js\NavBar\BarberShop\BarberShopDetails.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\js\NavBar\BarberShop\RegisterBarberShop.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\js\NavBar\BarberShop\ShowBarberShops.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\js\NavBar\Service\RegisterService.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\js\NavBar\Service\ShowServices.js" />
     </ItemGroup>
 
     <ItemGroup>
-      <AdditionalFiles Include="Views\NavBar\BarberShop\RegisterBarberShop.cshtml" />
+      <AdditionalFiles Include="Views\BarberShop\BarberShopDetails.cshtml" />
+      <AdditionalFiles Include="Views\BarberShop\ShowBarberShops.cshtml" />
+      <AdditionalFiles Include="Views\Service\RegisterService.cshtml" />
+      <AdditionalFiles Include="Views\Service\ShowServices.cshtml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Views\Service\Rating\" />
     </ItemGroup>
 
 </Project>

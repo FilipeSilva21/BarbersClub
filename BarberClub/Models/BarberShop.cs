@@ -23,6 +23,8 @@ public class BarberShop
     
     public string? ClosingHours { get; set; }
     
+    public string? ProfilePicUrl { get; set; }
+    
     public virtual ICollection<Service> Services { get; set; }
     
     public virtual ICollection<Rating> Ratings { get; set; }

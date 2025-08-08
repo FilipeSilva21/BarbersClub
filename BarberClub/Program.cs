@@ -50,7 +50,7 @@ builder.Services.AddControllers()
     });
 
 builder.Services.AddDbContext<ProjectDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("UserDatabase")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("BarbersClubDB")));
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IBarberShopService, BarberShopService>();

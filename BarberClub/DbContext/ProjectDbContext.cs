@@ -17,7 +17,6 @@ public class ProjectDbContext(DbContextOptions<ProjectDbContext> options) : Micr
     {
         base.OnModelCreating(modelBuilder);
     
-        // --- Configuração de User ---
         modelBuilder.Entity<User>(userEntity =>
         {
             userEntity.HasIndex(u => u.Email).IsUnique();
@@ -44,39 +43,33 @@ public class ProjectDbContext(DbContextOptions<ProjectDbContext> options) : Micr
                 .WithMany(bs => bs.Services) 
                 .HasForeignKey(s => s.BarberShopId)
                 .OnDelete(DeleteBehavior.Cascade); 
+            
+            modelBuilder.Entity<Service>()
+                .Property(s => s.Status)
+                .HasConversion<string>();
         });
 
         // --- Configuração de Rating ---
         modelBuilder.Entity<Rating>(ratingEntity =>
         {
+            // Rating -> Client (N-1)
             ratingEntity.HasOne(r => r.Client)
                 .WithMany(u => u.Ratings) 
                 .HasForeignKey(r => r.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Rating -> BarberShop (N-1)
-            ratingEntity.HasOne(r => r.BarberShop)
-                .WithMany(bs => bs.Ratings) 
-                .HasForeignKey(r => r.BarberShopId)
-                .OnDelete(DeleteBehavior.Cascade);
-
             // Rating -> Service (N-1)
             ratingEntity.HasOne(r => r.Service)
                 .WithMany(s => s.Ratings) 
                 .HasForeignKey(r => r.ServiceId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.ClientSetNull
+                );
         });
 
         // --- Configuração de Image ---
-        modelBuilder.Entity<Image>(imageEntity =>
-        {
-            // Image -> Service (N-1)
-            imageEntity.HasOne(i => i.Service)
-                .WithMany(s => s.Images) 
-                .HasForeignKey(i => i.ServiceId)
-                .OnDelete(DeleteBehavior.Cascade); 
-        });
         
+        
+        // --- Configuração de OfferedServices ---
         modelBuilder.Entity<OfferedService>(offeredServiceEntity =>
         {
             offeredServiceEntity.HasOne(os => os.BarberShop)

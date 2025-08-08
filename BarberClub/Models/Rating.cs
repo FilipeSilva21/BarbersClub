@@ -12,10 +12,6 @@ public class Rating
     
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     
-    public int BarberShopId { get; set; }
-    [ForeignKey("BarberShopId")]
-    public virtual BarberShop BarberShop { get; set; }
-    
     public int UserId { get; set; }
     [ForeignKey("UserId")]
     public virtual User Client { get; set; }

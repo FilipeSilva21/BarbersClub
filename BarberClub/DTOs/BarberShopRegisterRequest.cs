@@ -1,8 +1,9 @@
 using BarberClub.Models.Enums;
+using Microsoft.AspNetCore.Http;
 
 namespace BarberClub.DTOs;
 
-public record BarberShopRegisterRequest()
+public record BarberShopRegisterRequest
 {
     public string Name { get; set; } = string.Empty;
     
@@ -19,6 +20,8 @@ public record BarberShopRegisterRequest()
     public string? OpeningHours { get; set; } 
     
     public string? ClosingHours { get; set; }
+    
+    public IFormFile? ProfilePicFile { get; set; }
     
     public List<OfferedServiceResponse> OfferedServices { get; set; } = new();
     public List<WorkingDays> WorkingDays { get; set; } = new();

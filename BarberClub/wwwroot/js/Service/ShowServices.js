@@ -3,25 +3,21 @@ document.addEventListener('DOMContentLoaded', function () {
     const resultsContainer = document.getElementById('results-container');
     const loadingMessage = document.getElementById('loading-message');
 
-    // Função para formatar a data para o padrão brasileiro
     function formatDate(dateString) {
         const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
         return new Date(dateString).toLocaleDateString('pt-BR', options);
     }
 
-    // Função principal para buscar e renderizar os serviços
     async function fetchAndRenderServices() {
         loadingMessage.style.display = 'block';
         resultsContainer.innerHTML = '';
 
-        // Pega os valores dos filtros
         const barberShopName = document.getElementById('barberShopName').value;
         const serviceType = document.getElementById('ServiceType').value;
         const clientName = document.getElementById('clientName').value;
         const startDate = document.getElementById('startDate').value;
         const endDate = document.getElementById('endDate').value;
 
-        // Monta a URL da API com os parâmetros de busca
         const queryParams = new URLSearchParams({
             serviceType,
             barberShopName,
@@ -30,7 +26,6 @@ document.addEventListener('DOMContentLoaded', function () {
             endDate
         });
 
-        // Assumindo que sua API de serviços está em /api/services
         const apiUrl = `/api/services?${queryParams}`;
 
         try {
@@ -73,6 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     searchForm.addEventListener('submit', function (event) {
         event.preventDefault();
+        fetchAndRenderServices();
     });
 
     fetchAndRenderServices();

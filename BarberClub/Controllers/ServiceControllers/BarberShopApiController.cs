@@ -15,7 +15,7 @@ public class BarberShopApiController(IBarberShopService barberShopService): Cont
     
     [HttpPost ("register")] 
     [Authorize]
-    public async Task<IActionResult> RegisterBarberShop([FromBody] BarberShopRegisterRequest request)
+    public async Task<IActionResult> RegisterBarberShop([FromQuery] BarberShopRegisterRequest request)
     {
         if (!ModelState.IsValid)
         {
@@ -38,7 +38,7 @@ public class BarberShopApiController(IBarberShopService barberShopService): Cont
         {
             return NotFound($"Autor com ID {userId} não encontrado no banco de dados.");
         }
-        Console.WriteLine(request + "2");
+        
         return Ok(barberShop);
     }
 
