@@ -15,9 +15,7 @@ public class BarberShopController(IBarberShopService barberShopContext) : Contro
         return View("~/Views/BarberShop/ShowBarberShops.cshtml");
     }
     
-    [HttpGet]
-    
-    [Route("/barbershops/register")]
+    [HttpGet("/barbershops/register")]
     public IActionResult RegisterBarberShop()
     {
         return View("~/Views/BarberShop/RegisterBarberShop.cshtml");    
@@ -35,32 +33,41 @@ public class BarberShopController(IBarberShopService barberShopContext) : Contro
         return View("~/Views/BarberShop/BarberShopDetails.cshtml", barberShop);
     }
     
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Register([FromForm] BarberShopRegisterRequest request)
+    [HttpGet("barbershop/edit/{id}")]
+    public async Task<IActionResult> UpdateBarberShop(int id)
     {
-        if (!ModelState.IsValid)
+        var barberShop = await barberShopContext.GetBarberShopByIdAsync(id);
+        if (barberShop == null)
         {
-            // Se houver erro de validação, retorna para a mesma tela com os dados
-            return View(request);
-        }
-        
-        // Pega o ID do usuário logado (exemplo)
-        var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        if (!int.TryParse(userIdString, out var userId))
-        {
-            return Unauthorized("Sessão inválida.");
+            return NotFound();
         }
 
-        var newBarberShop = await barberShopContext.RegisterBarberShopAsync(userId, request);
-
-        if (newBarberShop == null)
+        var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+        if (barberShop.UserId != userId)
         {
-            ModelState.AddModelError(string.Empty, "Não foi possível cadastrar a barbearia.");
-            return View(request);
+            return Forbid(); 
         }
 
-        TempData["SuccessMessage"] = "Barbearia cadastrada com sucesso!";
-        return RedirectToAction("Dashboard", "NavBar"); // Redireciona para o dashboard
+        var dto = new BarberShopUpdateRequest
+        {
+            BarberShopId = barberShop.BarberShopId,
+            Name = barberShop.Name,
+            Address = barberShop.Address,
+            City = barberShop.City,
+            State = barberShop.State,
+            WhatsApp = barberShop.WhatsApp,
+            Instagram = barberShop.Instagram,
+            OpeningHours = barberShop.OpeningHours,
+            ClosingHours = barberShop.ClosingHours,
+            CurrentProfilePicUrl = barberShop.ProfilePicUrl,
+            WorkingDays = barberShop.WorkingDays,
+            OfferedServices = barberShop.OfferedServices.Select(os => new OfferedServiceResponse
+            {
+                ServiceType = os.ServiceType.ToString(),
+                Price = os.Price
+            }).ToList()
+        };
+
+        return View(dto);
     }
 }

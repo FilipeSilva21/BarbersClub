@@ -11,7 +11,6 @@ namespace BarberClub.Services;
 public class ServiceService(ProjectDbContext context, IWebHostEnvironment webHostEnvironment) : IServiceService
 {
    
-
     public async Task<ServiceViewResponse> CreateServiceAsync(ServiceRegisterRequest request)
     {
         var barberShop = await context.BarberShops.FindAsync(request.BarberShopId);
@@ -42,14 +41,51 @@ public class ServiceService(ProjectDbContext context, IWebHostEnvironment webHos
 
         return new ServiceViewResponse();
     }
-
-    public async Task<IEnumerable<ServiceViewResponse>> GetServicesByBarberShopAsync(int barberShopId)
+    
+    public async Task<Service?> GetServiceByIdAsync(int serviceId)
     {
-        return await context.Services
+        return await context.Services  
+            .Include(bs => bs.Ratings)
+            .Include(bs => bs.BarberShop)
+            .AsNoTracking()
+            .FirstOrDefaultAsync(b => b.ServiceId == serviceId);
+    }
+
+    public async Task<IEnumerable<ServiceViewResponse>> GetServicesByBarberShopAsync(
+        int barberShopId, 
+        string? clientName, 
+        string? serviceType, 
+        DateTime? startDate, 
+        DateTime? endDate,
+        TimeSpan? time)
+    {
+        // A consulta base agora começa filtrando pela barbearia
+        var query = context.Services
             .Where(s => s.BarberShopId == barberShopId)
+            .AsQueryable();
+
+        // Aplica os filtros adicionais, copiados do GetServicesAsync
+        if (!string.IsNullOrEmpty(clientName))
+            query = query.Where(s => s.Client.FirstName.Contains(clientName) || s.Client.LastName.Contains(clientName));
+        
+        if (!string.IsNullOrEmpty(serviceType))
+            query = query.Where(s => s.Services.ToString().Contains(serviceType));
+        
+        if (startDate.HasValue)
+            query = query.Where(s => s.Date.Date >= startDate.Value.Date);
+        
+        if (endDate.HasValue)
+            query = query.Where(s => s.Date.Date <= endDate.Value.Date);
+        
+        // Adiciona o novo filtro de horário
+        if (time.HasValue)
+            query = query.Where(s => s.Time == time.Value);
+
+        // A projeção e ordenação final permanecem as mesmas
+        return await query
             .Include(s => s.Client)
             .Include(s => s.BarberShop).ThenInclude(bs => bs.OfferedServices) 
-            .OrderByDescending(s => s.Date)
+            .OrderByDescending(s => s.Date).ThenBy(s => s.Time)
             .Select(s => new ServiceViewResponse()
             {
                 ServiceId = s.ServiceId,
@@ -60,6 +96,8 @@ public class ServiceService(ProjectDbContext context, IWebHostEnvironment webHos
                 BarberShopName = s.BarberShop.Name,
                 ClientId = s.UserId,
                 ClientName = s.Client.FirstName,
+                Status = s.Status.ToString(),
+                ServiceImage = s.ServiceImageUrl,
                 OfferedServices = s.BarberShop.OfferedServices.Select(os => new OfferedServiceResponse()
                 {
                     ServiceType = os.ServiceType.ToString(),
@@ -74,30 +112,30 @@ public class ServiceService(ProjectDbContext context, IWebHostEnvironment webHos
         string? clientName, 
         string? serviceType, 
         DateTime? startDate, 
-        DateTime? endDate)
+        DateTime? endDate,
+        bool? hasPhoto)
     {
         var query = context.Services.AsQueryable();
 
         if (!string.IsNullOrEmpty(barberShopName))
             query = query.Where(s => s.BarberShop.Name.Contains(barberShopName));
         
-
         if (!string.IsNullOrEmpty(clientName))
             query = query.Where(s => s.Client.FirstName.Contains(clientName) || s.Client.LastName.Contains(clientName));
         
-
         if (!string.IsNullOrEmpty(serviceType))
             query = query.Where(s => s.Services.ToString() == serviceType);
         
-
         if (startDate.HasValue)
             query = query.Where(s => s.Date.Date >= startDate.Value.Date);
         
-
         if (endDate.HasValue)
             query = query.Where(s => s.Date.Date <= endDate.Value.Date);
         
-
+        if (hasPhoto == true)
+            query = query.Where(s => !string.IsNullOrEmpty(s.ServiceImageUrl));
+        
+        
         var result = await query
             .Include(s => s.BarberShop) 
             .Include(s => s.Client)  
@@ -111,7 +149,8 @@ public class ServiceService(ProjectDbContext context, IWebHostEnvironment webHos
                 BarberShopId = s.BarberShopId,
                 BarberShopName = s.BarberShop.Name,
                 ClientId = s.UserId,
-                ClientName = s.Client.FirstName 
+                ClientName = s.Client.FirstName,
+                ServiceImage = s.ServiceImageUrl 
             })
             .AsNoTracking() 
             .ToListAsync();
@@ -197,45 +236,56 @@ public class ServiceService(ProjectDbContext context, IWebHostEnvironment webHos
         return true;
     }
     
-    public async Task<bool> ConcludeServiceAsync(int serviceId, int userId)
+    public async Task<bool> ConcludeServiceAsync(int serviceId)
     {
-        var service = await context.Services.FirstOrDefaultAsync(s => s.ServiceId == serviceId);
+        var service = await context.Services.FindAsync(serviceId);
 
-        if (service == null || service.UserId != userId)
-            return false;
-        
-        if (service.Status != ServiceStatus.Confirmado)
-            return false;
+        if (service == null || service.Status != ServiceStatus.Confirmado)
+        {
+            return false; 
+        }
 
         service.Status = ServiceStatus.Concluido;
-        await context.SaveChangesAsync();
 
+        await context.SaveChangesAsync();
         return true;
     }
+
+    public async Task<bool> ConcludeServiceAsync(int serviceId, string photoPath)
+    {
+        var service = await context.Services.FindAsync(serviceId);
     
+        if (service == null || service.Status != ServiceStatus.Confirmado)
+        {
+            return false;
+        }
+
+        if (string.IsNullOrEmpty(photoPath))
+        {
+            return false;
+        }
+
+        service.Status = ServiceStatus.Concluido;
+        service.ServiceImageUrl = photoPath; 
+        
+        await context.SaveChangesAsync();
+        return true;
+    }
+
     public async Task<Service?> UpdateServiceAsync(int serviceId, ServiceUpdateRequest request)
     {
-        // 1. Encontra o serviço existente no banco
         var service = await context.Services.FindAsync(serviceId);
         if (service == null)
-        {
-            return null; // ou throw new KeyNotFoundException(...);
-        }
+            return null;
 
-        // 2. Atualiza outras propriedades, se fornecidas
         if (request.Description != null)
-        {
             service.Description = request.Description;
-        }
-        if (request.Status.HasValue)
-        {
-            service.Status = request.Status.Value;
-        }
 
-        // 3. Processa a nova imagem, se ela foi enviada
+        if (request.Status.HasValue)
+            service.Status = request.Status.Value;
+
         if (request.UploadedImage != null && request.UploadedImage.Length > 0)
         {
-            // Se já existe uma imagem, apaga a antiga para não acumular lixo
             if (!string.IsNullOrEmpty(service.ServiceImageUrl))
             {
                 var oldImagePath = Path.Combine(webHostEnvironment.WebRootPath, service.ServiceImageUrl.TrimStart('/'));
@@ -245,10 +295,9 @@ public class ServiceService(ProjectDbContext context, IWebHostEnvironment webHos
                 }
             }
 
-            // Salva a nova imagem com nome único
             string uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(request.UploadedImage.FileName);
             string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "images", "services");
-            Directory.CreateDirectory(uploadsFolder);
+            Directory.CreateDirectory(uploadsFolder); 
             string filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
             using (var fileStream = new FileStream(filePath, FileMode.Create))
@@ -256,13 +305,10 @@ public class ServiceService(ProjectDbContext context, IWebHostEnvironment webHos
                 await request.UploadedImage.CopyToAsync(fileStream);
             }
 
-            // Atualiza a URL da imagem no banco de dados
             service.ServiceImageUrl = $"/images/services/{uniqueFileName}";
         }
 
-        // 4. Salva todas as alterações no banco
         await context.SaveChangesAsync();
-
         return service;
     }
 }

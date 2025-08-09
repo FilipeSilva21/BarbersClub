@@ -6,7 +6,13 @@ namespace BarberClub.Services.Interfaces;
 public interface IServiceService
 {
     Task<ServiceViewResponse> CreateServiceAsync(ServiceRegisterRequest request);
-    Task<IEnumerable<ServiceViewResponse>> GetServicesByBarberShopAsync(int barberShopId);
+    Task<IEnumerable<ServiceViewResponse>> GetServicesByBarberShopAsync(
+        int barberShopId,
+        string? clientName,
+        string? serviceType,
+        DateTime? startDate,
+        DateTime? endDate,
+        TimeSpan? time);
     Task<List<ServiceViewResponse>> GetServicesByUserAsync(int userId);
 
     Task<IEnumerable<ServiceViewResponse>> GetServicesAsync(
@@ -14,8 +20,11 @@ public interface IServiceService
         string? clientName,
         string? serviceType,
         DateTime? startDate,
-        DateTime? endDate
+        DateTime? endDate,
+        bool? hasPhoto
     );
+
+    Task<Service?> GetServiceByIdAsync(int serviceId);
 
     Task<IEnumerable<string>> GetBookedTimesAsync(int barberShopId, DateTime date);
     
@@ -24,4 +33,7 @@ public interface IServiceService
     Task<IEnumerable<ServiceViewResponse>> GetServicesByUserAndStatusAsync(int userId, string status);
 
     Task<Service?> UpdateServiceAsync(int serviceId, ServiceUpdateRequest request);
+    
+    Task<bool> ConcludeServiceAsync(int serviceId);
+    Task<bool> ConcludeServiceAsync(int serviceId, string photoPath);
 }

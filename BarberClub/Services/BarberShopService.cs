@@ -33,7 +33,7 @@ public class BarberShopService(DbContext.ProjectDbContext context, IWebHostEnvir
 
         if (request.ProfilePicFile != null && request.ProfilePicFile.Length > 0)
         {
-            string uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(request.ProfilePicFile.FileName);
+            string uniqueFileName = Guid.NewGuid() + Path.GetExtension(request.ProfilePicFile.FileName);
         
             string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "images", "barbershops");
             Directory.CreateDirectory(uploadsFolder);
@@ -125,9 +125,79 @@ public class BarberShopService(DbContext.ProjectDbContext context, IWebHostEnvir
         return clients;
     }
     
-    public Task<BarberShop?> UpdateBarberShopAsync(int barberShopId, int userId, BarberShopUpdateRequest request)
+    public async Task<BarberShop?> UpdateBarberShopAsync(int barberShopId, int userId, BarberShopUpdateRequest request)
     {
-        throw new NotImplementedException();
+        var barberShopToUpdate = await context.BarberShops
+            .Include(bs => bs.OfferedServices)
+            .FirstOrDefaultAsync(bs => bs.BarberShopId == barberShopId);
+
+        if (barberShopToUpdate == null) return null;
+
+        if (barberShopToUpdate.UserId != userId) return null; 
+
+        barberShopToUpdate.Name = request.Name;
+        barberShopToUpdate.Address = request.Address;
+        barberShopToUpdate.City = request.City;
+        barberShopToUpdate.State = request.State;
+        barberShopToUpdate.WhatsApp = request.WhatsApp;
+        barberShopToUpdate.Instagram = request.Instagram;
+        barberShopToUpdate.OpeningHours = request.OpeningHours;
+        barberShopToUpdate.ClosingHours = request.ClosingHours;
+        
+        barberShopToUpdate.WorkingDays = request.WorkingDays?.Distinct().ToList() ?? new List<WorkingDays>();
+
+        if (request.ProfilePicFile != null && request.ProfilePicFile.Length > 0)
+        {
+            if (!string.IsNullOrEmpty(barberShopToUpdate.ProfilePicUrl))
+            {
+                var oldImagePath = Path.Combine(webHostEnvironment.WebRootPath, barberShopToUpdate.ProfilePicUrl.TrimStart('/'));
+                if (File.Exists(oldImagePath)) File.Delete(oldImagePath);
+            }
+
+            string uniqueFileName = Guid.NewGuid() + Path.GetExtension(request.ProfilePicFile.FileName);
+            
+            string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "images", "barbershops");
+            
+            Directory.CreateDirectory(uploadsFolder);
+            
+            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+            
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                await request.ProfilePicFile.CopyToAsync(fileStream);
+            }
+            barberShopToUpdate.ProfilePicUrl = $"/images/barbershops/{uniqueFileName}";
+        }
+        
+        var servicesToRemove = barberShopToUpdate.OfferedServices
+            .Where(os => request.OfferedServices.All(dto => dto.ServiceType != os.ServiceType.ToString()))
+            .ToList();
+        context.OfferedServices.RemoveRange(servicesToRemove);
+
+        foreach (var serviceDto in request.OfferedServices)
+        {
+            if (Enum.TryParse<Models.Enums.Services>(serviceDto.ServiceType, true, out var serviceEnum))
+            {
+                var existingService = barberShopToUpdate.OfferedServices
+                    .FirstOrDefault(os => os.ServiceType == serviceEnum);
+                
+                if (existingService != null)
+                {
+                    existingService.Price = serviceDto.Price;
+                }
+                else
+                {
+                    barberShopToUpdate.OfferedServices.Add(new OfferedService
+                    {
+                        ServiceType = serviceEnum,
+                        Price = serviceDto.Price
+                    });
+                }
+            }
+        }
+
+        await context.SaveChangesAsync();
+        return barberShopToUpdate;
     }
 
     public async Task<bool> DeleteBarberShopAsync(int barberShopId, int userId)

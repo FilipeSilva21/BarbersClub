@@ -13,7 +13,9 @@ public record ServiceViewResponse
     public int ClientId { get; set; }
     public string ClientName { get; set; }
     public decimal Price { get; set; }
-    public string? Description { get; set; } 
+    public string? Description { get; set; }
+    
+    public string? ServiceImage { get; set; }
     
     public List<OfferedServiceResponse> OfferedServices { get; set; }
 }

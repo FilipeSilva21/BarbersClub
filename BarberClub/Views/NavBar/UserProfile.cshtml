@@ -1,0 +1,56 @@
+@model BarberClub.DTOs.UserProfileResponse
+
+@{
+    ViewData["Title"] = "Meu Perfil";
+    
+    var profileImage = !string.IsNullOrEmpty(Model.ProfilePicUrl)
+        ? Model.ProfilePicUrl
+        : "~/images/default-avatar.png";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/NavBar/userprofile.css" asp-append-version="true" />
+}
+
+<div class="container my-5 profile-page" id="profile-container">
+    <div class="row">
+        <div class="col-lg-4 mb-4">
+            <div class="card profile-card">
+                <div class="card-body text-center">
+                    <img src="@Url.Content(profileImage)" alt="Avatar do Usuário" class="profile-avatar mb-3" />
+                    
+                    <h4 class="card-title mb-1">@Model?.FirstName @Model?.LastName</h4>
+                    <p class="text-muted mb-3">@Model?.Email</p>
+                    
+                    <a href="/profile/edit" class="btn btn-outline-gold">Editar Perfil</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+            <h3 class="mb-4">Meus Agendamentos</h3>
+            <ul class="nav nav-tabs appointment-tabs mb-4">
+                <li class="nav-item"><a class="nav-link active" href="javascript:void(0);" data-status="Confirmado">Próximos</a></li>
+                <li class="nav-item"><a class="nav-link" href="javascript:void(0);" data-status="Concluido">Histórico</a></li>
+                <li class="nav-item"><a class="nav-link" href="javascript:void(0);" data-status="Cancelado">Cancelados</a></li>
+            </ul>
+
+            <div id="appointment-list-container">
+                <div class="text-center p-5" id="loading-spinner">
+                    <div class="spinner-border text-light" role="status">
+                        <span class="visually-hidden">Carregando...</span>
+                    </div>
+                    <p class="mt-2 text-muted">Buscando seus agendamentos...</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <script src="~/js/NavBar/userprofile.js" asp-append-version="true"></script>
+}

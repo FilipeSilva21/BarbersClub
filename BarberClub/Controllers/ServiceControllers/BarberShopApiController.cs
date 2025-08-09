@@ -85,4 +85,23 @@ public class BarberShopApiController(IBarberShopService barberShopService): Cont
 
         return NoContent(); 
     }
+    
+    [HttpPost("edit")]
+    public async Task<IActionResult> Edit([FromForm] BarberShopUpdateRequest request)
+    {
+        var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (!int.TryParse(userIdString, out var userId))
+        {
+            return Unauthorized("Token de usuário inválido.");
+        }
+
+        var updatedBarberShop = await barberShopService.UpdateBarberShopAsync(request.BarberShopId, userId, request);
+
+        if (updatedBarberShop == null)
+        {
+            return BadRequest(new { message = "Não foi possível atualizar a barbearia. Verifique os dados ou a permissão." });
+        }
+        
+        return Ok(updatedBarberShop);
+    }
 }

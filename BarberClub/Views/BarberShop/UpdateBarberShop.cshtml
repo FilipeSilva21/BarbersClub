@@ -1,0 +1,92 @@
+@model BarberClub.DTOs.BarberShopUpdateRequest
+@using BarberClub.Models.Enums
+
+@{
+    ViewData["Title"] = "Editar Barbearia";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/BarberShop/RegisterBarberShop.css" asp-append-version="true" />
+}
+
+<div class="auth-container">
+    <form id="barberShopEditForm">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="BarberShopId" />
+
+        <h2>Editar Informações da Barbearia</h2>
+        <p class="text">Atualize os dados da sua barbearia.</p>
+
+        <div class="mb-4 text-center">
+            <div class="profile-picture-container">
+                <img id="image-preview" src="@(string.IsNullOrEmpty(Model.CurrentProfilePicUrl) ? "/images/default-barbershop.png" : Url.Content(Model.CurrentProfilePicUrl))" alt="Foto de Perfil" />
+                <label asp-for="ProfilePicFile" class="picture-overlay">
+                    <i class="bi bi-camera-fill"></i>
+                    <span>Alterar Foto</span>
+                </label>
+                <input asp-for="ProfilePicFile" type="file" accept="image/*" class="d-none" />
+            </div>
+        </div>
+
+        <div class="mb-3 text-start"><label asp-for="Name">Nome da Barbearia</label><input asp-for="Name" class="form-control" required></div>
+        <div class="mb-3 text-start"><label asp-for="Address">Endereço</label><input asp-for="Address" class="form-control" required></div>
+        <div class="row">
+            <div class="col-md-6 mb-3 text-start"><label asp-for="City">Cidade</label><input asp-for="City" class="form-control" required></div>
+            <div class="col-md-6 mb-3 text-start"><label asp-for="State">Estado</label><input asp-for="State" class="form-control" required></div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3 text-start"><label asp-for="WhatsApp">WhatsApp</label><input asp-for="WhatsApp" class="form-control" required></div>
+            <div class="col-md-6 mb-3 text-start"><label asp-for="Instagram">Instagram</label><input asp-for="Instagram" class="form-control"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3 text-start"><label asp-for="OpeningHours">Horário de Abertura</label><input asp-for="OpeningHours" class="form-control" type="time"></div>
+            <div class="col-md-6 mb-3 text-start"><label asp-for="ClosingHours">Horário de Fechamento</label><input asp-for="ClosingHours" class="form-control" type="time"></div>
+        </div>
+
+        <div class="mb-3 text-start">
+            <label class="form-label d-block">Dias de Funcionamento</label>
+            <div class="working-days-group p-3 rounded">
+                @foreach (var day in Enum.GetValues(typeof(WorkingDays)))
+                {
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="WorkingDays" value="@day" id="day-@day"
+                               @(Model.WorkingDays != null && Model.WorkingDays.Contains((WorkingDays)day) ? "checked" : "")>
+                        <label class="form-check-label" for="day-@day">@day.ToString()</label>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="mb-4 text-start">
+            <label class="form-label d-block mb-2">Serviços e Preços</label>
+            <div class="services-price-group p-3 rounded">
+                @foreach (var service in Enum.GetValues(typeof(Services)))
+                {
+                    var serviceName = service.ToString();
+                    var existingService = Model.OfferedServices?.FirstOrDefault(s => s.ServiceType == serviceName);
+                    var isChecked = existingService != null;
+                    var price = isChecked ? existingService.Price : 0;
+                    
+                    <div class="row g-2 align-items-center mb-2">
+                        <div class="col-auto"><div class="form-check"><input class="form-check-input service-checkbox" type="checkbox" value="@serviceName" id="service-@serviceName" @(isChecked ? "checked" : "")></div></div>
+                        <div class="col"><label class="form-check-label" for="service-@serviceName">@serviceName</label></div>
+                        <div class="col-4"><div class="input-group input-group-sm"><span class="input-group-text">R$</span>
+                            <input type="number" step="0.01" value="@price.ToString("F2", System.Globalization.CultureInfo.InvariantCulture)" class="form-control service-price-input" data-service-type="@serviceName" @(!isChecked ? "disabled" : "")></div></div>
+                    </div>
+                }
+            </div>
+        </div>
+        
+        <div id="errorMessage" class="error-message mb-3 d-none"></div>
+
+        <button type="submit" class="btn btn-primary w-100">Salvar Alterações</button>
+    </form>
+</div>
+
+<div class="modal fade" id="successModal" tabindex="-1">...</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="~/js/BarberShop/UpdateBarberShop.js" asp-append-version="true"></script>
+}
