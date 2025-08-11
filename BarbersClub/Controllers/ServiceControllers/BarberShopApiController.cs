@@ -104,4 +104,11 @@ public class BarberShopApiController(IBarberShopService barberShopService): Cont
         
         return Ok(updatedBarberShop);
     }
+    
+    [HttpGet("top-rated")]
+    public async Task<IActionResult> GetTopRated([FromQuery] int count = 6)
+    {
+        var topRatedShops = await barberShopService.GetTopRatedBarberShopAsync(count);
+        return Ok(topRatedShops);
+    }
 }

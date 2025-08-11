@@ -12,6 +12,7 @@ public class RatingService(ProjectDbContext context) : IRatingService
     {
         var service = await context.Services
             .AsNoTracking() 
+            .Include(s => s.BarberShop)
             .FirstOrDefaultAsync(s => s.ServiceId == request.ServiceId);
 
         if (service == null)
@@ -35,6 +36,7 @@ public class RatingService(ProjectDbContext context) : IRatingService
             Comment = request.Comment,
             ServiceId = request.ServiceId,
             UserId = service.UserId,
+            BarberShopId = service.BarberShopId,
             CreatedAt = DateTime.UtcNow
         };
 
@@ -47,14 +49,16 @@ public class RatingService(ProjectDbContext context) : IRatingService
     public async Task<IEnumerable<RatingViewResponse>> GetRatingsByBarberShopAsync(int barberShopId)
     {
         return await context.Ratings
-            .Where(r => r.Service.BarberShopId == barberShopId)
+            .Where(r => r.BarberShopId == barberShopId) 
             .Include(r => r.Client)
+            .Include(r => r.BarberShop) 
             .Select(r => new RatingViewResponse()
             {
                 RatingId = r.RatingId,
                 RatingValue = r.RatingValue,
                 Comment = r.Comment,
-                ClientName = r.Client.FirstName
+                ClientName = r.Client.FirstName,
+                BarberShop = r.BarberShop,
             })
             .ToListAsync();
     }

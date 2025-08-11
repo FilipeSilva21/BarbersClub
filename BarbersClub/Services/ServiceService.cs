@@ -15,7 +15,7 @@ public class ServiceService(ProjectDbContext context, IWebHostEnvironment webHos
         var barberShop = await context.BarberShops.FindAsync(request.BarberShopId);
         var client = await context.Users.FindAsync(request.UserId);
         var offeredService = await context.OfferedServices
-            .FirstOrDefaultAsync(os => os.BarberShopId == request.BarberShopId && os.ServiceTypeType == request.ServiceTypes);
+            .FirstOrDefaultAsync(os => os.BarberShopId == request.BarberShopId && os.ServiceType == request.ServiceTypes);
 
         if (offeredService == null)
             throw new InvalidOperationException("Este serviço não é oferecido pela barbearia selecionada.");
@@ -95,7 +95,7 @@ public class ServiceService(ProjectDbContext context, IWebHostEnvironment webHos
                 ServiceImageUrl = s.ServiceImageUrl,
                 OfferedServices = s.BarberShop.OfferedServices.Select(os => new OfferedServiceResponse()
                 {
-                    ServiceType = os.ServiceTypeType.ToString(),
+                    ServiceType = os.ServiceType.ToString(),
                     Price = os.Price
                 }).ToList()
             })

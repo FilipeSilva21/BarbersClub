@@ -54,15 +54,34 @@
     <section class="explore-services-section py-5">
         <div class="container">
             <h2 class="text-center fw-bold section-title">Explore por Serviço</h2>
-            @* LINKS MODIFICADOS: Removemos o 'href' e adicionamos 'data-service' e uma classe comum
-               para que o JavaScript possa identificar o clique e o tipo de serviço.
-            *@
             <div class="row g-4 justify-content-center">
-                <div class="col-6 col-md-4 col-lg-2"><a href="#" data-service="corte" class="action-card service-filter-link"><i class="bi bi-scissors"></i><span>Corte</span></a></div>
-                <div class="col-6 col-md-4 col-lg-2"><a href="#" data-service="barba" class="action-card service-filter-link"><i class="bi bi-person-workspace"></i><span>Barba</span></a></div>
-                <div class="col-6 col-md-4 col-lg-2"><a href="#" data-service="cabeloebarba" class="action-card service-filter-link"><i class="bi bi-journal-plus"></i><span>Cabelo + Barba</span></a></div>
-                <div class="col-6 col-md-4 col-lg-2"><a href="#" data-service="pintura" class="action-card service-filter-link"><i class="bi bi-palette-fill"></i><span>Pintura</span></a></div>
-                <div class="col-6 col-md-4 col-lg-2"><a href="#" data-service="sobrancelha" class="action-card service-filter-link"><i class="bi bi-eye"></i><span>Sobrancelha</span></a></div>
+            
+                <div class="col-6 col-md-4 col-lg-2">
+                    <a href="@Url.Action("Services", "Service", new { serviceType = "Corte" })" class="action-card">
+                        <i class="bi bi-scissors"></i><span>Corte</span>
+                    </a>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <a href="@Url.Action("Services", "Service", new { serviceType = "Barba" })" class="action-card">
+                        <i class="bi bi-person-workspace"></i><span>Barba</span>
+                    </a>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <a href="@Url.Action("Services", "Service", new { serviceType = "CorteEBarba" })" class="action-card">
+                        <i class="bi bi-journal-plus"></i><span>Cabelo + Barba</span>
+                    </a>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <a href="@Url.Action("Services", "Service", new { serviceType = "Pintura" })" class="action-card">
+                        <i class="bi bi-palette-fill"></i><span>Pintura</span>
+                    </a>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <a href="@Url.Action("Services", "Service", new { serviceType = "Sobrancelha" })" class="action-card">
+                        <i class="bi bi-eye"></i><span>Sobrancelha</span>
+                    </a>
+                </div>
+
             </div>
         </div>
     </section>

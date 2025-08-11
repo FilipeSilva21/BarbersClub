@@ -2,36 +2,42 @@
    VARIÁVEIS GLOBAIS DE COR (TEMA ESCURO)
 ================================================================= */
 :root {
-  --bc-bg: #121212; /* Fundo principal super escuro */
-  --bc-surface: #1e1e1e; /* Cor de superfície para cards */
-  --bc-border: #333333; /* Cor das bordas */
-  --bc-gold: #c5a86a; /* Dourado para detalhes e CTAs */
-  --bc-text-primary: #f0f0f0; /* Texto principal claro */
-  --bc-text-secondary: #a0a0a0; /* Texto secundário (cinza) */
+  --bc-bg: #121212;
+  --bc-surface: #1e1e1e;
+  --bc-border: #333333;
+  --bc-gold: #c5a86a;
+  --bc-text-primary: #f0f0f0;
+  --bc-text-secondary: #a0a0a0;
 }
 
 /* =================================================================
-   ESTILOS GERAIS E TIPOGRAFIA
+   ESTILOS GERAIS DA PÁGINA HOME
+   NOTA: O seletor 'body' foi removido para não interferir com o Layout.css.
+   Os estilos agora são aplicados dentro de #client-view.
 ================================================================= */
-body {
-  background-color: var(--bc-bg);
-  color: var(--bc-text-primary);
-  font-family: 'Poppins', sans-serif; /* Sugestão de fonte elegante */
+
+#client-view {
+  font-family: 'Poppins', sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
+#client-view h1,
+#client-view h2,
+#client-view h3,
+#client-view h4,
+#client-view h5,
+#client-view h6 {
   color: var(--bc-text-primary);
 }
 
 /* Título de seção com detalhe dourado */
-h2.section-title {
+#client-view .section-title {
   position: relative;
   display: inline-block;
   padding-bottom: 10px;
   margin-bottom: 3rem !important;
 }
 
-h2.section-title::after {
+#client-view .section-title::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -45,7 +51,7 @@ h2.section-title::after {
 /* =================================================================
    BOTÕES E ELEMENTOS DE UI
 ================================================================= */
-.btn-gold {
+#client-view .btn-gold {
   background-color: var(--bc-gold);
   color: #121212;
   font-weight: bold;
@@ -55,23 +61,25 @@ h2.section-title::after {
   transition: all 0.3s ease;
 }
 
-.btn-gold:hover, .btn-gold:focus {
+#client-view .btn-gold:hover,
+#client-view .btn-gold:focus {
   background-color: #dfbf80;
   color: #000;
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(197, 168, 106, 0.2);
 }
 
-.text-gold {
+#client-view .text-gold {
   color: var(--bc-gold);
 }
 
 /* =================================================================
-   SEÇÃO HERO
+   SEÇÕES ESPECÍFICAS DA HOMEPAGE
+   (Estes seletores já são específicos e não precisam de escopo)
 ================================================================= */
 .hero-section {
   position: relative;
-  padding: 10rem 0;
+  padding: 8rem 0; /* Ajustado para compensar a navbar fixa */
   background: url('https://images.unsplash.com/photo-1621607512214-6c3494d4a852?auto=format&fit=crop&w=1950&q=80') no-repeat center center;
   background-size: cover;
 }
@@ -112,9 +120,6 @@ h2.section-title::after {
   color: #6c757d;
 }
 
-/* =================================================================
-   SEÇÃO COMO FUNCIONA
-================================================================= */
 .how-it-works-section {
   background-color: var(--bc-bg);
 }
@@ -142,11 +147,8 @@ h2.section-title::after {
   color: var(--bc-text-secondary);
 }
 
-/* =================================================================
-   SEÇÃO DESTAQUES & CARDS DE BARBEARIA
-================================================================= */
 .featured-section {
-  background-color: #161616; /* Um tom ligeiramente diferente para variação */
+  background-color: #161616;
 }
 
 .barber-card {
@@ -193,9 +195,6 @@ h2.section-title::after {
   border-top: 1px solid var(--bc-border);
 }
 
-/* =================================================================
-   SEÇÃO EXPLORAR POR SERVIÇO (usando seu estilo .action-card)
-================================================================= */
 .explore-services-section {
   background-color: var(--bc-bg);
 }
@@ -232,10 +231,6 @@ h2.section-title::after {
   text-align: center;
 }
 
-
-/* =================================================================
-   SEÇÃO DEPOIMENTOS
-================================================================= */
 .testimonials-section {
   background-color: #161616;
 }
@@ -258,10 +253,6 @@ h2.section-title::after {
   color: var(--bc-text-secondary);
 }
 
-
-/* =================================================================
-   SEÇÃO CTA PARA DONOS DE BARBEARIA
-================================================================= */
 .owner-cta-section {
   background-color: var(--bc-surface);
   padding: 4rem 0;

@@ -32,8 +32,8 @@ public class ServiceController(IServiceService serviceContext, IBarberShopServic
         var availableServicesForView = barberShop.OfferedServices
             .Select(s => new 
             {
-                Value = s.ServiceTypeType.ToString(),
-                Text = Regex.Replace(s.ServiceTypeType.ToString(), "(\\B[A-Z])", " $1"),
+                Value = s.ServiceType.ToString(),
+                Text = Regex.Replace(s.ServiceType.ToString(), "(\\B[A-Z])", " $1"),
             
                 Price = s.Price
             })
@@ -78,8 +78,8 @@ public class ServiceController(IServiceService serviceContext, IBarberShopServic
             {
                 serviceOptions.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
                 {
-                    Value = service.ServiceTypeType.ToString(),
-                    Text = System.Text.RegularExpressions.Regex.Replace(service.ServiceTypeType.ToString(), "(\\B[A-Z])", " $1")
+                    Value = service.ServiceType.ToString(),
+                    Text = System.Text.RegularExpressions.Regex.Replace(service.ServiceType.ToString(), "(\\B[A-Z])", " $1")
                 });
             }
         }
@@ -103,8 +103,8 @@ public class ServiceController(IServiceService serviceContext, IBarberShopServic
         var availableServicesForView = service.BarberShop.OfferedServices
             .Select(s => new 
             {
-                Value = s.ServiceTypeType.ToString(),
-                Text = Regex.Replace(s.ServiceTypeType.ToString(), "(\\B[A-Z])", " $1"),
+                Value = s.ServiceType.ToString(),
+                Text = Regex.Replace(s.ServiceType.ToString(), "(\\B[A-Z])", " $1"),
                 Price = s.Price
             })
             .ToList();

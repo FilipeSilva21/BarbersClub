@@ -7,7 +7,7 @@ public record TopRatedBarberShopResponse
     public string? ProfilePictureUrl { get; set; }
     public string City { get; set; }
     public string State { get; set; }
-    public double AverageRating { get; set; }
+    public decimal AverageRating { get; set; }
     public int ReviewCount { get; set; }
     public string? Description { get; set; }
 };

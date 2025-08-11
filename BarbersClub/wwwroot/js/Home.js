@@ -4,15 +4,8 @@
     const resultsTitle = document.getElementById('results-title');
     const searchForm = document.getElementById('search-form');
     const searchInput = document.getElementById('search-input');
-    const serviceLinks = document.querySelectorAll('.service-filter-link');
 
-    /**
-     * Função genérica para buscar dados na API e exibir os resultados.
-     * @param {string} url - A URL da API a ser chamada.
-     * @param {string} searchType - O tipo de busca ('barbershop' ou 'service').
-     * @param {string} title - O título a ser exibido na seção de resultados.
-     */
-    async function displayResults(url, searchType, title) {
+    async function displayResults(url, title) {
         resultsTitle.textContent = title;
         resultsContainer.innerHTML = '<p class="text-center text-white-50">Buscando resultados...</p>';
 
@@ -25,84 +18,61 @@
 
             if (results.length === 0) {
                 resultsContainer.innerHTML = '<p class="text-center text-white-50 fs-5">Nenhum resultado encontrado.</p>';
-                return;
+            } else {
+                results.forEach(item => {
+                    resultsContainer.innerHTML += createBarberShopCard(item);
+                });
             }
-
-            results.forEach(item => {
-                const cardCreator = searchType === 'barbershop' ? createBarberShopCard : createServiceResultCard;
-                resultsContainer.innerHTML += cardCreator(item);
-            });
         } catch (error) {
             console.error('Erro ao buscar resultados:', error);
             resultsContainer.innerHTML = '<p class="text-center text-danger fs-5">Ocorreu um erro ao buscar os resultados.</p>';
         }
     }
 
-    // Ação 1: Carregar os destaques quando a página abre
-    displayResults('/api/barberShop/top-rated?count=6', 'barbershop', 'Barbearias em Destaque');
+    displayResults('/api/barberShop/top-rated?count=6', 'Barbearias em Destaque');
 
 
-    // Ação 2: Ouvir o envio do formulário de busca
     searchForm.addEventListener('submit', function(event) {
-        event.preventDefault(); // Impede que a página recarregue!
+        event.preventDefault();
         const query = searchInput.value.trim();
         if (query) {
-            const url = `/api/barberShop/search?barberShopName=${encodeURIComponent(query)}`;
-            displayResults(url, 'barbershop', `Resultados para "${query}"`);
+            window.location.href = `/barbershops?barberShopName=${encodeURIComponent(query)}`;
         }
     });
-
-    // Ação 3: Ouvir cliques nos filtros de serviço
-    serviceLinks.forEach(link => {
-        link.addEventListener('click', function(event) {
-            event.preventDefault(); // Impede que o link navegue!
-            const serviceType = this.dataset.service;
-            if (serviceType) {
-                const url = `/api/services?serviceType=${encodeURIComponent(serviceType)}&sortBy=ratings_desc`;
-                displayResults(url, 'service', `Resultados para o serviço "${serviceType}"`);
-            }
-        });
-    });
-
 });
-
 
 // =================================================================================
 // FUNÇÕES PARA CRIAR OS CARDS HTML
 // =================================================================================
 
 /**
- * Cria um card para uma barbearia (usado na busca por texto e nos destaques).
+ * Cria um card para uma barbearia.
  * @param {object} shop - Objeto da barbearia.
  */
 function createBarberShopCard(shop) {
-    // Lógica para gerar as estrelas de avaliação (se houver dados)
-    let ratingHtml = '';
-    if (shop.averageRating && shop.reviewCount) {
-        let starsHtml = '';
-        const fullStars = Math.floor(shop.averageRating);
-        const halfStar = shop.averageRating - fullStars >= 0.5;
-        for(let i = 0; i < fullStars; i++) starsHtml += '<i class="bi bi-star-fill"></i>';
-        if(halfStar) starsHtml += '<i class="bi bi-star-half"></i>';
-        const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
-        for(let i = 0; i < emptyStars; i++) starsHtml += '<i class="bi bi-star"></i>';
+    const rating = shop.averageRating ? shop.averageRating.toFixed(1) : 'N/A';
+    const reviewCount = shop.reviewCount || 0;
+    const profilePic = shop.profilePictureUrl || shop.profilePicUrl || '/images/default-barbershop.png';
+    const shopId = shop.id || shop.barberShopId;
+    const shopName = shop.name || shop.barberShopName;
 
-        ratingHtml = `<div class="rating mb-3">${starsHtml}<span class="ms-1">${shop.averageRating.toFixed(1)} (${shop.reviewCount} avaliações)</span></div>`;
+    let ratingHtml = `<div class="rating mb-3"><span>Sem avaliações</span></div>`;
+    if (reviewCount > 0) {
+        ratingHtml = `<div class="rating mb-3"><i class="bi bi-star-fill"></i><span class="ms-1">${rating} (${reviewCount} avaliações)</span></div>`;
     }
 
     return `
         <div class="col-md-6 col-lg-4 d-flex">
             <div class="barber-card w-100">
-                <img src="${shop.profilePictureUrl || shop.profilePicUrl || '/images/placeholder-barbershop.jpg'}" class="card-img-top" alt="Foto da ${shop.name}">
+                <img src="${profilePic}" class="card-img-top" alt="Foto da ${shopName}">
                 <div class="card-body">
-                    <h5 class="card-title fw-bold">${shop.name}</h5>
+                    <h5 class="card-title fw-bold">${shopName}</h5>
                     <p class="mb-2"><i class="bi bi-geo-alt-fill me-1"></i> ${shop.city}, ${shop.state}</p>
                     ${ratingHtml}
                     <p class="text-white-50">${shop.description || 'Clique para ver os detalhes e agendar.'}</p>
                 </div>
                 <div class="card-footer p-3">
-                    <a href="/barbershop/details/${shop.id || shop.barberShopId}" class="btn btn-outline-light w-100">Ver Perfil e Agendar</a>
-                </div>
+                    <a href="/barbershop/details/${shopId}" class="btn btn-outline-light w-100">Ver Perfil e Agendar</a>
                 </div>
             </div>
         </div>
@@ -117,7 +87,7 @@ function createServiceResultCard(service) {
     return `
         <div class="col-md-6 col-lg-4 d-flex">
             <div class="barber-card w-100">
-                <img src="${service.serviceImageUrl || '/images/placeholder-barbershop.jpg'}" class="card-img-top" alt="Foto do serviço em ${service.barberShopName}">
+                <img src="${service.serviceImageUrl || '/images/default-service.png'}" class="card-img-top" alt="Foto do serviço em ${service.barberShopName}">
                 <div class="card-body">
                     <span class="badge bg-gold text-dark mb-2">${service.serviceType}</span>
                     <h5 class="card-title fw-bold">${service.barberShopName}</h5>
@@ -125,7 +95,8 @@ function createServiceResultCard(service) {
                     <p class="text-white-50">Esta barbearia oferece o serviço que você procura. Clique para ver o perfil completo.</p>
                 </div>
                 <div class="card-footer p-3">
-                    <a href="/Barbearia/${service.barberShopId}" class="btn btn-outline-light w-100">Ver Perfil da Barbearia</a>
+                    <!-- CORREÇÃO: A URL agora aponta para a rota MVC correta para detalhes da barbearia. -->
+                    <a href="/barbershop/details/${service.barberShopId}" class="btn btn-outline-light w-100">Ver Perfil da Barbearia</a>
                 </div>
             </div>
         </div>

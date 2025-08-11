@@ -31,28 +31,34 @@ public class BarberShopController(IBarberShopService barberShopContext) : Contro
         {
             return NotFound();
         }
+        // Ensure your BarberShopDetails.cshtml view uses @model BarberShopResponse
         return View("~/Views/BarberShop/BarberShopDetails.cshtml", barberShop);
     }
     
+    // --- MÉTODO CORRIGIDO ---
     [HttpGet("barbershop/edit/{id}")]
+    [Authorize] // Added authorization for security
     public async Task<IActionResult> UpdateBarberShop(int id)
     {
-        var barberShop = await barberShopContext.GetBarberShopByIdAsync(id);
+        // 1. Call the new method to get the FULL model for editing
+        var barberShop = await barberShopContext.GetBarberShopForUpdateAsync(id);
         if (barberShop == null)
         {
             return NotFound();
         }
 
-        var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-        if (barberShop.UserId != userId)
+        // 2. Safe permission check
+        var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (!int.TryParse(userIdString, out var userId) || barberShop.UserId != userId)
         {
-            return Forbid(); 
+            return Forbid(); // Use Forbid() for authorization failures
         }
 
+        // 3. Map the full BarberShop MODEL to the BarberShopUpdateRequest DTO
         var dto = new BarberShopUpdateRequest
         {
             BarberShopId = barberShop.BarberShopId,
-            Name = barberShop.Name,
+            Name = barberShop.Name, // Corrected property name
             Address = barberShop.Address,
             City = barberShop.City,
             State = barberShop.State,
@@ -64,11 +70,13 @@ public class BarberShopController(IBarberShopService barberShopContext) : Contro
             WorkingDays = barberShop.WorkingDays,
             OfferedServices = barberShop.OfferedServices.Select(os => new OfferedServiceResponse
             {
-                ServiceType = os.ServiceTypeType.ToString(),
+                ServiceType = os.ServiceType.ToString(), // Corrected property name
                 Price = os.Price
             }).ToList()
         };
 
-        return View(dto);
+        // 4. Pass the DTO to the View
+        // Ensure your UpdateBarberShop.cshtml view uses @model BarberShopUpdateRequest
+        return View("~/Views/BarberShop/UpdateBarberShop.cshtml", dto);
     }
 }
