@@ -49,28 +49,29 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const cardsHtml = shops.map(shop => {
             const imageUrl = shop.profilePicUrl || '/images/default-barbershop.png';
-            
-            // Calcula a média das avaliações
-            const averageRating = (shop.ratings && shop.ratings.length > 0)
-                ? (shop.ratings.reduce((acc, r) => acc + r.ratingValue, 0) / shop.ratings.length).toFixed(1)
-                : 'N/A';
+
+            const averageRating = shop.averageRating > 0 ? shop.averageRating.toFixed(1) : 'N/A';
+            const reviewCount = shop.reviewCount || 0;
 
             return `
-                <div class="col-md-6 col-lg-4">
-                    <div class="card barber-card h-100">
-                        <img src="${imageUrl}" class="card-img-top" alt="Foto de ${shop.name}">
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title fw-bold">${shop.name}</h5>
-                            <p class="card-text text-white-50"><i class="bi bi-geo-alt-fill"></i> ${shop.city || 'Cidade não informada'}, ${shop.state || 'UF'}</p>
-                            <div class="ratings mb-3">
-                                <i class="bi bi-star-fill"></i>
-                                <span>${averageRating}</span>
-                            </div>
-                            <a href="/barbershop/details/${shop.barberShopId}" class="btn btn-gold mt-auto">Ver Detalhes</a>
+            <div class="col-md-6 col-lg-4">
+                <div class="card barber-card h-100">
+                    <img src="${imageUrl}" class="card-img-top" alt="Foto de ${shop.name}">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fw-bold">${shop.name}</h5>
+                        <p class="card-text text-white-50 mb-2"><i class="bi bi-geo-alt-fill"></i> ${shop.city || 'Cidade não informada'}, ${shop.state || 'UF'}</p>
+                        
+                        <div class="ratings mb-3">
+                            <i class="bi bi-star-fill"></i>
+                            <strong>${averageRating}</strong> 
+                            <span class="text-white-50">(${reviewCount} ${reviewCount === 1 ? 'avaliação' : 'avaliações'})</span>
                         </div>
+                        
+                        <a href="/barbershop/details/${shop.barberShopId}" class="btn btn-gold mt-auto">Ver Detalhes</a>
                     </div>
                 </div>
-            `;
+            </div>
+        `;
         }).join('');
 
         resultsContainer.innerHTML = cardsHtml;

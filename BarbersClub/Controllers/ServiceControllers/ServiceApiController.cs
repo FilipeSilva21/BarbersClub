@@ -132,11 +132,26 @@ public class ServiceApiController(IServiceService serviceService, IBarberShopSer
         }
         try
         {
-            var bookedTimes = await serviceService.GetBookedTimesAsync(barberShopId, date);
+            var barberShop = await barberShopService.GetBarberShopByIdAsync(barberShopId);
+
+            if (barberShop == null)
+                return NotFound(new { message = "Barbearia não encontrada." });
             
-            return Ok(bookedTimes);
+            if (string.IsNullOrEmpty(barberShop.OpeningHours) || string.IsNullOrEmpty(barberShop.ClosingHours))
+                return BadRequest(new { message = "Os horários de funcionamento para esta barbearia não estão definidos." });
+
+            var bookedTimesList = await serviceService.GetBookedTimesAsync(barberShopId, date);
+
+            var response = new
+            {
+                openingTime = barberShop.OpeningHours,
+                closingTime = barberShop.ClosingHours,
+                bookedTimes = bookedTimesList
+            };
+        
+            return Ok(response);
         }
-        catch (Exception)
+        catch (Exception e)
         {
             return StatusCode(500, "Ocorreu um erro interno ao buscar os horários.");
         }

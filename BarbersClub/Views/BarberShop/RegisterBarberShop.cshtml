@@ -36,11 +36,31 @@
             <div class="col-md-6 mb-3 text-start"><label asp-for="WhatsApp"></label><input asp-for="WhatsApp" class="form-control" placeholder="(71) 99999-8888" required></div>
             <div class="col-md-6 mb-3 text-start"><label asp-for="Instagram"></label><input asp-for="Instagram" class="form-control" placeholder="username"></div>
         </div>
+        
         <div class="row">
-            <div class="col-md-6 mb-3 text-start"><label asp-for="OpeningHours"></label><input asp-for="OpeningHours" class="form-control" type="time" required></div>
-            <div class="col-md-6 mb-3 text-start"><label asp-for="ClosingHours"></label><input asp-for="ClosingHours" class="form-control" type="time" required></div>
+            <div class="col-md-6 mb-3 text-start">
+                <label asp-for="OpeningHours" class="form-label">Horário de Abertura</label>
+                <select asp-for="OpeningHours" class="form-select" required>
+                    <option value="" disabled selected>Selecione...</option>
+                    @for (int hour = 0; hour <= 23; hour++)
+                    {
+                        var time = $"{hour:D2}:00";
+                        <option value="@time">@time</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-6 mb-3 text-start">
+                <label asp-for="ClosingHours" class="form-label">Horário de Fechamento</label>
+                <select asp-for="ClosingHours" class="form-select" required>
+                    <option value="" disabled selected>Selecione...</option>
+                    @for (int hour = 0; hour <= 23; hour++)
+                    {
+                        var time = (hour == 23) ? "23:59" : $"{hour:D2}:00";
+                        <option value="@time">@time</option>
+                    }
+                </select>
+            </div>
         </div>
-
         <div class="mb-3 text-start">
             <label class="form-label d-block">Dias de Funcionamento</label>
             <div class="working-days-group p-3 rounded">
@@ -94,7 +114,6 @@
         </div>
     </div>
 </div>
-
 
 @section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
