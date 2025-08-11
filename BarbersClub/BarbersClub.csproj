@@ -22,6 +22,7 @@
       <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.1" />
       <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="9.0.1" />
       <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.12.1" />
+      <PackageReference Include="Vercel.Cdk" Version="1.0.0" />
     </ItemGroup>
 
     <ItemGroup>
