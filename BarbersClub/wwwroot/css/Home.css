@@ -1,5 +1,74 @@
-/* Estilos para a Visão do Cliente */
+/* =================================================================
+   VARIÁVEIS GLOBAIS DE COR (TEMA ESCURO)
+================================================================= */
+:root {
+  --bc-bg: #121212; /* Fundo principal super escuro */
+  --bc-surface: #1e1e1e; /* Cor de superfície para cards */
+  --bc-border: #333333; /* Cor das bordas */
+  --bc-gold: #c5a86a; /* Dourado para detalhes e CTAs */
+  --bc-text-primary: #f0f0f0; /* Texto principal claro */
+  --bc-text-secondary: #a0a0a0; /* Texto secundário (cinza) */
+}
 
+/* =================================================================
+   ESTILOS GERAIS E TIPOGRAFIA
+================================================================= */
+body {
+  background-color: var(--bc-bg);
+  color: var(--bc-text-primary);
+  font-family: 'Poppins', sans-serif; /* Sugestão de fonte elegante */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--bc-text-primary);
+}
+
+/* Título de seção com detalhe dourado */
+h2.section-title {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 10px;
+  margin-bottom: 3rem !important;
+}
+
+h2.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background-color: var(--bc-gold);
+}
+
+/* =================================================================
+   BOTÕES E ELEMENTOS DE UI
+================================================================= */
+.btn-gold {
+  background-color: var(--bc-gold);
+  color: #121212;
+  font-weight: bold;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 30px;
+  transition: all 0.3s ease;
+}
+
+.btn-gold:hover, .btn-gold:focus {
+  background-color: #dfbf80;
+  color: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(197, 168, 106, 0.2);
+}
+
+.text-gold {
+  color: var(--bc-gold);
+}
+
+/* =================================================================
+   SEÇÃO HERO
+================================================================= */
 .hero-section {
   position: relative;
   padding: 10rem 0;
@@ -13,7 +82,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.6);
+  background: linear-gradient(to top, rgba(18, 18, 18, 0.9), rgba(0, 0, 0, 0.6));
 }
 
 .search-bar {
@@ -26,6 +95,13 @@
   padding-left: 2.5rem;
   border-radius: 50px;
   height: 50px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid transparent;
+  color: #333;
+}
+
+.search-bar .form-control::placeholder {
+  color: #6c757d;
 }
 
 .search-bar .bi-search {
@@ -36,21 +112,57 @@
   color: #6c757d;
 }
 
+/* =================================================================
+   SEÇÃO COMO FUNCIONA
+================================================================= */
+.how-it-works-section {
+  background-color: var(--bc-bg);
+}
+
+.step-card {
+  background-color: transparent;
+  border: 2px solid var(--bc-border);
+  padding: 2rem;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.step-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--bc-gold);
+}
+
+.step-card .step-icon i {
+  font-size: 3rem;
+  color: var(--bc-gold);
+}
+
+.step-card p {
+  color: var(--bc-text-secondary);
+}
+
+/* =================================================================
+   SEÇÃO DESTAQUES & CARDS DE BARBEARIA
+================================================================= */
 .featured-section {
-  background-color: #1a1a1a;
+  background-color: #161616; /* Um tom ligeiramente diferente para variação */
 }
 
 .barber-card {
-  background-color: var(--bc-surface, #1e1e1e);
-  border: 1px solid #333;
+  background-color: var(--bc-surface);
+  border: 1px solid var(--bc-border);
   border-radius: 10px;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
 }
 
 .barber-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+  border-color: #444;
 }
 
 .barber-card .card-img-top {
@@ -59,39 +171,33 @@
 }
 
 .barber-card .card-body {
-  color: var(--bc-text-primary, #f0f0f0);
+  color: var(--bc-text-primary);
+  flex-grow: 1;
 }
 
-.barber-card .ratings {
-  color: var(--bc-gold, #c5a86a);
-  font-weight: 500;
+.barber-card .card-body p {
+  color: var(--bc-text-secondary);
 }
 
-.barber-card .ratings .bi-star-fill {
-  margin-right: 5px;
+.barber-card .rating {
+  color: var(--bc-gold);
+  font-size: 0.9rem;
 }
 
-
-/* Estilos para o Dashboard do Barbeiro */
-
-.stat-card {
-  background-color: var(--bc-surface, #1e1e1e);
-  border-radius: 10px;
-  padding: 1.5rem;
-  display: flex;
-  align-items: center;
-  border: 1px solid #333;
+.barber-card .rating .bi {
+  margin-right: 2px;
 }
 
-.stat-card i {
-  font-size: 2.5rem;
-  color: var(--bc-gold, #c5a86a);
-  margin-right: 1.5rem;
+.barber-card .card-footer {
+  background-color: var(--bc-surface);
+  border-top: 1px solid var(--bc-border);
 }
 
-.stat-card-body p {
-  margin-bottom: 0.25rem;
-  color: var(--bc-text-secondary, #a0a0a0);
+/* =================================================================
+   SEÇÃO EXPLORAR POR SERVIÇO (usando seu estilo .action-card)
+================================================================= */
+.explore-services-section {
+  background-color: var(--bc-bg);
 }
 
 .action-card {
@@ -99,18 +205,19 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: var(--bc-surface, #1e1e1e);
+  background-color: var(--bc-surface);
   border-radius: 10px;
-  padding: 2rem;
+  padding: 2rem 1rem;
   text-decoration: none;
-  color: var(--bc-text-primary, #f0f0f0);
-  border: 1px solid #333;
+  color: var(--bc-text-primary);
+  border: 1px solid var(--bc-border);
   transition: all 0.3s ease;
+  height: 100%;
 }
 
 .action-card:hover {
   background-color: #2a2a2a;
-  color: var(--bc-gold, #c5a86a);
+  color: var(--bc-gold);
   transform: translateY(-5px);
 }
 
@@ -120,6 +227,42 @@
 }
 
 .action-card span {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 500;
+  text-align: center;
+}
+
+
+/* =================================================================
+   SEÇÃO DEPOIMENTOS
+================================================================= */
+.testimonials-section {
+  background-color: #161616;
+}
+
+.testimonial-card {
+  background-color: var(--bc-surface);
+  border: 1px solid var(--bc-border);
+  border-left: 5px solid var(--bc-gold);
+  padding: 2rem;
+  border-radius: 10px;
+  height: 100%;
+}
+
+.testimonial-card .blockquote-footer {
+  color: var(--bc-gold);
+  font-size: 1rem;
+}
+
+.testimonial-card p {
+  color: var(--bc-text-secondary);
+}
+
+
+/* =================================================================
+   SEÇÃO CTA PARA DONOS DE BARBEARIA
+================================================================= */
+.owner-cta-section {
+  background-color: var(--bc-surface);
+  padding: 4rem 0;
 }

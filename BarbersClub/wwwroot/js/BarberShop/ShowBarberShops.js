@@ -31,8 +31,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const responseData = await response.json();
 
-            // --- CORREÇÃO APLICADA AQUI ---
-            // Agora o 'responseData' já é o array de barbearias.
             renderResults(responseData);
 
         } catch (error) {
@@ -91,6 +89,5 @@ document.addEventListener('DOMContentLoaded', function () {
         fetchAndRenderBarberShops(params);
     });
 
-    // Carrega a lista inicial de barbearias
     fetchAndRenderBarberShops();
 });

@@ -11,7 +11,7 @@ public class Service
     
     public TimeSpan Time { get; set; }
 
-    public Enums.Services Services { get; set; }
+    public ServiceTypes? ServiceType { get; set; }
     
     public string Description { get; set; } = string.Empty;
     

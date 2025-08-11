@@ -10,239 +10,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6d0fe01-8bb2-4d5d-8b8f-9d6258a8d21b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/BarbersClub/BarbersClub.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BarbersClub/Views/_ViewImports.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/css/NavBar/Dashboard.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/css/Service/ShowServices.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BarberClub/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BarberClub/.idea/dataSources.local.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BarberClub/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BarberClub/.idea/dataSources/c3c3823b-532f-4e6f-8565-289f381498f0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BarberClub/.idea/dataSources/c3c3823b-532f-4e6f-8565-289f381498f0/storage_v2/_src_/database/BarbersClub.jQ1JZQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BarberClub/.idea/dataSources/c3c3823b-532f-4e6f-8565-289f381498f0/storage_v2/_src_/database/BarbersClub.jQ1JZQ/schema/INFORMATION_SCHEMA.NBgcMw.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BarberClub/.idea/dataSources/c3c3823b-532f-4e6f-8565-289f381498f0/storage_v2/_src_/database/BarbersClub.jQ1JZQ/schema/dbo.sYMBAA.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BarberClub/.idea/dataSources/c3c3823b-532f-4e6f-8565-289f381498f0/storage_v2/_src_/database/BarbersClub.jQ1JZQ/schema/sys.zb4BAA.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BarberClub/.idea/indexLayout.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BarberClub/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BarberClub/.idea/projectSettingsUpdater.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BarberClub/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarberClub/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarberClub/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub.sln" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/.idea/.idea.BarberClub.dir/.idea/projectSettingsUpdater.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/.idea/.idea.BarberClub.dir/.idea/projectSettingsUpdater.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/.idea/.idea.BarberClub.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/.idea/.idea.BarberClub.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/BarberClub.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/BarberClub.csproj.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/BarberClub.csproj.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/BarberClub.csproj.user" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/BarberClub.csproj.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/BarberClub.sln" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/BarberClub.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Controllers/ServiceControllers/AuthApiController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Controllers/ServiceControllers/AuthApiController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Controllers/ServiceControllers/BarberShopApiController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Controllers/ServiceControllers/BarberShopApiController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Controllers/ServiceControllers/DashboardStatsControllerApi.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Controllers/ServiceControllers/DashboardStatsControllerApi.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Controllers/ServiceControllers/RatingApiController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Controllers/ServiceControllers/RatingApiController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Controllers/ServiceControllers/ServiceApiController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Controllers/ServiceControllers/ServiceApiController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Controllers/ServiceControllers/UserApiController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Controllers/ServiceControllers/UserApiController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Controllers/WebControllers/AuthController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Controllers/WebControllers/AuthController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Controllers/WebControllers/BarberShopController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Controllers/WebControllers/BarberShopController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Controllers/WebControllers/HomeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Controllers/WebControllers/HomeController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Controllers/WebControllers/NavBarController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Controllers/WebControllers/NavBarController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Controllers/WebControllers/RatingController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Controllers/WebControllers/RatingController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Controllers/WebControllers/ServiceController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Controllers/WebControllers/ServiceController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Controllers/WebControllers/UserProfileController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Controllers/WebControllers/UserProfileController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/DTOs/BarberShopRegisterRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/DTOs/BarberShopRegisterRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/DTOs/BarberShopUpdateRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/DTOs/BarberShopUpdateRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/DTOs/DashboardStats.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/DTOs/DashboardStats.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/DTOs/DashboardStatsResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/DTOs/DashboardStatsResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/DTOs/OfferedServiceResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/DTOs/OfferedServiceResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/DTOs/ProfileDetailsUpdateRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/DTOs/ProfileDetailsUpdateRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/DTOs/RatingRegisterRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/DTOs/RatingRegisterRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/DTOs/RatingViewResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/DTOs/RatingViewResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/DTOs/ServiceRegisterRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/DTOs/ServiceRegisterRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/DTOs/ServiceUpdateRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/DTOs/ServiceUpdateRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/DTOs/ServiceViewResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/DTOs/ServiceViewResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/DTOs/TokenResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/DTOs/TokenResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/DTOs/UserLoginRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/DTOs/UserLoginRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/DTOs/UserProfileResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/DTOs/UserProfileResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/DTOs/UserRegisterRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/DTOs/UserRegisterRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/DTOs/UserUpdateRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/DTOs/UserUpdateRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/DbContext/ProjectDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/DbContext/ProjectDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/20250802030912_Initial.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/20250802030912_Initial.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/20250804164651_Refactoring price and offered services.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/20250804164651_Refactoring price and offered services.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/20250804180855_offered services added to barbershops model.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/20250804180855_offered services added to barbershops model.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/20250805024057_Changing time to timespan.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/20250805024057_Changing time to timespan.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/20250806022456_Adding profilepic to user model.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/20250806022456_Adding profilepic to user model.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/20250806030003_Adding status to a service.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/20250806030003_Adding status to a service.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/20250806031626_Adding status to service model on prijectContext.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/20250806031626_Adding status to service model on prijectContext.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/20250806032435_Fixing status.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/20250806032435_Fixing status.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/20250806195052_ProfilePic type.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/20250806195052_ProfilePic type.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/20250807181434_Removing barbershop from ratings model.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/20250807181434_Removing barbershop from ratings model.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/20250807183143_Removing barbershopId from rating model.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/20250807183143_Removing barbershopId from rating model.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/20250807194126_Changing profiletype on models.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/20250807194126_Changing profiletype on models.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/20250808002822_Changing service pic in service model.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/20250808002822_Changing service pic in service model.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/20250808034743_teste.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/20250808034743_teste.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Migrations/ProjectDbContextModelSnapshot.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Models/BarberShop.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Models/BarberShop.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Models/Enums/Roles.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Models/Enums/Roles.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Models/Enums/ServiceStatus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Models/Enums/ServiceStatus.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Models/Enums/Services.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Models/Enums/Services.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Models/Enums/WorkingDays.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Models/Enums/WorkingDays.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Models/Image.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Models/Image.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Models/OfferedServices.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Models/OfferedServices.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Models/Rating.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Models/Rating.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Models/Service.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Models/Service.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Models/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Models/User.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Properties/launchSettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Services/AuthService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Services/AuthService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Services/BarberShopService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Services/BarberShopService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Services/DashboardStatsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Services/DashboardStatsService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Services/Interfaces/IAuthService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Services/Interfaces/IAuthService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Services/Interfaces/IBarberShopService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Services/Interfaces/IBarberShopService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Services/Interfaces/IDashBoardService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Services/Interfaces/IDashBoardService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Services/Interfaces/IRatingService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Services/Interfaces/IRatingService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Services/Interfaces/IServiceService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Services/Interfaces/IServiceService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Services/Interfaces/IUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Services/Interfaces/IUserService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Services/RatingService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Services/RatingService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Services/ServiceService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Services/ServiceService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Services/UserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Services/UserService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Views/Auth/Login.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Views/Auth/Login.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Views/Auth/Register.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Views/Auth/Register.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Views/BarberShop/BarberShopDetails.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Views/BarberShop/BarberShopDetails.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Views/BarberShop/RegisterBarberShop.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Views/BarberShop/RegisterBarberShop.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Views/BarberShop/ShowBarberShops.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Views/BarberShop/ShowBarberShops.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Views/BarberShop/UpdateBarberShop.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Views/BarberShop/UpdateBarberShop.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Views/Home/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Views/Home/Index.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Views/Home/Privacy.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Views/Home/Privacy.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Views/NavBar/Dashboard.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Views/NavBar/Dashboard.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Views/NavBar/EditProfile.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Views/NavBar/EditProfile.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Views/NavBar/UserProfile.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Views/NavBar/UserProfile.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Views/Service/BarberShopServices.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Views/Service/BarberShopServices.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Views/Service/EditServices.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Views/Service/EditServices.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Views/Service/Rating/CreateRating.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Views/Service/Rating/CreateRating.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Views/Service/RegisterService.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Views/Service/RegisterService.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Views/Service/ShowServices.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Views/Service/ShowServices.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Views/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Views/Shared/_Layout.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Views/Shared/_Layout.cshtml.css" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Views/Shared/_Layout.cshtml.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Views/Shared/_ValidationScriptsPartial.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Views/Shared/_ValidationScriptsPartial.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Views/_ViewImports.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/Views/_ViewStart.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Views/_ViewStart.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/appsettings.Development.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/css/Auth/Login.css" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/css/Auth/Login.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/css/Auth/Register.css" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/css/Auth/Register.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/css/BarberShop/BarberShopDetails.css" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/css/BarberShop/BarberShopDetails.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/css/BarberShop/RegisterBarberShop.css" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/css/BarberShop/RegisterBarberShop.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/css/BarberShop/ShowBarberShops.css" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/css/BarberShop/ShowBarberShops.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/css/Home.css" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/css/Home.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/css/Layout.css" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/css/Layout.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/css/NavBar/Dashboard.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/css/NavBar/EditProfile.css" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/css/NavBar/EditProfile.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/css/NavBar/UserProfile.css" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/css/NavBar/UserProfile.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/css/Service/BarberShopsServices.css" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/css/Service/BarberShopsServices.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/css/Service/Rating/CreateRating.css" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/css/Service/Rating/CreateRating.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/css/Service/RegisterService.css" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/css/Service/RegisterService.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/css/Service/ShowServices.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/favicon.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/images/barbershops/169bf2bf-872f-4b4a-a2c7-cada5acdff5c.webp" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/images/barbershops/169bf2bf-872f-4b4a-a2c7-cada5acdff5c.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/images/barbershops/36e805c3-3d3a-4fb3-a44c-d9f5d9d17533.webp" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/images/barbershops/36e805c3-3d3a-4fb3-a44c-d9f5d9d17533.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/images/barbershops/681d719b-1525-4a45-9515-7d938a1ae118.webp" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/images/barbershops/681d719b-1525-4a45-9515-7d938a1ae118.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/images/barbershops/c5290ebf-234b-41ca-9e0d-ee9c336f62ac.webp" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/images/barbershops/c5290ebf-234b-41ca-9e0d-ee9c336f62ac.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/images/barbershops/d8925cce-2f56-4ce9-a608-db80bc83e3f6.webp" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/images/barbershops/d8925cce-2f56-4ce9-a608-db80bc83e3f6.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/images/services/1ff3b5a7-0a23-4f06-a094-8cd5d681ed73.webp" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/images/services/1ff3b5a7-0a23-4f06-a094-8cd5d681ed73.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/images/services/4c7d332b-79bd-41c3-99b5-c5cab77884bb.webp" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/images/services/4c7d332b-79bd-41c3-99b5-c5cab77884bb.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/images/services/4f5584ea-f361-4ec0-a70b-ad7b87cac52b.webp" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/images/services/4f5584ea-f361-4ec0-a70b-ad7b87cac52b.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/images/services/b9e59e3e-bd95-4078-a2ff-2a49ee2eef5a.webp" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/images/services/b9e59e3e-bd95-4078-a2ff-2a49ee2eef5a.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/images/services/df0a0e19-8a36-4540-88e8-c5515beae48a.webp" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/images/services/df0a0e19-8a36-4540-88e8-c5515beae48a.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/images/users/57e5e304-0926-48e6-a76e-b5f9a10484f9.webp" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/images/users/57e5e304-0926-48e6-a76e-b5f9a10484f9.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/images/users/ab249067-7c34-430a-913a-e27a3667194d.webp" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/images/users/ab249067-7c34-430a-913a-e27a3667194d.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/js/Auth/Auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/js/Auth/Auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/js/Auth/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/js/Auth/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/js/Auth/Register.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/js/Auth/Register.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/js/BarberShop/BarberShopDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/js/BarberShop/BarberShopDetails.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/js/BarberShop/RegisterBarberShop.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/js/BarberShop/RegisterBarberShop.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/js/BarberShop/ShowBarberShops.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/js/BarberShop/ShowBarberShops.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/js/BarberShop/UpdateBarberShop.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/js/BarberShop/UpdateBarberShop.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/js/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/js/Home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/js/NavBar/DashBoard.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/js/NavBar/DashBoard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/js/NavBar/EditProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/js/NavBar/EditProfile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/js/NavBar/UserProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/js/NavBar/UserProfile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/js/Service/BarberShopServices.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/js/Service/BarberShopServices.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/js/Service/EditService.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/js/Service/EditService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/js/Service/Rating/CreateRating.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/js/Service/Rating/CreateRating.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/js/Service/RegisterService.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/js/Service/RegisterService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/js/Service/ShowServices.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/js/Service/ShowServices.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/css/bootstrap.css" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/css/bootstrap.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/js/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/js/bootstrap.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/js/bootstrap.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/js/bootstrap.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/jquery-validation/LICENSE.md" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/jquery-validation/LICENSE.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/jquery-validation/dist/additional-methods.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/jquery-validation/dist/additional-methods.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/jquery-validation/dist/additional-methods.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/jquery-validation/dist/additional-methods.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/jquery-validation/dist/jquery.validate.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/jquery-validation/dist/jquery.validate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/jquery/LICENSE.txt" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/jquery/LICENSE.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/jquery/dist/jquery.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/jquery/dist/jquery.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/jquery/dist/jquery.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/jquery/dist/jquery.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/jquery/dist/jquery.min.map" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/jquery/dist/jquery.min.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/jquery/dist/jquery.slim.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/jquery/dist/jquery.slim.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/jquery/dist/jquery.slim.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/jquery/dist/jquery.slim.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarberClub/wwwroot/lib/jquery/dist/jquery.slim.min.map" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/lib/jquery/dist/jquery.slim.min.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarbersClub/Controllers/ServiceControllers/ServiceApiController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Controllers/ServiceControllers/ServiceApiController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarbersClub/Controllers/WebControllers/BarberShopController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Controllers/WebControllers/BarberShopController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarbersClub/Controllers/WebControllers/ServiceController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Controllers/WebControllers/ServiceController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarbersClub/DTOs/ServiceRegisterRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/DTOs/ServiceRegisterRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarbersClub/DTOs/ServiceUpdateRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/DTOs/ServiceUpdateRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarbersClub/DbContext/ProjectDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/DbContext/ProjectDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarbersClub/Models/Enums/Services.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Models/Enums/ServiceTypes.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarbersClub/Models/OfferedServices.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Models/OfferedServices.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarbersClub/Models/Service.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Models/Service.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarbersClub/Services/BarberShopService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Services/BarberShopService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarbersClub/Services/ServiceService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Services/ServiceService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarbersClub/Views/BarberShop/BarberShopDetails.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Views/BarberShop/BarberShopDetails.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarbersClub/Views/BarberShop/RegisterBarberShop.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Views/BarberShop/RegisterBarberShop.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarbersClub/Views/BarberShop/UpdateBarberShop.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Views/BarberShop/UpdateBarberShop.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarbersClub/Views/Service/EditServices.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/Views/Service/EditServices.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarbersClub/wwwroot/js/Service/EditService.js" beforeDir="false" afterPath="$PROJECT_DIR$/BarbersClub/wwwroot/js/Service/EditService.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -467,7 +251,15 @@
       <option name="project" value="LOCAL" />
       <updated>1754627721837</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="update user, create and update barbershop offered services fixing">
+      <option name="closed" value="true" />
+      <created>1754803831541</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1754803831541</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -498,7 +290,8 @@
     <MESSAGE value="barbershop details added" />
     <MESSAGE value="commit de 3 dias atrasado" />
     <MESSAGE value="refactor: update BarberShop views and file structure, improve forms and frontend consistency" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: update BarberShop views and file structure, improve forms and frontend consistency" />
+    <MESSAGE value="update user, create and update barbershop offered services fixing" />
+    <option name="LAST_COMMIT_MESSAGE" value="update user, create and update barbershop offered services fixing" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

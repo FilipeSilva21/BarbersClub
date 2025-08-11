@@ -2,6 +2,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using BarbersClub.DbContext;
 using BarberClub.Services;
+using BarbersClub.Services;
 using BarbersClub.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;

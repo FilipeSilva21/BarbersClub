@@ -4,9 +4,8 @@ using BarberClub.Models;
 using BarberClub.Models.Enums;
 using BarbersClub.Services.Interfaces;
 using BarbersClub.DbContext;
-using Microsoft.AspNetCore.Http;
 
-namespace BarberClub.Services;
+namespace BarbersClub.Services; 
 
 public class ServiceService(ProjectDbContext context, IWebHostEnvironment webHostEnvironment) : IServiceService
 {
@@ -16,7 +15,7 @@ public class ServiceService(ProjectDbContext context, IWebHostEnvironment webHos
         var barberShop = await context.BarberShops.FindAsync(request.BarberShopId);
         var client = await context.Users.FindAsync(request.UserId);
         var offeredService = await context.OfferedServices
-            .FirstOrDefaultAsync(os => os.BarberShopId == request.BarberShopId && os.ServiceType == request.Services);
+            .FirstOrDefaultAsync(os => os.BarberShopId == request.BarberShopId && os.ServiceTypeType == request.ServiceTypes);
 
         if (offeredService == null)
             throw new InvalidOperationException("Este serviço não é oferecido pela barbearia selecionada.");
@@ -28,7 +27,7 @@ public class ServiceService(ProjectDbContext context, IWebHostEnvironment webHos
         {
             Date = request.Date,
             Time = request.Time,
-            Services = request.Services,
+            ServiceType = request.ServiceTypes,
             Price = offeredService.Price,
             Description = request.Description,  
             BarberShopId = request.BarberShopId,
@@ -67,7 +66,7 @@ public class ServiceService(ProjectDbContext context, IWebHostEnvironment webHos
             query = query.Where(s => s.Client.FirstName.Contains(clientName) || s.Client.LastName.Contains(clientName));
         
         if (!string.IsNullOrEmpty(serviceType))
-            query = query.Where(s => s.Services.ToString().Contains(serviceType));
+            query = query.Where(s => s.ServiceType.ToString().Contains(serviceType));
         
         if (startDate.HasValue)
             query = query.Where(s => s.Date.Date >= startDate.Value.Date);
@@ -87,7 +86,7 @@ public class ServiceService(ProjectDbContext context, IWebHostEnvironment webHos
                 ServiceId = s.ServiceId,
                 Date = s.Date,
                 Time = s.Time,
-                ServiceType = s.Services.ToString(),
+                ServiceType = s.ServiceType.ToString(),
                 BarberShopId = s.BarberShopId,
                 BarberShopName = s.BarberShop.Name,
                 ClientId = s.UserId,
@@ -96,7 +95,7 @@ public class ServiceService(ProjectDbContext context, IWebHostEnvironment webHos
                 ServiceImageUrl = s.ServiceImageUrl,
                 OfferedServices = s.BarberShop.OfferedServices.Select(os => new OfferedServiceResponse()
                 {
-                    ServiceType = os.ServiceType.ToString(),
+                    ServiceType = os.ServiceTypeType.ToString(),
                     Price = os.Price
                 }).ToList()
             })
@@ -118,7 +117,7 @@ public class ServiceService(ProjectDbContext context, IWebHostEnvironment webHos
             query = query.Where(s => s.BarberShop.Name.Contains(barberShopName));
         
         if (!string.IsNullOrEmpty(serviceType))
-            query = query.Where(s => s.Services.ToString() == serviceType);
+            query = query.Where(s => s.ServiceType.ToString() == serviceType);
         
         if (startDate.HasValue)
             query = query.Where(s => s.Date.Date >= startDate.Value.Date);
@@ -152,7 +151,7 @@ public class ServiceService(ProjectDbContext context, IWebHostEnvironment webHos
             {
                 ServiceId = s.ServiceId,
                 Date = s.Date,
-                ServiceType = s.Services.ToString(),
+                ServiceType = s.ServiceType.ToString(),
                 Description = s.Description,
                 BarberShopId = s.BarberShopId,
                 BarberShopName = s.BarberShop.Name,
@@ -181,7 +180,7 @@ public class ServiceService(ProjectDbContext context, IWebHostEnvironment webHos
                 ServiceId = s.ServiceId,
                 Date = s.Date,
                 Time = s.Time,
-                ServiceType = s.Services.ToString(),
+                ServiceType = s.ServiceType.ToString(),
                 Description = s.Description,
                 BarberShopId = s.BarberShopId,
                 BarberShopName = s.BarberShop.Name,
@@ -221,27 +220,42 @@ public class ServiceService(ProjectDbContext context, IWebHostEnvironment webHos
                 ServiceId = s.ServiceId,
                 Date = s.Date,
                 Time = s.Time,
-                ServiceType = s.Services.ToString(),
+                ServiceType = s.ServiceType.ToString(),
                 Description = s.Description,
                 Price = s.Price,
                 BarberShopId = s.BarberShopId,
                 BarberShopName = s.BarberShop.Name,
                 ClientId = s.UserId,
                 ClientName = s.Client.FirstName,
-                Status = s.Status.ToString()
+                Status = s.Status.ToString(),
+                HasRating = s.Ratings.Any()
             })
             .ToListAsync();
     }
 
     public async Task<bool> CancelServiceAsync(int serviceId, int userId)
     {
-        var service = await context.Services.FirstOrDefaultAsync(s => s.ServiceId == serviceId);
+        var service = await context.Services
+            .Include(s => s.BarberShop) 
+            .FirstOrDefaultAsync(s => s.ServiceId == serviceId);
 
-        if (service == null || service.UserId != userId)
+        if (service == null)
+        {
             return false;
-        
+        }
+
+        bool isClient = service.UserId == userId;
+        bool isBarberShopOwner = service.BarberShop.UserId == userId;
+
+        if (!isClient && !isBarberShopOwner)
+        {
+            return false;
+        }
+    
         if (service.Status != ServiceStatus.Confirmado)
+        {
             return false;
+        }
 
         service.Status = ServiceStatus.Cancelado;
         await context.SaveChangesAsync();
@@ -297,6 +311,9 @@ public class ServiceService(ProjectDbContext context, IWebHostEnvironment webHos
         if (request.Status.HasValue)
             service.Status = request.Status.Value;
 
+        if (request.ServiceType != null)
+            service.ServiceType = request.ServiceType;
+        
         if (request.UploadedImage != null && request.UploadedImage.Length > 0)
         {
             if (!string.IsNullOrEmpty(service.ServiceImageUrl))

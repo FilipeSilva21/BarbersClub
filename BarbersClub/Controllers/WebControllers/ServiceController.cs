@@ -32,8 +32,8 @@ public class ServiceController(IServiceService serviceContext, IBarberShopServic
         var availableServicesForView = barberShop.OfferedServices
             .Select(s => new 
             {
-                Value = s.ServiceType.ToString(),
-                Text = Regex.Replace(s.ServiceType.ToString(), "(\\B[A-Z])", " $1"),
+                Value = s.ServiceTypeType.ToString(),
+                Text = Regex.Replace(s.ServiceTypeType.ToString(), "(\\B[A-Z])", " $1"),
             
                 Price = s.Price
             })
@@ -78,8 +78,8 @@ public class ServiceController(IServiceService serviceContext, IBarberShopServic
             {
                 serviceOptions.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
                 {
-                    Value = service.ServiceType.ToString(),
-                    Text = System.Text.RegularExpressions.Regex.Replace(service.ServiceType.ToString(), "(\\B[A-Z])", " $1")
+                    Value = service.ServiceTypeType.ToString(),
+                    Text = System.Text.RegularExpressions.Regex.Replace(service.ServiceTypeType.ToString(), "(\\B[A-Z])", " $1")
                 });
             }
         }
@@ -103,8 +103,8 @@ public class ServiceController(IServiceService serviceContext, IBarberShopServic
         var availableServicesForView = service.BarberShop.OfferedServices
             .Select(s => new 
             {
-                Value = s.ServiceType.ToString(),
-                Text = Regex.Replace(s.ServiceType.ToString(), "(\\B[A-Z])", " $1"),
+                Value = s.ServiceTypeType.ToString(),
+                Text = Regex.Replace(s.ServiceTypeType.ToString(), "(\\B[A-Z])", " $1"),
                 Price = s.Price
             })
             .ToList();
@@ -115,7 +115,7 @@ public class ServiceController(IServiceService serviceContext, IBarberShopServic
     }
     
     [HttpPost]
-    public async Task<IActionResult> UpdateServiceWithPhoto(int serviceId, IFormFile photoFile)
+    public async Task<IActionResult> UpdateService(int serviceId, IFormFile photoFile)
     {
         if (photoFile == null || photoFile.Length == 0)
         {
@@ -135,6 +135,6 @@ public class ServiceController(IServiceService serviceContext, IBarberShopServic
         }
 
         TempData["SuccessMessage"] = "Serviço atualizado com sucesso!";
-        return RedirectToAction("BarbershopsServices", new { id = updatedService.BarberShopId });
+        return RedirectToAction("BarberShopServices", new { id = updatedService.BarberShopId });
     }
 }

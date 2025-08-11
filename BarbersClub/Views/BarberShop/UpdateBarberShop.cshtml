@@ -60,7 +60,7 @@
         <div class="mb-4 text-start">
             <label class="form-label d-block mb-2">Serviços e Preços</label>
             <div class="services-price-group p-3 rounded">
-                @foreach (var service in Enum.GetValues(typeof(Services)))
+                @foreach (var service in Enum.GetValues(typeof(ServiceTypes)))
                 {
                     var serviceName = service.ToString();
                     var existingService = Model.OfferedServices?.FirstOrDefault(s => s.ServiceType == serviceName);

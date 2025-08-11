@@ -12,9 +12,14 @@
         <p class="text-muted">Gerencie os agendamentos de "@ViewBag.BarberShopName"</p>
     </header>
 
-    <div class="filters-panel card mb-4">
+    <div class="mb-4">
+        <button class="btn btn-outline-secondary w-100" type="button" data-bs-toggle="collapse" data-bs-target="#filtersCollapse">
+            <i class="bi bi-funnel me-2"></i> Mostrar / Ocultar Filtros
+        </button>
+    </div>
+
+    <div class="collapse filters-panel card mb-4" id="filtersCollapse" data-bs-theme="dark">
         <div class="card-body">
-            <h5 class="card-title mb-3">Filtros</h5>
             <div class="row g-3">
                 <div class="col-md-6">
                     <label for="clientNameFilter" class="form-label">Nome do Cliente</label>
@@ -36,14 +41,14 @@
                 <div class="col-md-4">
                     <label for="timeFilter" class="form-label">Horário Específico</label>
                     <select class="form-select" id="timeFilter">
-                        <option value="">Todos os Horários</option>
+                        <option value="">Todos</option>
                         @{
-                            int startHour = ViewBag.OpeningTime.Hours;
-                            int endHour = ViewBag.ClosingTime.Hours;
-
-                            for (int hour = startHour; hour <= endHour; hour++)
+                            if (ViewBag.OpeningTime != null && ViewBag.ClosingTime != null)
                             {
-                                <option value="@hour.ToString("00"):00">@(hour.ToString("00")):00</option>
+                                for (TimeSpan time = ViewBag.OpeningTime; time < ViewBag.ClosingTime; time = time.Add(TimeSpan.FromMinutes(30)))
+                                {
+                                    <option value="@time.ToString("hh\\:mm")">@time.ToString("hh\\:mm")</option>
+                                }
                             }
                         }
                     </select>
@@ -55,6 +60,7 @@
             </div>
         </div>
     </div>
+    
     <div id="appointment-list-container">
         <div class="text-center p-5" id="loading-spinner">
             <div class="spinner-border text-light" style="width: 3rem; height: 3rem;" role="status">
@@ -67,13 +73,10 @@
 
 <input type="file" id="photoUploader" style="display: none;" accept="image/*" />
 
-
 @section Scripts {
     <script>
         const BARBERSHOP_ID = @Html.Raw(Json.Serialize(ViewBag.BarberShopId));
     </script>
-
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <script src="~/js/Service/BarberShopServices.js" asp-append-> </script>
+    <script src="~/js/Service/BarberShopServices.js" asp-append-version="true"></script>
 }

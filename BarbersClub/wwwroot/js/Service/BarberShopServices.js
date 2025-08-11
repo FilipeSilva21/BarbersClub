@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // --- Referências aos elementos do DOM ---
+    // --- Referências aos Elementos do DOM ---
     const appointmentListContainer = document.getElementById('appointment-list-container');
     const loadingSpinner = document.getElementById('loading-spinner');
     const photoUploader = document.getElementById('photoUploader');
 
-    // --- Referências aos novos campos de filtro ---
+    // --- Referências aos Filtros ---
     const clientNameFilter = document.getElementById('clientNameFilter');
     const serviceTypeFilter = document.getElementById('serviceTypeFilter');
     const startDateFilter = document.getElementById('startDateFilter');
@@ -13,24 +13,68 @@ document.addEventListener('DOMContentLoaded', function () {
     const filterButton = document.getElementById('filterButton');
     const clearFiltersButton = document.getElementById('clearFiltersButton');
 
-    // Validação inicial do ID da barbearia
-    if (typeof BARBERSHOP_ID === 'undefined') {
-        console.error('ID da barbearia não foi definido na página.');
-        if (loadingSpinner) loadingSpinner.style.display = 'none';
-        appointmentListContainer.innerHTML = '<p class="text-center text-danger">Erro de configuração: ID da barbearia não encontrado.</p>';
-        return;
+    /**
+     * Busca os agendamentos na API com base nos filtros e renderiza na tela.
+     */
+    async function fetchAppointments() {
+        if (!loadingSpinner || !appointmentListContainer) return;
+
+        loadingSpinner.style.display = 'block';
+        appointmentListContainer.innerHTML = '';
+
+        // Monta os parâmetros da URL a partir dos filtros
+        const params = new URLSearchParams();
+        if (clientNameFilter.value) params.append('clientName', clientNameFilter.value);
+        if (serviceTypeFilter.value) params.append('serviceType', serviceTypeFilter.value);
+        if (startDateFilter.value) params.append('startDate', startDateFilter.value);
+        if (endDateFilter.value) params.append('endDate', endDateFilter.value);
+        if (timeFilter.value) params.append('time', timeFilter.value);
+
+        const url = `/api/services/barbershop/${BARBERSHOP_ID}?${params.toString()}`;
+
+        try {
+            const token = localStorage.getItem('jwt_token');
+            const response = await fetch(url, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+
+            if (!response.ok) throw new Error('Falha ao buscar os agendamentos.');
+
+            const appointments = await response.json();
+            renderAppointments(appointments);
+
+        } catch (error) {
+            console.error(error);
+            appointmentListContainer.innerHTML = '<p class="text-danger text-center">Não foi possível carregar os agendamentos.</p>';
+        } finally {
+            loadingSpinner.style.display = 'none';
+        }
     }
 
-    // --- Função para criar os cards de agendamento (mantida) ---
+    /**
+     * Renderiza os cards de agendamento no container.
+     * @param {Array} appointments - A lista de agendamentos.
+     */
+    function renderAppointments(appointments) {
+        if (appointments.length === 0) {
+            appointmentListContainer.innerHTML = `<div class="text-center p-5"><p class="text-muted">Nenhum agendamento encontrado para os filtros aplicados.</p></div>`;
+        } else {
+            appointmentListContainer.innerHTML = appointments.map(createAppointmentCard).join('');
+        }
+    }
+
+    /**
+     * Cria o HTML para um único card de agendamento.
+     * @param {object} appt - O objeto do agendamento.
+     */
     function createAppointmentCard(appt) {
         const dateOnly = appt.date.split('T')[0];
         const fullDateTime = new Date(`${dateOnly}T${appt.time}`);
         const formattedDate = fullDateTime.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long' });
         const formattedTime = fullDateTime.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
 
-        const statusParaAcoes = ['Confirmado'];
-
-        const actionButtons = statusParaAcoes.includes(appt.status)
+        // Define quais status podem ter botões de ação
+        const actionButtons = appt.status === 'Confirmado'
             ? `
             <div class="mt-3 action-buttons">
                 <button class="btn btn-sm btn-success btn-conclude" data-id="${appt.serviceId}">
@@ -63,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>`;
     }
 
-    // --- Funções de Conclusão (mantidas) ---
+    // --- Funções de Conclusão ---
     async function handleConcludeClick(serviceId) {
         Swal.fire({
             title: 'Concluir Agendamento',

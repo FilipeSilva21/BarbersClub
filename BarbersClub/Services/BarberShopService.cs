@@ -54,11 +54,11 @@ public class BarberShopService(ProjectDbContext context, IWebHostEnvironment web
         {
             foreach (var serviceDto in request.OfferedServices)
             {
-                if (Enum.TryParse<Models.Enums.Services>(serviceDto.ServiceType, ignoreCase:true, out var serviceEnum))
+                if (Enum.TryParse<Models.Enums.ServiceTypes>(serviceDto.ServiceType, ignoreCase:true, out var serviceEnum))
                 {
                     barberShop.OfferedServices.Add(new OfferedService
                     {
-                        ServiceType = serviceEnum,
+                        ServiceTypeType = serviceEnum,
                         Price = serviceDto.Price
                     });
                 }
@@ -171,16 +171,16 @@ public class BarberShopService(ProjectDbContext context, IWebHostEnvironment web
         }
         
         var servicesToRemove = barberShopToUpdate.OfferedServices
-            .Where(os => request.OfferedServices.All(dto => dto.ServiceType != os.ServiceType.ToString()))
+            .Where(os => request.OfferedServices.All(dto => dto.ServiceType != os.ServiceTypeType.ToString()))
             .ToList();
         context.OfferedServices.RemoveRange(servicesToRemove);
 
         foreach (var serviceDto in request.OfferedServices)
         {
-            if (Enum.TryParse<Models.Enums.Services>(serviceDto.ServiceType, true, out var serviceEnum))
+            if (Enum.TryParse<Models.Enums.ServiceTypes>(serviceDto.ServiceType, true, out var serviceEnum))
             {
                 var existingService = barberShopToUpdate.OfferedServices
-                    .FirstOrDefault(os => os.ServiceType == serviceEnum);
+                    .FirstOrDefault(os => os.ServiceTypeType == serviceEnum);
                 
                 if (existingService != null)
                 {
@@ -190,7 +190,7 @@ public class BarberShopService(ProjectDbContext context, IWebHostEnvironment web
                 {
                     barberShopToUpdate.OfferedServices.Add(new OfferedService
                     {
-                        ServiceType = serviceEnum,
+                        ServiceTypeType = serviceEnum,
                         Price = serviceDto.Price
                     });
                 }

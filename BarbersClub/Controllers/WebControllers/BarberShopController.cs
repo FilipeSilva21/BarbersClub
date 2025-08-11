@@ -64,7 +64,7 @@ public class BarberShopController(IBarberShopService barberShopContext) : Contro
             WorkingDays = barberShop.WorkingDays,
             OfferedServices = barberShop.OfferedServices.Select(os => new OfferedServiceResponse
             {
-                ServiceType = os.ServiceType.ToString(),
+                ServiceType = os.ServiceTypeType.ToString(),
                 Price = os.Price
             }).ToList()
         };

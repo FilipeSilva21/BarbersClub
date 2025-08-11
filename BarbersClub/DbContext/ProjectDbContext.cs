@@ -50,7 +50,7 @@ public class ProjectDbContext(DbContextOptions<ProjectDbContext> options) : Micr
         {
             serviceEntity.HasKey(s => s.ServiceId);
 
-            serviceEntity.Property(s => s.Services)
+            serviceEntity.Property(s => s.ServiceType)
                 .HasConversion<string>();
 
             serviceEntity.Property(s => s.Status)
@@ -86,8 +86,8 @@ public class ProjectDbContext(DbContextOptions<ProjectDbContext> options) : Micr
         modelBuilder.Entity<OfferedService>(offeredServiceEntity =>
         {
             offeredServiceEntity.HasKey(os => os.OfferedServiceId);
-            offeredServiceEntity.HasIndex(os => new { os.BarberShopId, os.ServiceType }).IsUnique();
-            offeredServiceEntity.Property(os => os.ServiceType).HasConversion<string>();
+            offeredServiceEntity.HasIndex(os => new { os.BarberShopId, ServiceType = os.ServiceTypeType }).IsUnique();
+            offeredServiceEntity.Property(os => os.ServiceTypeType).HasConversion<string>();
         });
     }
 }

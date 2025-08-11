@@ -1,6 +1,6 @@
 namespace BarberClub.Models.Enums;
 
-public enum Services
+public enum ServiceTypes
 {
     CorteSocial,
     CorteDiversificado,

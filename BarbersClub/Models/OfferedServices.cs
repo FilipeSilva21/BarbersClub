@@ -5,7 +5,7 @@ namespace BarberClub.Models;
 public class OfferedService
 {
     public int OfferedServiceId { get; set; }
-    public Enums.Services ServiceType { get; set; }
+    public Enums.ServiceTypes ServiceTypeType { get; set; }
     public decimal Price { get; set; }
 
     public int BarberShopId { get; set; }

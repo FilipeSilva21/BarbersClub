@@ -57,7 +57,7 @@
                             <li class="d-flex justify-content-between align-items-center mb-2">
                                 <span>
                                     <i class="bi bi-scissors text-gold me-2"></i>
-                                    @System.Text.RegularExpressions.Regex.Replace(offeredService.ServiceType.ToString(), "(\\B[A-Z])", " $1")
+                                    @System.Text.RegularExpressions.Regex.Replace(offeredService.ServiceTypeType.ToString(), "(\\B[A-Z])", " $1")
                                 </span>
                                 <span class="fw-bold text-gold">
                                     @offeredService.Price.ToString("C", CultureInfo.GetCultureInfo("pt-BR"))

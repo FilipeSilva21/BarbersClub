@@ -8,11 +8,9 @@
         ? Url.Content(Model.BarberShop.ProfilePicUrl) 
         : "/images/default-barbershop.png";
 
-    // ADICIONE ESTE BLOCO PARA FORMATAR OS DIAS DE FUNCIONAMENTO
-    var workingDaysString = "Não informado"; // Define um valor padrão
+    var workingDaysString = "Não informado"; 
     if (Model?.BarberShop?.WorkingDays != null && Model.BarberShop.WorkingDays.Any())
     {
-        // Junta os nomes dos dias em uma única string, separados por vírgula
         workingDaysString = string.Join(", ", Model.BarberShop.WorkingDays.Select(d => d.ToString()));
     }
 }

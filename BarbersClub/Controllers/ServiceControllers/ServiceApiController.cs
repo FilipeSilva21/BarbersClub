@@ -41,12 +41,19 @@ public class ServiceApiController(IServiceService serviceService, IBarberShopSer
         {
             return Unauthorized();
         }
+        
+        var serviceToCheck = await serviceService.GetServiceByIdAsync(serviceId);
+        if (serviceToCheck != null)
+        {
+            Console.WriteLine($"ID do usuário logado (token): {userId}");
+            Console.WriteLine($"ID do dono do serviço (banco): {serviceToCheck.UserId}");
+        }
 
         var result = await serviceService.CancelServiceAsync(serviceId, userId);
-        
+    
         if (!result)
         {
-            return BadRequest("Não foi possível cancelar o agendamento. Verifique se ele ainda está confirmado.");
+            return BadRequest("Não foi possível cancelar o agendamento.");
         }
 
         return Ok(new { message = "Agendamento cancelado com sucesso." });
@@ -204,5 +211,24 @@ public class ServiceApiController(IServiceService serviceService, IBarberShopSer
         {
             return StatusCode(500, new { message = "Ocorreu um erro interno ao processar o arquivo." });
         }
+    }
+    
+    [HttpPut("update/{serviceId}")] 
+    [Authorize] 
+    public async Task<IActionResult> UpdateService(int serviceId, [FromForm] ServiceUpdateRequest request)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        var updatedService = await serviceService.UpdateServiceAsync(serviceId, request);
+
+        if (updatedService == null)
+        {
+            return NotFound(new { message = "Serviço não encontrado." });
+        }
+
+        return Ok(updatedService);
     }
 }
