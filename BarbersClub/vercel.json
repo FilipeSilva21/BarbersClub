@@ -1,0 +1,17 @@
+﻿{
+  "builds": [
+    {
+      "src": "BarbersClub.csproj",
+      "use": "@vercel/static-build",
+      "config": {
+        "buildCommand": "dotnet publish -c Release -o ./publish"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/publish/$1"
+    }
+  ]
+}
