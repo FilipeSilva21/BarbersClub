@@ -2,9 +2,9 @@
   "builds": [
     {
       "src": "BarbersClub.csproj",
-      "use": "@vercel/node",
+      "use": "@vercel/static-build",
       "config": {
-        "outputDirectory": "publish"
+        "buildCommand": "dotnet publish --configuration Release --output ./publish"
       }
     }
   ],
