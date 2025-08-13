@@ -5,7 +5,7 @@ using BarbersClub.DbContext;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace BarberClub.Services;
+namespace BarbersClub.Services;
 
 public class UserService(ProjectDbContext context, IWebHostEnvironment webHostEnvironment) : IUserService
 {

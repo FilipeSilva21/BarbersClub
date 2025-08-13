@@ -19,7 +19,7 @@ public class NavBarController(IDashboardStatsService dashboardContext, IBarberSh
 
         var barberShops = await barberShopContext.GetBarberShopsByUserIdAsync(userId);
 
-        if (barberShops == null || !barberShops.Any())
+        if (barberShops is null || !barberShops.Any())
         {
             ViewData["Message"] = "Você ainda não cadastrou sua barbearia.";
             return View("~/Views/NavBar/Dashboard.cshtml", null);
@@ -32,11 +32,4 @@ public class NavBarController(IDashboardStatsService dashboardContext, IBarberSh
 
         return View("~/Views/NavBar/Dashboard.cshtml", statsDto);
     }
-    
-    [HttpGet("/navbar/profile")]
-    public IActionResult Profile()
-    {
-        return View("~/Views/NavBar/Profile.cshtml");
-    }
-
 }

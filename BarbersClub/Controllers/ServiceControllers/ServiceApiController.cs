@@ -43,10 +43,9 @@ public class ServiceApiController(IServiceService serviceService, IBarberShopSer
         }
         
         var serviceToCheck = await serviceService.GetServiceByIdAsync(serviceId);
-        if (serviceToCheck != null)
+        if (serviceToCheck is null)
         {
-            Console.WriteLine($"ID do usuário logado (token): {userId}");
-            Console.WriteLine($"ID do dono do serviço (banco): {serviceToCheck.UserId}");
+            return Unauthorized();
         }
 
         var result = await serviceService.CancelServiceAsync(serviceId, userId);

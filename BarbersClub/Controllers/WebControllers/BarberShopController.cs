@@ -31,34 +31,29 @@ public class BarberShopController(IBarberShopService barberShopContext) : Contro
         {
             return NotFound();
         }
-        // Ensure your BarberShopDetails.cshtml view uses @model BarberShopResponse
         return View("~/Views/BarberShop/BarberShopDetails.cshtml", barberShop);
     }
     
-    // --- MÉTODO CORRIGIDO ---
     [HttpGet("barbershop/edit/{id}")]
-    [Authorize] // Added authorization for security
+    [Authorize] 
     public async Task<IActionResult> UpdateBarberShop(int id)
     {
-        // 1. Call the new method to get the FULL model for editing
         var barberShop = await barberShopContext.GetBarberShopForUpdateAsync(id);
-        if (barberShop == null)
+        if (barberShop is null)
         {
             return NotFound();
         }
-
-        // 2. Safe permission check
+        
         var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
         if (!int.TryParse(userIdString, out var userId) || barberShop.UserId != userId)
         {
-            return Forbid(); // Use Forbid() for authorization failures
+            return Forbid(); 
         }
 
-        // 3. Map the full BarberShop MODEL to the BarberShopUpdateRequest DTO
         var dto = new BarberShopUpdateRequest
         {
             BarberShopId = barberShop.BarberShopId,
-            Name = barberShop.Name, // Corrected property name
+            Name = barberShop.Name, 
             Address = barberShop.Address,
             City = barberShop.City,
             State = barberShop.State,
@@ -70,13 +65,11 @@ public class BarberShopController(IBarberShopService barberShopContext) : Contro
             WorkingDays = barberShop.WorkingDays,
             OfferedServices = barberShop.OfferedServices.Select(os => new OfferedServiceResponse
             {
-                ServiceType = os.ServiceType.ToString(), // Corrected property name
+                ServiceType = os.ServiceType.ToString(), 
                 Price = os.Price
             }).ToList()
         };
 
-        // 4. Pass the DTO to the View
-        // Ensure your UpdateBarberShop.cshtml view uses @model BarberShopUpdateRequest
         return View("~/Views/BarberShop/UpdateBarberShop.cshtml", dto);
     }
 }

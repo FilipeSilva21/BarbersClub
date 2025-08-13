@@ -1,8 +1,0 @@
-﻿{
-  "name": "barbersclub-api",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "vercel-build": "dotnet tool install -g Microsoft.dotnet-publish && dotnet publish --configuration Release --output ./publish"
-  }
-}

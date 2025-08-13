@@ -1,6 +1,4 @@
 // wwwroot/js/User/EditProfile.js
-// EditProfile.js - intercepta submit e envia PUT /api/users/edit com FormData
-console.log('EditProfile.js loaded');
 
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('userProfileEditForm');

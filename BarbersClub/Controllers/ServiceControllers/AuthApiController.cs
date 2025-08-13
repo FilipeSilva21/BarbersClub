@@ -30,7 +30,7 @@ public class AuthApiController(IAuthService authService): ControllerBase
     {
         var (token, user) = await authService.LoginAsync(request);
 
-        if (token == null || user == null)
+        if (token is null || user is null)
         {
             return Unauthorized(new { message = "Email ou senha inválidos." });
         }

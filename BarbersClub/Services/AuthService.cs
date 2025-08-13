@@ -68,8 +68,6 @@ public class AuthService(ProjectDbContext context, IConfiguration config, IWebHo
     
         var token = GenerateToken(user);
         
-        Console.WriteLine("Entrou nessa desgraca" + token);
-        
         return (await token, user); 
     }
 

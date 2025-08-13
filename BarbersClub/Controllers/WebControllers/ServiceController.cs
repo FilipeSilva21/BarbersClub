@@ -24,7 +24,7 @@ public class ServiceController(IServiceService serviceContext, IBarberShopServic
         }
 
         var barberShop = await barberShopService.GetBarberShopByIdAsync(barberShopId);
-        if (barberShop == null)
+        if (barberShop is null)
         {
             return NotFound("Barbearia não encontrada.");
         }
@@ -50,7 +50,7 @@ public class ServiceController(IServiceService serviceContext, IBarberShopServic
     public async Task<IActionResult> BarberShopServices(int id)
     {
         var barberShop = await barberShopService.GetBarberShopByIdAsync(id);
-        if (barberShop == null)
+        if (barberShop is null)
         {
             return NotFound("Barbearia não encontrada.");
         }
@@ -72,14 +72,14 @@ public class ServiceController(IServiceService serviceContext, IBarberShopServic
             new() { Value = "", Text = "Todos os Serviços" }
         };
 
-        if (barberShop.OfferedServices != null)
+        if (barberShop.OfferedServices is not null)
         {
             foreach (var service in barberShop.OfferedServices)
             {
                 serviceOptions.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
                 {
-                    Value = service.ServiceType.ToString(),
-                    Text = System.Text.RegularExpressions.Regex.Replace(service.ServiceType.ToString(), "(\\B[A-Z])", " $1")
+                    Value = service.ServiceType,
+                    Text = Regex.Replace(service.ServiceType, "(\\B[A-Z])", " $1")
                 });
             }
         }
@@ -93,7 +93,7 @@ public class ServiceController(IServiceService serviceContext, IBarberShopServic
     public async Task<IActionResult> EditService(int serviceId)
     {
         var service = await serviceContext.GetServiceByIdAsync(serviceId);
-        if (service == null)
+        if (service is null)
             return NotFound("Agendamento não encontrado.");
 
         var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -115,9 +115,9 @@ public class ServiceController(IServiceService serviceContext, IBarberShopServic
     }
     
     [HttpPost]
-    public async Task<IActionResult> UpdateService(int serviceId, IFormFile photoFile)
+    public async Task<IActionResult> UpdateService(int serviceId, IFormFile? photoFile)
     {
-        if (photoFile == null || photoFile.Length == 0)
+        if (photoFile is null || photoFile.Length == 0)
         {
             return View("EditServices" );
         }
@@ -129,7 +129,7 @@ public class ServiceController(IServiceService serviceContext, IBarberShopServic
 
         var updatedService = await serviceContext.UpdateServiceAsync(serviceId, updateRequest);
 
-        if (updatedService == null)
+        if (updatedService is null)
         {
             return NotFound();
         }
