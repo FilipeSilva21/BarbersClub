@@ -1,0 +1,113 @@
+/* Em /wwwroot/css/Service/ShowServices.css */
+
+/* =================================== */
+/* === Variáveis e Estilos Gerais === */
+/* =================================== */
+:root {
+    --dark-bg-primary: #212529;
+    --dark-bg-secondary: #343a40;
+    --dark-border-color: #495057;
+    --light-text-color: #f8f9fa;
+    --gold-color: #c5a86a;
+}
+
+/* --- Botões --- */
+.btn-gold {
+    background-color: var(--gold-color);
+    color: #111;
+    font-weight: 500;
+    border: 1px solid var(--gold-color);
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-gold:hover {
+    background-color: #b38f24;
+}
+
+.btn-outline-gold {
+    color: var(--gold-color);
+    border-color: var(--gold-color);
+    font-weight: 500;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-outline-gold:hover {
+    background-color: var(--gold-color);
+    color: #111;
+}
+
+.text-gold {
+    color: var(--gold-color) !important;
+}
+
+
+/* ============================================= */
+/* === Componente de Filtros (Tema Escuro) === */
+/* ============================================= */
+.filters-toggle-btn {
+    font-weight: 500;
+    background-color: var(--dark-bg-primary);
+    border-color: var(--dark-border-color);
+    color: var(--light-text-color);
+    transition: background-color 0.2s;
+}
+
+.filters-toggle-btn:hover,
+.filters-toggle-btn:focus {
+    background-color: var(--dark-bg-secondary);
+    border-color: var(--dark-border-color);
+    color: #fff;
+}
+
+.filters-panel {
+    background-color: var(--dark-bg-primary) !important;
+    border: 1px solid var(--dark-border-color) !important;
+}
+
+
+/* =================================== */
+/* ===       Cards de Serviço      === */
+/* =================================== */
+.service-card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    background-color: var(--dark-bg-secondary);
+    border: 1px solid var(--dark-border-color);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    color: var(--light-text-color);
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    border-color: var(--gold-color);
+}
+
+.service-card .card-img-top {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.service-card .card-body {
+    text-align: left;
+}
+
+.service-card .card-body a {
+    color: var(--light-text-color);
+    text-decoration: none;
+}
+.service-card .card-body a:hover {
+    color: #fff;
+}
+
+.service-card .card-text.small {
+    padding-top: 1rem;
+    border-top: 1px solid var(--dark-border-color);
+    color: #dee2e6 !important;
+}
+
+.service-card .card-footer {
+    background-color: transparent;
+    border-top: 1px solid var(--dark-border-color);
+}
