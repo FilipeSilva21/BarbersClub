@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace BarberClub.Migrations
+namespace Repository.Migrations
 {
     /// <inheritdoc />
     public partial class Initial : Migration
@@ -64,7 +64,7 @@ namespace BarberClub.Migrations
                 {
                     OfferedServiceId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ServiceType = table.Column<int>(type: "int", nullable: false),
+                    ServiceType = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     BarberShopId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -87,7 +87,7 @@ namespace BarberClub.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Time = table.Column<TimeSpan>(type: "time", nullable: false),
-                    Services = table.Column<int>(type: "int", nullable: false),
+                    ServiceType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -113,33 +113,6 @@ namespace BarberClub.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Images",
-                columns: table => new
-                {
-                    ImageId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Url = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UploadedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ServiceId = table.Column<int>(type: "int", nullable: false),
-                    BarberShopId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Images", x => x.ImageId);
-                    table.ForeignKey(
-                        name: "FK_Images_BarberShops_BarberShopId",
-                        column: x => x.BarberShopId,
-                        principalTable: "BarberShops",
-                        principalColumn: "BarberShopId");
-                    table.ForeignKey(
-                        name: "FK_Images_Services_ServiceId",
-                        column: x => x.ServiceId,
-                        principalTable: "Services",
-                        principalColumn: "ServiceId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Ratings",
                 columns: table => new
                 {
@@ -150,7 +123,7 @@ namespace BarberClub.Migrations
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     ServiceId = table.Column<int>(type: "int", nullable: false),
-                    BarberShopId = table.Column<int>(type: "int", nullable: true)
+                    BarberShopId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -159,7 +132,8 @@ namespace BarberClub.Migrations
                         name: "FK_Ratings_BarberShops_BarberShopId",
                         column: x => x.BarberShopId,
                         principalTable: "BarberShops",
-                        principalColumn: "BarberShopId");
+                        principalColumn: "BarberShopId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Ratings_Services_ServiceId",
                         column: x => x.ServiceId,
@@ -180,19 +154,10 @@ namespace BarberClub.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Images_BarberShopId",
-                table: "Images",
-                column: "BarberShopId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Images_ServiceId",
-                table: "Images",
-                column: "ServiceId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OfferedServices_BarberShopId",
+                name: "IX_OfferedServices_BarberShopId_ServiceType",
                 table: "OfferedServices",
-                column: "BarberShopId");
+                columns: new[] { "BarberShopId", "ServiceType" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ratings_BarberShopId",
@@ -229,9 +194,6 @@ namespace BarberClub.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Images");
-
             migrationBuilder.DropTable(
                 name: "OfferedServices");
 
