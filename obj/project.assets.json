@@ -5389,11 +5389,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\filip\\RiderProjects\\BarbersClub\\Repository\\Repository.csproj",
+      "projectUniqueName": "C:\\Users\\filip\\Downloads\\Projects\\.NET Projects\\BarbersClub\\Repository\\Repository.csproj",
       "projectName": "Repository",
-      "projectPath": "C:\\Users\\filip\\RiderProjects\\BarbersClub\\Repository\\Repository.csproj",
+      "projectPath": "C:\\Users\\filip\\Downloads\\Projects\\.NET Projects\\BarbersClub\\Repository\\Repository.csproj",
       "packagesPath": "C:\\Users\\filip\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\filip\\RiderProjects\\BarbersClub\\Repository\\obj\\",
+      "outputPath": "C:\\Users\\filip\\Downloads\\Projects\\.NET Projects\\BarbersClub\\Repository\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
