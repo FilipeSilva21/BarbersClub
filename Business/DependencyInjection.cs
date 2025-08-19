@@ -1,5 +1,6 @@
 ﻿using BarbersClub.Business.Services;
 using BarbersClub.Business.Services.Interfaces;
+using Business.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BarbersClub.Business

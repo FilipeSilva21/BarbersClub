@@ -1,12 +1,10 @@
-using Microsoft.EntityFrameworkCore;
-using BarberClub;
 using BarbersClub.Business.DTOs;
 using BarbersClub.Business.Services.Interfaces;
-using BarbersClub.DbContext;
+using Microsoft.EntityFrameworkCore;
 using Repository.DbContext;
 using Repository.Models.Enums;
 
-namespace BarbersClub.Business.Services;
+namespace Business.Services;
 
 public class DashboardStatsService(ProjectDbContext context) : IDashboardStatsService
 {
