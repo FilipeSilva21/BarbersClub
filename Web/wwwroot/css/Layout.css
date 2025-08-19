@@ -1,0 +1,133 @@
+﻿/* Importando a fonte do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+
+/* Variáveis de Cor para fácil manutenção */
+:root {
+    --bc-dark: #121212;
+    --bc-surface: #1e1e1e;
+    --bc-gold: #c5a86a;
+    --bc-gold-hover: #e4d5b7;
+    --bc-text-primary: #f0f0f0;
+    --bc-text-secondary: #a0a0a0;
+}
+
+/* ===== ESTILOS GERAIS DO BODY ===== */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--bc-dark);
+    color: var(--bc-text-primary);
+    padding-top: 70px; /* Espaçamento para compensar o header fixo */
+}
+
+/* ===== CABEÇALHO / NAVBAR ===== */
+.navbar {
+    background-color: var(--bc-surface);
+    border-bottom: 1px solid #333;
+    transition: background-color 0.3s ease;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    color: var(--bc-gold);
+    font-size: 1.5rem;
+}
+
+.navbar-brand:hover {
+    color: var(--bc-gold-hover);
+}
+
+.navbar-brand .bi {
+    margin-right: 8px;
+    transform: rotate(-90deg); /* Ícone da tesoura na horizontal */
+}
+
+.nav-link {
+    color: var(--bc-text-secondary);
+    font-weight: 500;
+    margin: 0 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--bc-text-primary);
+}
+
+/* Botão de "Entrar" customizado */
+.btn-outline-gold {
+    /* Cor do texto e da borda */
+    color: #c5a86a; /* Use sua cor dourada aqui */
+    border-color: #c5a86a;
+    background-color: transparent; /* Fundo transparente */
+}
+
+/* Estilo para quando o mouse passa por cima */
+.btn-outline-gold:hover {
+    /* Cor do fundo muda para dourado */
+    background-color: #c5a86a;
+
+    /* Cor do texto muda para uma cor escura para criar contraste */
+    color: #121212;
+}
+
+/* ===== RODAPÉ ===== */
+.footer-barberclub {
+    background-color: var(--bc-surface);
+    padding: 1.5rem 0;
+    color: var(--bc-text-secondary);
+    border-top: 1px solid #333;
+    font-size: 0.9rem;
+}
+
+.footer-barberclub p {
+    margin: 0;
+}
+
+.social-icons a {
+    color: var(--bc-text-secondary);
+    font-size: 1.5rem;
+    margin-left: 1rem;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: var(--bc-gold);
+}
+
+/* ======================================= */
+/* O CSS ABAIXO É APENAS PARA O CONTEÚDO   */
+/* DAS PÁGINAS QUE *NÃO* SÃO DE LOGIN.     */
+/* As páginas de Login/Cadastro usarão seu */
+/* CSS específico (`Login.css`, etc.)      */
+/* ======================================= */
+main .container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+/* Adicione este bloco ao seu arquivo style.css */
+
+/* Botão Dourado Sólido (o que faltava) */
+.btn-gold {
+    background-color: var(--bc-gold, #c5a86a);
+    color: var(--bc-dark, #121212);
+    border-color: var(--bc-gold, #c5a86a);
+    font-weight: 500;
+}
+
+.btn-gold:hover {
+    background-color: var(--bc-gold-hover, #e4d5b7);
+    border-color: var(--bc-gold-hover, #e4d5b7);
+    color: var(--bc-dark, #121212);
+}
+
+.nav-link-gold {
+    color: var(--bc-gold, #c5a86a); /* Cor dourada do seu tema */
+    font-weight: 500;
+    font-size: 0.9rem; /* Um pouco menor que o texto normal */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.nav-link-gold:hover {
+    color: var(--bc-gold-hover, #e4d5b7); /* Cor mais clara ao passar o mouse */
+}

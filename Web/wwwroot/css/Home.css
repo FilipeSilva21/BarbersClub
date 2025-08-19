@@ -1,0 +1,259 @@
+/* =================================================================
+   VARIÁVEIS GLOBAIS DE COR (TEMA ESCURO)
+================================================================= */
+:root {
+  --bc-bg: #121212;
+  --bc-surface: #1e1e1e;
+  --bc-border: #333333;
+  --bc-gold: #c5a86a;
+  --bc-text-primary: #f0f0f0;
+  --bc-text-secondary: #a0a0a0;
+}
+
+/* =================================================================
+   ESTILOS GERAIS DA PÁGINA HOME
+   NOTA: O seletor 'body' foi removido para não interferir com o Layout.css.
+   Os estilos agora são aplicados dentro de #client-view.
+================================================================= */
+
+#client-view {
+  font-family: 'Poppins', sans-serif;
+}
+
+#client-view h1,
+#client-view h2,
+#client-view h3,
+#client-view h4,
+#client-view h5,
+#client-view h6 {
+  color: var(--bc-text-primary);
+}
+
+/* Título de seção com detalhe dourado */
+#client-view .section-title {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 10px;
+  margin-bottom: 3rem !important;
+}
+
+#client-view .section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background-color: var(--bc-gold);
+}
+
+/* =================================================================
+   BOTÕES E ELEMENTOS DE UI
+================================================================= */
+#client-view .btn-gold {
+  background-color: var(--bc-gold);
+  color: #121212;
+  font-weight: bold;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 30px;
+  transition: all 0.3s ease;
+}
+
+#client-view .btn-gold:hover,
+#client-view .btn-gold:focus {
+  background-color: #dfbf80;
+  color: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(197, 168, 106, 0.2);
+}
+
+#client-view .text-gold {
+  color: var(--bc-gold);
+}
+
+/* =================================================================
+   SEÇÕES ESPECÍFICAS DA HOMEPAGE
+   (Estes seletores já são específicos e não precisam de escopo)
+================================================================= */
+.hero-section {
+  position: relative;
+  padding: 8rem 0; /* Ajustado para compensar a navbar fixa */
+  background: url('https://images.unsplash.com/photo-1621607512214-6c3494d4a852?auto=format&fit=crop&w=1950&q=80') no-repeat center center;
+  background-size: cover;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(18, 18, 18, 0.9), rgba(0, 0, 0, 0.6));
+}
+
+.search-bar {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+}
+
+.search-bar .form-control {
+  padding-left: 2.5rem;
+  border-radius: 50px;
+  height: 50px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid transparent;
+  color: #333;
+}
+
+.search-bar .form-control::placeholder {
+  color: #6c757d;
+}
+
+.search-bar .bi-search {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6c757d;
+}
+
+.how-it-works-section {
+  background-color: var(--bc-bg);
+}
+
+.step-card {
+  background-color: transparent;
+  border: 2px solid var(--bc-border);
+  padding: 2rem;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.step-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--bc-gold);
+}
+
+.step-card .step-icon i {
+  font-size: 3rem;
+  color: var(--bc-gold);
+}
+
+.step-card p {
+  color: var(--bc-text-secondary);
+}
+
+.featured-section {
+  background-color: #161616;
+}
+
+.barber-card {
+  background-color: var(--bc-surface);
+  border: 1px solid var(--bc-border);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.barber-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+  border-color: #444;
+}
+
+.barber-card .card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+.barber-card .card-body {
+  color: var(--bc-text-primary);
+  flex-grow: 1;
+}
+
+.barber-card .card-body p {
+  color: var(--bc-text-secondary);
+}
+
+.barber-card .rating {
+  color: var(--bc-gold);
+  font-size: 0.9rem;
+}
+
+.barber-card .rating .bi {
+  margin-right: 2px;
+}
+
+.barber-card .card-footer {
+  background-color: var(--bc-surface);
+  border-top: 1px solid var(--bc-border);
+}
+
+.explore-services-section {
+  background-color: var(--bc-bg);
+}
+
+.action-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bc-surface);
+  border-radius: 10px;
+  padding: 2rem 1rem;
+  text-decoration: none;
+  color: var(--bc-text-primary);
+  border: 1px solid var(--bc-border);
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.action-card:hover {
+  background-color: #2a2a2a;
+  color: var(--bc-gold);
+  transform: translateY(-5px);
+}
+
+.action-card i {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.action-card span {
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.testimonials-section {
+  background-color: #161616;
+}
+
+.testimonial-card {
+  background-color: var(--bc-surface);
+  border: 1px solid var(--bc-border);
+  border-left: 5px solid var(--bc-gold);
+  padding: 2rem;
+  border-radius: 10px;
+  height: 100%;
+}
+
+.testimonial-card .blockquote-footer {
+  color: var(--bc-gold);
+  font-size: 1rem;
+}
+
+.testimonial-card p {
+  color: var(--bc-text-secondary);
+}
+
+.owner-cta-section {
+  background-color: var(--bc-surface);
+  padding: 4rem 0;
+}

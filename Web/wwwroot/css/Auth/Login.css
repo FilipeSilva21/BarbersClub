@@ -1,0 +1,75 @@
+﻿/* wwwroot/css/Login.css */ 
+
+.auth-container {
+    background-color: var(--bc-surface, #1e1e1e);
+    padding: 3.5rem 2.5rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 450px;
+    margin: 2rem auto; 
+    text-align: center;
+}
+
+.auth-container h2 {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--bc-gold, #c5a86a);
+}
+
+.auth-container .text-muted {
+    color: var(--bc-text-secondary, #a0a0a0) !important;
+    margin-bottom: 2rem;
+}
+
+/* Estilização dos campos do formulário */
+.auth-container .form-control {
+    background-color: #2a2a2a;
+    border: 1px solid #444;
+    color: var(--bc-text-primary, #f0f0f0);
+    border-radius: 5px;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.auth-container .form-control:focus {
+    background-color: #2a2a2a;
+    color: var(--bc-text-primary, #f0f0f0);
+    border-color: var(--bc-gold, #c5a86a);
+    box-shadow: 0 0 10px rgba(197, 168, 106, 0.2);
+}
+
+.auth-container .form-control::placeholder {
+    color: #888;
+}
+
+/* Estilização do botão primário dentro do container de autenticação */
+.auth-container .btn-primary {
+    background-color: var(--bc-gold, #c5a86a);
+    border-color: var(--bc-gold, #c5a86a);
+    color: var(--bc-surface, #1e1e1e);
+    font-weight: 500;
+    padding: 0.75rem;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.auth-container .btn-primary:hover {
+    background-color: var(--bc-gold-hover, #e4d5b7);
+    border-color: var(--bc-gold-hover, #e4d5b7);
+    transform: translateY(-2px);
+}
+
+/* Links auxiliares (Ex: "Ainda não tem conta?") */
+.auth-link {
+    display: block;
+    margin-top: 1.5rem;
+    color: var(--bc-gold, #c5a86a);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.auth-link:hover {
+    color: var(--bc-gold-hover, #e4d5b7);
+    text-decoration: underline;
+}
