@@ -1,0 +1,74 @@
+@{ Layout = "_Layout"; }
+
+@{
+    ViewData["Title"] = "Avaliar Serviço";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Service/Rating/CreateRating.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Service/RegisterService.css" asp-append-version="true" />
+}
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card card-register-service">
+                <div class="card-header text-center py-4">
+                    <h1 class="h3 fw-bold mb-0">Deixe sua Avaliação</h1>
+                    <p class="text-muted mb-0">Sua opinião é muito importante!</p>
+                </div>
+                <div class="card-body p-4 p-md-5">
+                    <form id="ratingForm" novalidate>
+                        <input type="hidden" name="ServiceId" value="@ViewBag.ServiceId" />
+
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold text-center d-block">Sua nota</label>
+                            <div class="star-rating-container">
+                                <input type="radio" id="star5" name="RatingValue" value="5" required /><label for="star5" title="5 estrelas">&#9733;</label>
+                                <input type="radio" id="star4" name="RatingValue" value="4" required /><label for="star4" title="4 estrelas">&#9733;</label>
+                                <input type="radio" id="star3" name="RatingValue" value="3" required /><label for="star3" title="3 estrelas">&#9733;</label>
+                                <input type="radio" id="star2" name="RatingValue" value="2" required /><label for="star2" title="2 estrelas">&#9733;</label>
+                                <input type="radio" id="star1" name="RatingValue" value="1" required /><label for="star1" title="1 estrela">&#9733;</label>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="comment" class="form-label fw-semibold">Seu comentário (Opcional)</label>
+                            <textarea id="comment" name="Comment" class="form-control" rows="4" placeholder="Descreva sua experiência..."></textarea>
+                        </div>
+
+                        <div id="errorMessage" class="alert alert-danger d-none" role="alert"></div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-gold btn-lg">
+                                <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                <span class="button-text">Enviar Avaliação</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ratingSuccessModal" tabindex="-1" aria-labelledby="ratingSuccessModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ratingSuccessModalLabel">Obrigado!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Sua avaliação foi enviada com sucesso.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/Service/Rating/CreateRating.js" asp-append-version="true"></script>
+}

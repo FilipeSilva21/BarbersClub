@@ -1,0 +1,83 @@
+/* Centraliza e estiliza o container principal */
+#barbershop-details-view {
+    color: var(--bc-text-primary, #f0f0f0);
+}
+
+/* Estilo do cabeçalho */
+#barbershop-details-view header h1 {
+    color: var(--bc-gold-hover, #e4d5b7);
+}
+
+.text-gold {
+    color: var(--bc-gold, #c5a86a);
+}
+
+/* Card base para os painéis de informação */
+.details-card {
+    background-color: var(--bc-surface, #1e1e1e);
+    border: 1px solid #444;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+#barbershop-details-view .details-card h3 {
+    color: var(--bc-gold, #c5a86a);
+    border-bottom: 2px solid #444;
+    padding-bottom: 0.75rem;
+}
+
+/* Imagem da barbearia */
+#barbershop-details-view .img-fluid {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Lista de informações (telefone, horário, etc.) */
+.info-list li {
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: var(--bc-text-secondary, #a0a0a0);
+}
+
+.info-list li i {
+    font-size: 1.5rem;
+    color: var(--bc-gold, #c5a86a);
+}
+
+/* Lista de serviços */
+.services-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #333;
+    font-size: 1.05rem;
+}
+
+.services-list li:last-child {
+    border-bottom: none;
+}
+
+/* Seção de avaliações */
+.rating-item {
+    padding: 1rem 0;
+    border-bottom: 1px solid #333;
+}
+.rating-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.rating-score {
+    color: var(--bc-gold, #c5a86a);
+    margin-bottom: 0.5rem;
+}
+
+.rating-comment {
+    font-style: italic;
+    color: var(--bc-text-primary, #f0f0f0);
+    margin-bottom: 0.25rem;
+}
