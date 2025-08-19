@@ -1,0 +1,16 @@
+C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Business\bin\Debug\net9.0\Business.deps.json
+C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Business\bin\Debug\net9.0\Business.dll
+C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Business\bin\Debug\net9.0\Business.pdb
+C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Business\bin\Debug\net9.0\Repository.dll
+C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Business\bin\Debug\net9.0\Repository.pdb
+C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Business\obj\Debug\net9.0\Business.csproj.AssemblyReference.cache
+C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Business\obj\Debug\net9.0\Business.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Business\obj\Debug\net9.0\Business.AssemblyInfoInputs.cache
+C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Business\obj\Debug\net9.0\Business.AssemblyInfo.cs
+C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Business\obj\Debug\net9.0\Business.csproj.CoreCompileInputs.cache
+C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Business\obj\Debug\net9.0\Business.sourcelink.json
+C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Business\obj\Debug\net9.0\Business.csproj.Up2Date
+C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Business\obj\Debug\net9.0\Business.dll
+C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Business\obj\Debug\net9.0\refint\Business.dll
+C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Business\obj\Debug\net9.0\Business.pdb
+C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Business\obj\Debug\net9.0\ref\Business.dll
