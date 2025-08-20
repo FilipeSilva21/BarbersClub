@@ -7,9 +7,7 @@ using Repository.DbContext;
 using Repository.Models;
 using Repository.Models.Enums;
 
-// Garanta que este using está presente
-
-namespace BarbersClub.Business.Services;
+namespace Business.Services;
 
 public class BarberShopService(ProjectDbContext context, IWebHostEnvironment webHostEnvironment) : IBarberShopService
 {
@@ -57,7 +55,7 @@ public class BarberShopService(ProjectDbContext context, IWebHostEnvironment web
                 {
                     barberShop.OfferedServices.Add(new OfferedService
                     {
-                        ServiceType = serviceEnum, // Corrigido para ServiceType
+                        ServiceType = serviceEnum, 
                         Price = serviceDto.Price
                     });
                 }
@@ -155,8 +153,6 @@ public class BarberShopService(ProjectDbContext context, IWebHostEnvironment web
         await context.SaveChangesAsync();
         return true;
     }
-
-    // --- MÉTODOS DE LEITURA (AGORA RETORNAM DTOs) ---
 
     public async Task<BarberShopViewResponse?> GetBarberShopByIdAsync(int barberShopId)
     {

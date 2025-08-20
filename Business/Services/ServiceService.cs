@@ -7,7 +7,7 @@ using Repository.DbContext;
 using Repository.Models;
 using Repository.Models.Enums;
 
-namespace BarbersClub.Business.Services; 
+namespace Business.Services; 
 
 public class ServiceService(ProjectDbContext context, IWebHostEnvironment webHostEnvironment) : IServiceService
 {

@@ -2,7 +2,7 @@
 using BarbersClub.Business.DTOs;
 using Repository.Models;
 
-namespace BarbersClub.Business.Services.Interfaces;
+namespace Business.Services.Interfaces;
 
 public interface IAuthService
 {

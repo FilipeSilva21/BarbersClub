@@ -2,7 +2,7 @@
 using System.Security.Claims;
 using System.Text;
 using BarbersClub.Business.DTOs;
-using BarbersClub.Business.Services.Interfaces;
+using Business.Services.Interfaces;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using Repository.DbContext;
 using Repository.Models;
 
-namespace BarbersClub.Business.Services;
+namespace Business.Services;
 
 public class AuthService(ProjectDbContext context, IConfiguration config, IWebHostEnvironment webHostEnvironment): IAuthService
 {

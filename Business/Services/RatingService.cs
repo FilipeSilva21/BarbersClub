@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Repository.DbContext;
 using Repository.Models;
 
-namespace BarbersClub.Business.Services;
+namespace Business.Services;
 
 public class RatingService(ProjectDbContext context) : IRatingService
 {

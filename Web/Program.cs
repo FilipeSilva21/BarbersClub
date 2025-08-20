@@ -1,7 +1,8 @@
 using System.Text;
 using System.Text.Json.Serialization;
 using BarbersClub.Business; // Referência à sua nova camada Business
-using BarbersClub.Repository;   // Referência à sua nova camada Entity
+using BarbersClub.Repository;
+using Business; // Referência à sua nova camada Entity
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.IdentityModel.Tokens;
 using Scalar.AspNetCore;
@@ -46,10 +47,8 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
     });
 
-// Adiciona o DbContext (lógica de registro na camada Entity)
 builder.Services.AddDatabase(builder.Configuration);
 
-// Adiciona os serviços de negócio (lógica de registro na camada Business)
 builder.Services.AddBusinessServices();
 
 var app = builder.Build();

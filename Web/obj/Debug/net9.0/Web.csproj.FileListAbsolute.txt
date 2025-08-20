@@ -191,4 +191,3 @@ C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0
 C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\Web.pdb
 C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\Web.genruntimeconfig.cache
 C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\ref\Web.dll
-C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

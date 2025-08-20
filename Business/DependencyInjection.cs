@@ -1,9 +1,9 @@
-﻿using BarbersClub.Business.Services;
+﻿using Business.Services;
 using BarbersClub.Business.Services.Interfaces;
-using Business.Services;
+using Business.Services.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace BarbersClub.Business
+namespace Business
 {
     public static class DependencyInjection
     {
