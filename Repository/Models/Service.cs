@@ -5,7 +5,7 @@ namespace Repository.Models;
 
 public class Service
 {
-    public int? ServiceId { get; set; }
+    public int ServiceId { get; set; }
     
     public DateTime Date { get; set; }
     
