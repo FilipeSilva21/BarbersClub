@@ -2,7 +2,8 @@ using System.Text;
 using System.Text.Json.Serialization;
 using BarbersClub.Business; // Referência à sua nova camada Business
 using BarbersClub.Repository;
-using Business; // Referência à sua nova camada Entity
+using Business;
+using Business.Error_Handling; // Referência à sua nova camada Entity
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.IdentityModel.Tokens;
 using Scalar.AspNetCore;
@@ -65,6 +66,7 @@ if (app.Environment.IsDevelopment())
     app.MapScalarApiReference();
 }
 
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseHttpsRedirection();
 app.UseRouting();
 

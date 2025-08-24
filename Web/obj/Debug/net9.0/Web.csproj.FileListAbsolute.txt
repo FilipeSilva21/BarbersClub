@@ -109,9 +109,7 @@ C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0
 C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\compressed\ur965rwxtc-9ktzlfaqvy.gz
 C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\compressed\zu621e1u9k-r0y1r80rch.gz
 C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\compressed\46bvzkmpoq-0op2s8jx8d.gz
-C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\compressed\il05hmak5q-hf7eqvbhgo.gz
 C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\compressed\4xu3g09e1p-1rnuv7jpjw.gz
-C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\compressed\t85162zhau-acxpomf2vt.gz
 C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\compressed\fcxckteirx-0ota3g2kvj.gz
 C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\compressed\ycgh1a40r3-q0v8m0hf6q.gz
 C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\compressed\931ao3d2a1-z23u14qmpp.gz
@@ -119,7 +117,6 @@ C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0
 C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\compressed\tg7qrzgydz-ze19c252pi.gz
 C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\compressed\emhiynb9qv-scdwf0kydu.gz
 C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\compressed\gvj8tzft7l-ueov14t4vx.gz
-C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\compressed\z7dzdi4th1-cenfbgia8a.gz
 C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\compressed\7ygf986cjc-t1cqhe9u97.gz
 C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\compressed\g7jaoa2azg-c2jlpeoesf.gz
 C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\compressed\q6tcj720kj-sejl45xvog.gz
@@ -191,3 +188,6 @@ C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0
 C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\Web.pdb
 C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\Web.genruntimeconfig.cache
 C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\ref\Web.dll
+C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\compressed\t85162zhau-1sv397uxb5.gz
+C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\compressed\il05hmak5q-luxrbgkwrh.gz
+C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\compressed\z7dzdi4th1-4laro2t40q.gz

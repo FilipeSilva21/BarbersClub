@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using BarbersClub.Business.DTOs;
 using BarbersClub.Business.Services.Interfaces;
+using Business.Error_Handling;
 using Business.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -14,25 +15,25 @@ namespace Web.Controllers.ServiceControllers;
 public class AuthApiController(IAuthService authService): ControllerBase
 {
     [HttpPost ("register")]
-    public async Task<ActionResult<User>> Register([FromForm] UserRegisterRequest request)
+    public async Task<ActionResult<User>> RegisterUser([FromForm] UserRegisterRequest request)
     {
-        var user = await authService.RegisterAsync(request);
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
 
-        if (user is null)
-            return BadRequest(new { message = "Email já cadastrado" });
-        
-        return Ok(user);
+        await authService.RegisterUserAsync(request);
+        return Ok(new { Message = "Usuário registrado com sucesso!" });
     }
     
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody]UserLoginRequest request)
     {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
         var (token, user) = await authService.LoginAsync(request);
 
         if (token is null || user is null)
-        {
             return Unauthorized(new { message = "Email ou senha inválidos." });
-        }
 
         var claims = new List<Claim>
         {

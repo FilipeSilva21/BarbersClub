@@ -1,6 +1,7 @@
 using BarbersClub.Business.DTOs;
 using BarbersClub.Business.Services.Interfaces;
 using BarbersClub.DbContext;
+using Business.Error_Handling;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Repository.DbContext;
@@ -16,9 +17,9 @@ public class BarberShopService(ProjectDbContext context, IWebHostEnvironment web
         var userExists = await context.Users.AnyAsync(u => u.UserId == userId);
     
         if (!userExists)
-            return null;
+            throw new UserIdNotFoundException(userId);
 
-        var barberShop = new BarberShop()
+        var barberShop = new BarberShop
         {
             UserId = userId,
             Name = request.Name,
@@ -76,7 +77,7 @@ public class BarberShopService(ProjectDbContext context, IWebHostEnvironment web
             .FirstOrDefaultAsync(bs => bs.BarberShopId == barberShopId);
 
         if (barberShopToUpdate == null || barberShopToUpdate.UserId != userId) 
-            return null;
+            throw new BarberShopNotFoundException(barberShopId);
 
         barberShopToUpdate.Name = request.Name;
         barberShopToUpdate.Address = request.Address;
@@ -147,7 +148,7 @@ public class BarberShopService(ProjectDbContext context, IWebHostEnvironment web
         var barberShop = await context.BarberShops.FindAsync(barberShopId);
 
         if (barberShop == null || barberShop.UserId != userId)
-            return false;
+            throw new BarberShopNotFoundException(barberShopId);
 
         context.BarberShops.Remove(barberShop);
         await context.SaveChangesAsync();

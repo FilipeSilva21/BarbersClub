@@ -1,10 +1,11 @@
-using Microsoft.AspNetCore.Authorization; // Adicionado
-using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using BarbersClub.Business.DTOs;
 using BarbersClub.Business.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+// Adicionado
 
-namespace BarbersClub.Controllers.ServiceControllers;
+namespace Web.Controllers.ServiceControllers;
 
 [Route("api/services")]
 [ApiController]
@@ -38,22 +39,16 @@ public class ServiceApiController(IServiceService serviceService, IBarberShopSer
     {
         var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
         if (!int.TryParse(userIdString, out var userId))
-        {
             return Unauthorized();
-        }
         
         var serviceToCheck = await serviceService.GetServiceByIdAsync(serviceId);
         if (serviceToCheck is null)
-        {
             return Unauthorized();
-        }
 
         var result = await serviceService.CancelServiceAsync(serviceId, userId);
     
         if (!result)
-        {
             return BadRequest("Não foi possível cancelar o agendamento.");
-        }
 
         return Ok(new { message = "Agendamento cancelado com sucesso." });
     }
@@ -100,11 +95,10 @@ public class ServiceApiController(IServiceService serviceService, IBarberShopSer
         [FromQuery] TimeSpan? time)
     {
         var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        
         if (!int.TryParse(userIdString, out var userId))
-        {
             return Unauthorized("Sessão inválida.");
-        }
-
+            
         var barberShop = await barberShopService.GetBarberShopByIdAsync(barberShopId);
         if (barberShop == null || barberShop.UserId != userId)
         {
@@ -126,9 +120,8 @@ public class ServiceApiController(IServiceService serviceService, IBarberShopSer
     public async Task<IActionResult> GetBookedTimes([FromQuery] int barberShopId, [FromQuery] DateTime date)
     {
         if (barberShopId <= 0)
-        {
             return BadRequest("O ID da barbearia é inválido.");
-        }
+        
         try
         {
             var barberShop = await barberShopService.GetBarberShopByIdAsync(barberShopId);
@@ -178,9 +171,9 @@ public class ServiceApiController(IServiceService serviceService, IBarberShopSer
     }
 
     [HttpPost("conclude-with-photo/{serviceId}")]
-    public async Task<IActionResult> ConcludeWithPhoto(int serviceId, [FromForm] IFormFile photoFile)
+    public async Task<IActionResult> ConcludeWithPhoto(int serviceId, [FromForm] IFormFile? photoFile)
     {
-        if (photoFile == null || photoFile.Length == 0)
+        if (photoFile is null || photoFile.Length == 0)
             return BadRequest(new { message = "Nenhum arquivo foi enviado." });
 
         var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);

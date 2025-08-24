@@ -1,5 +1,6 @@
 using BarbersClub.Business.DTOs;
 using BarbersClub.Business.Services.Interfaces;
+using Business.Error_Handling;
 using Microsoft.EntityFrameworkCore;
 using Repository.DbContext;
 using Repository.Models.Enums;
@@ -11,9 +12,9 @@ public class DashboardStatsService(ProjectDbContext context) : IDashboardStatsSe
     public async Task<DashboardStatsResponse> GetDashboardStatsAsync(int? barberShopId)
     {
         var barberShop = await context.BarberShops.FindAsync(barberShopId);
-        
+
         if (barberShop is null)
-            return null;
+            throw new BarberShopNotFoundException(barberShop.BarberShopId); 
 
         var today = DateTime.UtcNow.Date;
         

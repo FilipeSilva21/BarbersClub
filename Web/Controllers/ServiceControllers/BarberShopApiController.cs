@@ -28,18 +28,17 @@ public class BarberShopApiController(IBarberShopService barberShopService, IAuth
 
         var barberShop = await barberShopService.RegisterBarberShopAsync(userId, request);
 
-        if (barberShop == null)
-        {
+        if (barberShop is null)
             return NotFound($"Autor com ID {userId} não encontrado no banco de dados.");
-        }
+
         
         var claims = User.Claims.ToList();
 
         var existingClaim = claims.FirstOrDefault(c => c.Type == "hasBarberShops");
-        if (existingClaim != null)
-        {
+        
+        if (existingClaim is not null)
             claims.Remove(existingClaim);
-        }
+    
         claims.Add(new Claim("hasBarberShops", "true"));
 
         var updatedToken = authService.GenerateToken(claims);
@@ -60,7 +59,7 @@ public class BarberShopApiController(IBarberShopService barberShopService, IAuth
     {
         var barberShop = await barberShopService.GetBarberShopByIdAsync(barberShopId);
         
-        if (barberShop == null)
+        if (barberShop is null)
             return NotFound();
         
         return Ok(barberShop);
@@ -96,16 +95,12 @@ public class BarberShopApiController(IBarberShopService barberShopService, IAuth
     {
         var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
         if (!int.TryParse(userIdString, out var userId))
-        {
             return Unauthorized("Token de usuário inválido.");
-        }
 
         var updatedBarberShop = await barberShopService.UpdateBarberShopAsync(request.BarberShopId, userId, request);
 
-        if (updatedBarberShop == null)
-        {
+        if (updatedBarberShop is null)
             return BadRequest(new { message = "Não foi possível atualizar a barbearia. Verifique os dados ou a permissão." });
-        }
         
         return Ok(updatedBarberShop);
     }

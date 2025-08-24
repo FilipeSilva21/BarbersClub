@@ -3,7 +3,7 @@ using BarbersClub.Business.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BarbersClub.Controllers.ServiceControllers;
+namespace Web.Controllers.ServiceControllers;
 
 
 [Route("api/ratings")]

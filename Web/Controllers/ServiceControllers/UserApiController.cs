@@ -24,7 +24,7 @@ public class UserApiController (IUserService userService, IAuthService authServi
     {
         var user = await userService.GetUserByIdAsync(userId);
      
-        if(user == null)
+        if(user is null)
             return NotFound();
         
         return Ok(user);
