@@ -1,5 +1,5 @@
 @using System.Globalization
-@model BarbersClub.Business.DTOs.BarberShopViewResponse
+@model Business.DTOs.BarberShopViewResponse
 
 @{ Layout = "_Layout"; }
 
@@ -14,9 +14,12 @@
 <div id="barbershop-details-view" class="container my-5">
     <header class="text-center mb-5">
         <h1 class="display-4 fw-bold">@Model.Name</h1>
-        <p class="lead text-white-50 fs-5">
-            <i class="bi bi-geo-alt-fill me-2"></i>@Model.Address, @Model.City - @Model.State
-        </p>
+            <p class="lead text-white-50 mb-3">
+                @Model.Description
+            </p>
+            <p class="lead text-white-50 fs-5">
+                <i class="bi bi-geo-alt-fill me-2"></i>@Model.Address, @Model.City - @Model.State
+            </p>
         <div class="average-rating fs-4">
             <i class="bi bi-star-fill text-gold"></i>
             <span>@Model.AverageRating.ToString("F1")</span>

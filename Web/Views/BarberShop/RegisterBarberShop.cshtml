@@ -28,15 +28,37 @@
                 <input asp-for="ProfilePicFile" type="file" accept="image/*" class="d-none" />
             </div>
         </div>
-        <div class="mb-3 text-start"><label asp-for="Name"></label><input asp-for="Name" class="form-control" placeholder="Ex: Navalha de Ouro" required></div>
-        <div class="mb-3 text-start"><label asp-for="Address"></label><input asp-for="Address" class="form-control" placeholder="Ex: Rua das Tesouras, 123" required></div>
-        <div class="row">
-            <div class="col-md-6 mb-3 text-start"><label asp-for="City"></label><input asp-for="City" class="form-control" placeholder="Ex: Salvador" required></div>
-            <div class="col-md-6 mb-3 text-start"><label asp-for="State"></label><input asp-for="State" class="form-control" placeholder="Ex: BA" required></div>
+        <div class="mb-3 text-start">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" placeholder="Ex: Navalha de Ouro" required>
+        </div>
+        <div class="mb-3 text-start">
+            <label asp-for="Description"></label>
+            <input asp-for="Description" class="form-control" placeholder="Ex: Especialista em massagem e barboterapia" required>
+        </div>
+        <div class="mb-3 text-start">
+            <label asp-for="Address"></label>
+            <input asp-for="Address" class="form-control" placeholder="Ex: Rua das Tesouras, 123" required>
         </div>
         <div class="row">
-            <div class="col-md-6 mb-3 text-start"><label asp-for="WhatsApp"></label><input asp-for="WhatsApp" class="form-control" placeholder="(71) 99999-8888" required></div>
-            <div class="col-md-6 mb-3 text-start"><label asp-for="Instagram"></label><input asp-for="Instagram" class="form-control" placeholder="username"></div>
+            <div class="col-md-6 mb-3 text-start">
+                <label asp-for="City"></label>
+                <input asp-for="City" class="form-control" placeholder="Ex: Salvador" required>
+            </div>
+            <div class="col-md-6 mb-3 text-start">
+                <label asp-for="State"></label>
+                <input asp-for="State" class="form-control" placeholder="Ex: BA" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3 text-start">
+                <label asp-for="WhatsApp"></label>
+                <input asp-for="WhatsApp" class="form-control" placeholder="(71) 99999-8888" required>
+            </div>
+            <div class="col-md-6 mb-3 text-start">
+                <label asp-for="Instagram"></label>
+                <input asp-for="Instagram" class="form-control" placeholder="username">
+            </div>
         </div>
         
         <div class="row">

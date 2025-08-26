@@ -1,6 +1,7 @@
 using BarbersClub.Business.DTOs;
 using BarbersClub.Business.Services.Interfaces;
-using BarbersClub.DbContext;
+using Business.Error_Handling;
+using Business.Services.Interfaces;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -13,11 +14,16 @@ public class UserService(ProjectDbContext context, IWebHostEnvironment webHostEn
 {
     public async Task<User?> GetUserByIdAsync(int userId)
     {
+        var user = await context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.UserId == userId);
+        if (user is null)
+            throw new UserIdNotFoundException(userId);
+        
         return await context.Users
             .Include(u => u.Services)
             .Include(u => u.Ratings)
             .SingleOrDefaultAsync(u => u.UserId == userId);
     }
+
 
     public async Task<IEnumerable<User>> GetUsers()
     {
@@ -27,16 +33,13 @@ public class UserService(ProjectDbContext context, IWebHostEnvironment webHostEn
     public async Task<User?> UpdateUserAsync(int userId, UserUpdateRequest request)
     {
         var user = await context.Users.FindAsync(userId);
+        
         if (user is null)
-        {
-            return null;
-        }
+            throw new UserIdNotFoundException(userId);
 
         if (await context.Users.AnyAsync(u => u.Email == request.Email && u.UserId != userId))
-        {
-            return null;
-        }
-
+            throw new EmailNotFoundException(request.Email);
+        
         user.FirstName = request.FirstName;
         user.LastName = request.LastName;
         user.Email = request.Email;
@@ -65,16 +68,15 @@ public class UserService(ProjectDbContext context, IWebHostEnvironment webHostEn
             user.ProfilePicUrl = $"/images/users/{uniqueFileName}";
         }
 
-        if (!string.IsNullOrWhiteSpace(request.NewPassword))
+        if (!string.IsNullOrWhiteSpace(request.NewPassword) || !string.IsNullOrWhiteSpace(request.ConfirmPassword))
         {
-            if (request.NewPassword != request.ConfirmPassword)
-            {
-                return null;
-            }
+            if (string.IsNullOrWhiteSpace(request.NewPassword) || string.IsNullOrWhiteSpace(request.ConfirmPassword))
+                throw new ArgumentException("Para alterar a senha, informe Nova Senha e Confirmar Senha.");
+            if (!string.Equals(request.NewPassword, request.ConfirmPassword))
+                throw new ArgumentException("As senhas não conferem.");
 
             var passwordHasher = new PasswordHasher<User>();
-            var newHashedPassword = passwordHasher.HashPassword(user, request.NewPassword);
-            user.PasswordHashed = newHashedPassword;
+            user.PasswordHashed = passwordHasher.HashPassword(user, request.NewPassword!);
         }
 
         await context.SaveChangesAsync();
@@ -82,8 +84,5 @@ public class UserService(ProjectDbContext context, IWebHostEnvironment webHostEn
         return user;
     }
     
-    public async Task<IEnumerable<User>> GetUserByEmailAsync(string email)
-    {
-        throw new NotImplementedException();
-    }
+    
 }

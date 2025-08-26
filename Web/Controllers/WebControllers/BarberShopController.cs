@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using BarbersClub.Business.DTOs;
 using BarbersClub.Business.Services.Interfaces;
+using Business.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,10 +28,9 @@ public class BarberShopController(IBarberShopService barberShopContext) : Contro
     {
         var barberShop = await barberShopContext.GetBarberShopByIdAsync(barberShopId);
         
-        if (barberShop == null)
-        {
+        if (barberShop is null)
             return NotFound();
-        }
+        
         return View("~/Views/BarberShop/BarberShopDetails.cshtml", barberShop);
     }
     
@@ -40,20 +40,17 @@ public class BarberShopController(IBarberShopService barberShopContext) : Contro
     {
         var barberShop = await barberShopContext.GetBarberShopForUpdateAsync(id);
         if (barberShop is null)
-        {
             return NotFound();
-        }
         
         var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
         if (!int.TryParse(userIdString, out var userId) || barberShop.UserId != userId)
-        {
             return Forbid(); 
-        }
 
         var dto = new BarberShopUpdateRequest
         {
             BarberShopId = barberShop.BarberShopId,
             Name = barberShop.Name, 
+            Description = barberShop.Description,
             Address = barberShop.Address,
             City = barberShop.City,
             State = barberShop.State,

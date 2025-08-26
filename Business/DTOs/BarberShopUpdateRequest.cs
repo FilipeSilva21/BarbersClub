@@ -9,6 +9,8 @@ public record BarberShopUpdateRequest
     
     public string Name { get; set; } = string.Empty;
     
+    public string? Description { get; set; }
+    
     public string State { get; set; } = string.Empty;
 
     public string City { get; set; } = string.Empty;

@@ -16,7 +16,7 @@ public class AuthApiController(IAuthService authService): ControllerBase
     [HttpPost ("register")]
     public async Task<ActionResult<User>> Register([FromForm] UserRegisterRequest request)
     {
-        var user = await authService.RegisterAsync(request);
+        var user = await authService.RegisterUserAsync(request);
 
         if (user is null)
             return BadRequest(new { message = "Email já cadastrado" });

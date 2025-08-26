@@ -2,6 +2,8 @@
 using System.Security.Claims;
 using System.Text;
 using BarbersClub.Business.DTOs;
+using Business;
+using Business.Error_Handling;
 using Business.Services.Interfaces;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -15,13 +17,13 @@ namespace Business.Services;
 
 public class AuthService(ProjectDbContext context, IConfiguration config, IWebHostEnvironment webHostEnvironment): IAuthService
 {
-    public async Task<User?> RegisterAsync(UserRegisterRequest request)
+    public async Task<User?> RegisterUserAsync(UserRegisterRequest request)
     {
         if (await context.Users.AnyAsync(u => u.Email == request.Email))
-            return null;
+            throw new DuplicateEmailException($"Email {request.Email} já está em uso.");
         
         if(request.Password != request.ConfirmPassword)
-            return null;
+            throw new ArgumentException("As senhas não conferem.");
         
         var user = new User();
         
@@ -35,7 +37,7 @@ public class AuthService(ProjectDbContext context, IConfiguration config, IWebHo
 
         if (request.ProfilePic != null && request.ProfilePic.Length > 0)
         {
-            string uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(request.ProfilePic.FileName);
+            string uniqueFileName = Guid.NewGuid() + Path.GetExtension(request.ProfilePic.FileName);
         
             string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "images", "users");
             Directory.CreateDirectory(uploadsFolder); 
@@ -60,13 +62,13 @@ public class AuthService(ProjectDbContext context, IConfiguration config, IWebHo
         var user = await context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
 
         if (user is null)
-            return (null, null);
+            throw new EmailNotFoundException($"Usuário com email {request.Email} não encontrado.");
 
         if (new PasswordHasher<User>().VerifyHashedPassword(
                 user,
                 user.PasswordHashed,
                 request.Password) == PasswordVerificationResult.Failed)
-            return (null, null);
+            throw new InvalidCredentialsException("Usuário ou Senha inválida.");
     
         var barberShopIds = await context.BarberShops
             .Where(b => b.UserId == user.UserId)
@@ -96,9 +98,7 @@ public class AuthService(ProjectDbContext context, IConfiguration config, IWebHo
     {
         var tokenKeyString = config.GetValue<string>("Jwt:SecretKey");
         if (string.IsNullOrEmpty(tokenKeyString))
-        {
             throw new InvalidOperationException("A chave do token ('Jwt:SecretKey') não está configurada.");
-        }
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKeyString));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);

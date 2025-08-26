@@ -1,6 +1,6 @@
 using BarbersClub.Business.DTOs;
 using BarbersClub.Business.Services.Interfaces;
-using BarbersClub.DbContext;
+using Business.Error_Handling;
 using Microsoft.EntityFrameworkCore;
 using Repository.DbContext;
 using Repository.Models;
@@ -16,20 +16,14 @@ public class RatingService(ProjectDbContext context) : IRatingService
             .Include(s => s.BarberShop)
             .FirstOrDefaultAsync(s => s.ServiceId == request.ServiceId);
 
-        if (service == null)
-        {
-            Console.WriteLine("Service not found");
-            return null;
-        }
+        if (service is null)
+            throw new ServiceNotFoundException(service.ServiceId); 
 
         var existingRating = await context.Ratings
             .AnyAsync(r => r.ServiceId == request.ServiceId);
 
         if (existingRating)
-        {
-            Console.WriteLine("Service already rated");
-            return null; 
-        }
+            throw new RatingAlreadyExistException(service.ServiceId); 
 
         var newRating = new Rating
         {

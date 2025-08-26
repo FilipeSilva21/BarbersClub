@@ -60,7 +60,7 @@ public class BarberShopApiController(IBarberShopService barberShopService, IAuth
     {
         var barberShop = await barberShopService.GetBarberShopByIdAsync(barberShopId);
         
-        if (barberShop == null)
+        if (barberShop is null)
             return NotFound();
         
         return Ok(barberShop);
@@ -79,6 +79,7 @@ public class BarberShopApiController(IBarberShopService barberShopService, IAuth
     }
     
     [HttpDelete("{barberShopId}")]
+    [Authorize]
     public async Task<IActionResult> DeleteBarberShop(int barberShopId)
     {
         var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? string.Empty);
@@ -92,20 +93,17 @@ public class BarberShopApiController(IBarberShopService barberShopService, IAuth
     }
     
     [HttpPost("edit")]
+    [Authorize]
     public async Task<IActionResult> Edit([FromForm] BarberShopUpdateRequest request)
     {
         var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
         if (!int.TryParse(userIdString, out var userId))
-        {
             return Unauthorized("Token de usuário inválido.");
-        }
 
         var updatedBarberShop = await barberShopService.UpdateBarberShopAsync(request.BarberShopId, userId, request);
 
-        if (updatedBarberShop == null)
-        {
+        if (updatedBarberShop is null)
             return BadRequest(new { message = "Não foi possível atualizar a barbearia. Verifique os dados ou a permissão." });
-        }
         
         return Ok(updatedBarberShop);
     }

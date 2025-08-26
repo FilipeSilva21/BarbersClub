@@ -1,8 +1,9 @@
 using System.Security.Claims;
 using BarbersClub.Business.Services.Interfaces;
+using Business.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BarbersClub.Controllers.WebControllers;
+namespace Web.Controllers.WebControllers;
 
 public class NavBarController(IDashboardStatsService dashboardContext, IBarberShopService barberShopContext) : Controller
 {

@@ -1,5 +1,3 @@
-// Em wwwroot/js/BarberShop/EditBarberShop.js
-
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('barberShopEditForm');
     if (!form) {
@@ -7,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
     }
 
-    // --- Seletores de Elementos ---
     const submitButton = form.querySelector('button[type="submit"]');
     const spinner = submitButton ? submitButton.querySelector('.spinner-border') : null;
     const errorMessageDiv = document.getElementById('errorMessage');
@@ -37,16 +34,29 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     form.addEventListener('submit', async function (event) {
-        event.preventDefault(); 
+        event.preventDefault();
 
-        if(submitButton) submitButton.disabled = true;
-        if(spinner) spinner.classList.remove('d-none');
+        if (submitButton) submitButton.disabled = true;
+        if (spinner) spinner.classList.remove('d-none');
         const token = localStorage.getItem('jwt_token');
-        if (!token) { return; }
-        
+        if (!token) {
+            if (submitButton) submitButton.disabled = false;
+            if (spinner) spinner.classList.add('d-none');
+            // Redireciona para o login ou exibe uma mensagem de erro
+            return;
+        }
+
+        // 🚀 Crie FormData para coletar todos os campos simples
         const formData = new FormData(form);
 
+        // 📝 Remova o WorkingDays e anexe-o novamente para evitar duplicatas
         const workingDays = Array.from(form.querySelectorAll('input[name="WorkingDays"]:checked')).map(cb => cb.value);
+        formData.delete('WorkingDays');
+        workingDays.forEach(day => {
+            formData.append('WorkingDays', day);
+        });
+
+        // 📝 Remova OfferedServices e anexe-o novamente com a sintaxe correta
         const offeredServices = [];
         form.querySelectorAll('.service-checkbox:checked').forEach(checkbox => {
             const serviceType = checkbox.value;
@@ -57,24 +67,29 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        formData.delete('WorkingDays');
-        formData.delete('OfferedServices.ServiceType');
-        formData.delete('OfferedServices.Price');
-
-        workingDays.forEach(day => {
-            formData.append('WorkingDays', day);
-        });
-
+        // Remove os campos de OfferedServices para anexá-los corretamente
+        // Nota: as chaves são complexas, então este loop é mais seguro
+        for (let pair of formData.entries()) {
+            if (pair[0].startsWith('OfferedServices')) {
+                formData.delete(pair[0]);
+            }
+        }
         offeredServices.forEach((service, index) => {
             formData.append(`OfferedServices[${index}].ServiceType`, service.serviceType);
             formData.append(`OfferedServices[${index}].Price`, service.price);
         });
 
+        // Verifique se o BarberShopId está no FormData
+        const barberShopId = form.querySelector('input[name="BarberShopId"]').value;
+        if (!formData.get('BarberShopId')) {
+            formData.append('BarberShopId', barberShopId);
+        }
+
         const actionUrl = '/api/barbershop/edit';
 
         try {
             const response = await fetch(actionUrl, {
-                method: 'POST',
+                method: 'POST', // Use 'POST' para compatibilidade com FormData e arquivos
                 body: formData,
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -91,8 +106,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             } else {
                 const errorData = await response.json().catch(() => ({ message: 'Ocorreu um erro ao atualizar.' }));
-                if(errorMessageDiv) {
-                    errorMessageDiv.textContent = errorData.message || Object.values(errorData.errors).flat().join('\n');
+                if (errorMessageDiv) {
+                    let errorText = 'Ocorreu um erro ao atualizar.';
+                    if (response.status === 400 && errorData.errors) {
+                        errorText = Object.values(errorData.errors).flat().join('\n');
+                    } else if (errorData.message) {
+                        errorText = errorData.message;
+                    }
+                    errorMessageDiv.textContent = errorText;
                     errorMessageDiv.classList.remove('d-none');
                 }
             }
@@ -103,8 +124,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 errorMessageDiv.classList.remove('d-none');
             }
         } finally {
-            if(submitButton) submitButton.disabled = false;
-            if(spinner) spinner.classList.add('d-none');
+            if (submitButton) submitButton.disabled = false;
+            if (spinner) spinner.classList.add('d-none');
         }
     });
 });

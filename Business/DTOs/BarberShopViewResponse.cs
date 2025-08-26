@@ -1,10 +1,13 @@
-namespace BarbersClub.Business.DTOs;
+using BarbersClub.Business.DTOs;
+
+namespace Business.DTOs;
 
 public record BarberShopViewResponse
 {
     public int BarberShopId { get; init; }
     public int UserId { get; init; }
     public string Name { get; init; } = string.Empty;
+    public string? Description { get; init; }
     public string Address { get; init; } = string.Empty;
     public string State { get; init; } = string.Empty;
     public string City { get; init; } = string.Empty;

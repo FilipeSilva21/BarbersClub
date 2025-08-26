@@ -1,6 +1,6 @@
 using BarbersClub.Business.DTOs;
 using BarbersClub.Business.Services.Interfaces;
-using BarbersClub.DbContext;
+using Business.Error_Handling;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Repository.DbContext;
@@ -140,7 +140,6 @@ public class ServiceService(ProjectDbContext context, IWebHostEnvironment webHos
                 query = query.Include(s => s.Ratings)
                     .OrderByDescending(s => s.Ratings.Any() ? s.Ratings.Average(r => r.RatingValue) : 0);
                 break;
-            case "date_desc":
             default:
                 query = query.OrderByDescending(s => s.Date);
                 break;
@@ -241,24 +240,18 @@ public class ServiceService(ProjectDbContext context, IWebHostEnvironment webHos
             .Include(s => s.BarberShop) 
             .FirstOrDefaultAsync(s => s.ServiceId == serviceId);
 
-        if (service == null)
-        {
-            return false;
-        }
+        if (service is null)
+            throw new ServiceNotFoundException(serviceId);
 
         bool isClient = service.UserId == userId;
         bool isBarberShopOwner = service.BarberShop.UserId == userId;
 
         if (!isClient && !isBarberShopOwner)
-        {
             return false;
-        }
     
-        if (service.Status != ServiceStatus.Confirmado)
-        {
+        if (service.Status is not ServiceStatus.Confirmado)
             return false;
-        }
-
+        
         service.Status = ServiceStatus.Cancelado;
         await context.SaveChangesAsync();
 
@@ -269,10 +262,8 @@ public class ServiceService(ProjectDbContext context, IWebHostEnvironment webHos
     {
         var service = await context.Services.FindAsync(serviceId);
 
-        if (service == null || service.Status != ServiceStatus.Confirmado)
-        {
-            return false; 
-        }
+        if (service is null || service.Status is not ServiceStatus.Confirmado)
+            throw new ServiceNotFoundException(serviceId); 
 
         service.Status = ServiceStatus.Concluido;
 
@@ -284,15 +275,11 @@ public class ServiceService(ProjectDbContext context, IWebHostEnvironment webHos
     {
         var service = await context.Services.FindAsync(serviceId);
     
-        if (service == null || service.Status != ServiceStatus.Confirmado)
-        {
-            return false;
-        }
+        if (service is null || service.Status is not ServiceStatus.Confirmado)
+            throw new ServiceNotFoundException(serviceId);
 
         if (string.IsNullOrEmpty(photoPath))
-        {
             return false;
-        }
 
         service.Status = ServiceStatus.Concluido;
         service.ServiceImageUrl = photoPath; 
@@ -304,19 +291,19 @@ public class ServiceService(ProjectDbContext context, IWebHostEnvironment webHos
     public async Task<Service?> UpdateServiceAsync(int serviceId, ServiceUpdateRequest request)
     {
         var service = await context.Services.FindAsync(serviceId);
-        if (service == null)
-            return null;
+        if (service is null)
+            throw new ServiceNotFoundException(serviceId);
 
-        if (request.Description != null)
+        if (request.Description is not null)
             service.Description = request.Description;
 
         if (request.Status.HasValue)
             service.Status = request.Status.Value;
 
-        if (request.ServiceType != null)
+        if (request.ServiceType is not null)
             service.ServiceType = request.ServiceType;
         
-        if (request.UploadedImage != null && request.UploadedImage.Length > 0)
+        if (request.UploadedImage is not null && request.UploadedImage.Length > 0)
         {
             if (!string.IsNullOrEmpty(service.ServiceImageUrl))
             {

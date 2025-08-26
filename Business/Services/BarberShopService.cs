@@ -1,6 +1,7 @@
 using BarbersClub.Business.DTOs;
-using BarbersClub.Business.Services.Interfaces;
-using BarbersClub.DbContext;
+using Business.DTOs;
+using Business.Error_Handling;
+using Business.Services.Interfaces;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Repository.DbContext;
@@ -11,17 +12,18 @@ namespace Business.Services;
 
 public class BarberShopService(ProjectDbContext context, IWebHostEnvironment webHostEnvironment) : IBarberShopService
 {
-    public async Task<BarberShop?> RegisterBarberShopAsync(int userId, BarberShopRegisterRequest request)
+   public async Task<BarberShop?> RegisterBarberShopAsync(int userId, BarberShopRegisterRequest request)
     {
         var userExists = await context.Users.AnyAsync(u => u.UserId == userId);
-    
-        if (!userExists)
-            return null;
 
-        var barberShop = new BarberShop()
+        if (!userExists)
+            throw new UserIdNotFoundException(userId);
+
+        var barberShop = new BarberShop
         {
             UserId = userId,
             Name = request.Name,
+            Description = request.Description,
             State = request.State,
             City = request.City,
             Address = request.Address,
@@ -47,18 +49,15 @@ public class BarberShopService(ProjectDbContext context, IWebHostEnvironment web
             barberShop.ProfilePicUrl = $"/images/barbershops/{uniqueFileName}";
         }
         
-        if (request.OfferedServices is not null)
+        foreach (var serviceDto in request.OfferedServices)
         {
-            foreach (var serviceDto in request.OfferedServices)
+            if (Enum.TryParse<ServiceTypes>(serviceDto.ServiceType, ignoreCase:true, out var serviceEnum))
             {
-                if (Enum.TryParse<ServiceTypes>(serviceDto.ServiceType, ignoreCase:true, out var serviceEnum))
+                barberShop.OfferedServices.Add(new OfferedService
                 {
-                    barberShop.OfferedServices.Add(new OfferedService
-                    {
-                        ServiceType = serviceEnum, 
-                        Price = serviceDto.Price
-                    });
-                }
+                    ServiceType = serviceEnum, 
+                    Price = serviceDto.Price
+                });
             }
         }
         
@@ -75,10 +74,11 @@ public class BarberShopService(ProjectDbContext context, IWebHostEnvironment web
             .Include(bs => bs.OfferedServices)
             .FirstOrDefaultAsync(bs => bs.BarberShopId == barberShopId);
 
-        if (barberShopToUpdate == null || barberShopToUpdate.UserId != userId) 
-            return null;
+        if (barberShopToUpdate is null || barberShopToUpdate.UserId != userId) 
+            throw new BarberShopNotFoundException(barberShopId);
 
         barberShopToUpdate.Name = request.Name;
+        barberShopToUpdate.Description = request.Description;
         barberShopToUpdate.Address = request.Address;
         barberShopToUpdate.City = request.City;
         barberShopToUpdate.State = request.State;
@@ -124,17 +124,13 @@ public class BarberShopService(ProjectDbContext context, IWebHostEnvironment web
                     .FirstOrDefault(os => os.ServiceType == serviceEnum);
                 
                 if (existingService != null)
-                {
                     existingService.Price = serviceDto.Price;
-                }
                 else
-                {
                     barberShopToUpdate.OfferedServices.Add(new OfferedService
                     {
                         ServiceType = serviceEnum,
                         Price = serviceDto.Price
                     });
-                }
             }
         }
 
@@ -146,8 +142,8 @@ public class BarberShopService(ProjectDbContext context, IWebHostEnvironment web
     {
         var barberShop = await context.BarberShops.FindAsync(barberShopId);
 
-        if (barberShop == null || barberShop.UserId != userId)
-            return false;
+        if (barberShop is null || barberShop.UserId != userId)
+            throw new BarberShopNotFoundException(barberShopId);
 
         context.BarberShops.Remove(barberShop);
         await context.SaveChangesAsync();
@@ -166,6 +162,7 @@ public class BarberShopService(ProjectDbContext context, IWebHostEnvironment web
             {
                 BarberShopId = bs.BarberShopId,
                 UserId = bs.UserId,
+                Description = bs.Description,
                 Name = bs.Name,
                 Address = bs.Address,
                 City = bs.City,
@@ -200,59 +197,60 @@ public class BarberShopService(ProjectDbContext context, IWebHostEnvironment web
     }
 
     public async Task<IEnumerable<BarberShopViewResponse?>> GetBarberShopsAsync()
-    { 
+    {
         return await context.BarberShops
             .AsNoTracking()
-            .Include(bs => bs.Services).ThenInclude(s => s.Ratings)
             .Select(bs => new BarberShopViewResponse
             {
                 BarberShopId = bs.BarberShopId,
                 UserId = bs.UserId,
+                Description = bs.Description,
                 Name = bs.Name,
                 Address = bs.Address,
                 City = bs.City,
                 State = bs.State,
                 ProfilePicUrl = bs.ProfilePicUrl,
-                AverageRating = bs.Services.SelectMany(s => s.Ratings).Any() 
-                                ? bs.Services.SelectMany(s => s.Ratings).Average(r => r.RatingValue) 
-                                : 0,
+                AverageRating = bs.Services.SelectMany(s => s.Ratings).Any()
+                    ? bs.Services.SelectMany(s => s.Ratings).Average(r => r.RatingValue)
+                    : 0,
                 ReviewCount = bs.Services.SelectMany(s => s.Ratings).Count()
             })
             .ToListAsync();
     }
 
-    public async Task<IEnumerable<BarberShopViewResponse?>> SearchBarberShopsAsync(string? barberShopName, string? state, string? city, string? barberName)
-    {
-        IQueryable<BarberShop> query = context.BarberShops
-            .Include(bs => bs.Services).ThenInclude(s => s.Ratings)
-            .Include(bs => bs.Barber);
+        public async Task<IEnumerable<BarberShopViewResponse?>> SearchBarberShopsAsync(string? barberShopName, string? state, string? city, string? barberName)
+        {
+            IQueryable<BarberShop> query = context.BarberShops
+                .Include(bs => bs.Services).ThenInclude(s => s.Ratings)
+                .Include(bs => bs.Barber);
 
-        if (!string.IsNullOrEmpty(barberShopName))
-            query = query.Where(b => b.Name.Contains(barberShopName));
-        if (!string.IsNullOrEmpty(state))
-            query = query.Where(b => b.State == state);
-        if (!string.IsNullOrEmpty(city))
-            query = query.Where(b => b.City == city);
-        if (!string.IsNullOrEmpty(barberName))
-            query = query.Where(b => b.Barber.FirstName.Contains(barberName));
-    
-        return await query
-            .Select(bs => new BarberShopViewResponse
-            {
-                BarberShopId = bs.BarberShopId,
-                UserId = bs.UserId,
-                Name = bs.Name,
-                Address = bs.Address,
-                City = bs.City,
-                State = bs.State,
-                ProfilePicUrl = bs.ProfilePicUrl,
-                AverageRating = bs.Services.SelectMany(s => s.Ratings).Any() 
-                                ? bs.Services.SelectMany(s => s.Ratings).Average(r => r.RatingValue) 
-                                : 0,
-                ReviewCount = bs.Services.SelectMany(s => s.Ratings).Count()
-            })
-            .ToListAsync();
-    }
+            if (!string.IsNullOrEmpty(barberShopName))
+                query = query.Where(b => b.Name.Contains(barberShopName));
+            if (!string.IsNullOrEmpty(state))
+                query = query.Where(b => b.State == state);
+            if (!string.IsNullOrEmpty(city))
+                query = query.Where(b => b.City == city);
+            if (!string.IsNullOrEmpty(barberName))
+                query = query.Where(b => b.Barber.FirstName.Contains(barberName));
+        
+            return await query
+                .Select(bs => new BarberShopViewResponse
+                {
+                    BarberShopId = bs.BarberShopId,
+                    UserId = bs.UserId,
+                    Name = bs.Name,
+                    Description = bs.Description,
+                    Address = bs.Address,
+                    City = bs.City,
+                    State = bs.State,
+                    ProfilePicUrl = bs.ProfilePicUrl,
+                    AverageRating = bs.Services.SelectMany(s => s.Ratings).Any() 
+                                    ? bs.Services.SelectMany(s => s.Ratings).Average(r => r.RatingValue) 
+                                    : 0,
+                    ReviewCount = bs.Services.SelectMany(s => s.Ratings).Count()
+                })
+                .ToListAsync();
+        }
     
     public async Task<BarberShop?> GetBarberShopForUpdateAsync(int barberShopId)
     {
@@ -293,11 +291,9 @@ public class BarberShopService(ProjectDbContext context, IWebHostEnvironment web
                 ProfilePictureUrl = bs.ProfilePicUrl,
                 City = bs.City,
                 State = bs.State,
-            
                 AverageRating = bs.Services.SelectMany(s => s.Ratings).Average(r => r.RatingValue), 
                 ReviewCount = bs.Services.SelectMany(s => s.Ratings).Count(),
-            
-                Description = "Especialistas em cortes modernos e barboterapia." 
+                Description = bs.Description
             })
             .ToListAsync();
     }

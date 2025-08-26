@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using BarbersClub.Business.DTOs;
 using BarbersClub.Business.Services.Interfaces;
+using Business.Services.Interfaces;
 
 namespace BarbersClub.Controllers.ServiceControllers;
 
