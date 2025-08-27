@@ -87,9 +87,7 @@
                 {
                     <p class="text-white-50">Nenhum serviço cadastrado ainda.</p>
                 }
-                <a asp-controller="Service" 
-                   asp-action="CreateServiceForBarberShop" 
-                   asp-route-barberShopId="@Model.BarberShopId" 
+                <a href="/service/create/@Model.BarberShopId"
                    class="btn btn-gold w-100 mt-4">
                     Agendar Horário
                 </a>

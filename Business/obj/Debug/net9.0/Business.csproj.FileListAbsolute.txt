@@ -14,3 +14,5 @@ C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Business\obj\Debug\n
 C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Business\obj\Debug\net9.0\refint\Business.dll
 C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Business\obj\Debug\net9.0\Business.pdb
 C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Business\obj\Debug\net9.0\ref\Business.dll
+C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Business\bin\Debug\net9.0\Business.runtimeconfig.json
+C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Business\obj\Debug\net9.0\Business.genruntimeconfig.cache

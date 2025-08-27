@@ -1,7 +1,8 @@
+using BarbersClub.Business.DTOs;
 using Microsoft.AspNetCore.Http;
 using Repository.Models.Enums;
 
-namespace BarbersClub.Business.DTOs;
+namespace Business.DTOs;
 
 public record BarberShopRegisterRequest
 {

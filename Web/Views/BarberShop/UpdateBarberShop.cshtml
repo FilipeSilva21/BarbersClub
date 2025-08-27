@@ -1,4 +1,4 @@
-@model BarbersClub.Business.DTOs.BarberShopUpdateRequest
+@model Business.DTOs.BarberShopUpdateRequest
 @using Repository.Models.Enums
 
 @{ Layout = "_Layout"; }
@@ -110,6 +110,7 @@
         <div id="errorMessage" class="error-message mb-3 d-none"></div>
 
         <button type="submit" class="btn btn-primary w-100">Salvar Alterações</button>
+        <button href="/api/barbershop/delete/@Model.BarberShopId" class="btn btn-primary w-100">Deletar barbearia</button>
     </form>
 </div>
 
