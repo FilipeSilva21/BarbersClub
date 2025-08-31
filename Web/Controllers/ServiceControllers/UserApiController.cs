@@ -23,8 +23,8 @@ public class UserApiController (IUserService userService, IAuthService authServi
     public async Task<IActionResult> GetUserById(int userId)
     {
         var user = await userService.GetUserByIdAsync(userId);
-     
-        if(user == null)
+      
+        if(user is null)
             return NotFound();
         
         return Ok(user);
@@ -37,17 +37,36 @@ public class UserApiController (IUserService userService, IAuthService authServi
         var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
 
         if (userIdClaim is null || !int.TryParse(userIdClaim.Value, out var userId))
-        {
             return Unauthorized("ID de usuário inválido no token.");
-        }
 
         var updatedUser = await userService.UpdateUserAsync(userId, request);
 
         if (updatedUser is null)
-        {
             return BadRequest("Não foi possível atualizar o usuário. Verifique os dados fornecidos.");
+
+        var claims = User.Claims
+            .Where(c => c.Type != ClaimTypes.Name && 
+                        c.Type != ClaimTypes.Email &&
+                        c.Type != "hasBarbershops" &&
+                        c.Type != "barberShopId") // Também remove o ID antigo para evitar duplicatas
+            .ToList();
+        
+        claims.Add(new Claim(ClaimTypes.Name, updatedUser.FirstName));
+        claims.Add(new Claim(ClaimTypes.Email, updatedUser.Email));
+
+        var userBarberShops = updatedUser.BarberShops;
+        bool hasShops = userBarberShops != null && userBarberShops.Any();
+
+        claims.Add(new Claim("hasBarbershops", hasShops.ToString().ToLower()));
+        
+        if (hasShops)
+        {
+            var barberShopId = userBarberShops.First().BarberShopId.ToString();
+            claims.Add(new Claim("barberShopId", barberShopId));
         }
-    
+
+        var updatedToken = authService.GenerateToken(claims);
+
         return Ok(new 
         {
             updatedUser.UserId,
@@ -55,7 +74,8 @@ public class UserApiController (IUserService userService, IAuthService authServi
             updatedUser.LastName,
             updatedUser.Email,
             updatedUser.ProfilePicUrl,
-            updatedUser.Role
+            updatedUser.Role, 
+            token = updatedToken 
         });
     }
 }

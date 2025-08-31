@@ -29,18 +29,15 @@ public class BarberShopApiController(IBarberShopService barberShopService, IAuth
 
         var barberShop = await barberShopService.RegisterBarberShopAsync(userId, request);
 
-        if (barberShop == null)
-        {
+        if (barberShop is null)
             return NotFound($"Autor com ID {userId} não encontrado no banco de dados.");
-        }
         
         var claims = User.Claims.ToList();
 
         var existingClaim = claims.FirstOrDefault(c => c.Type == "hasBarberShops");
-        if (existingClaim != null)
-        {
+        if (existingClaim is not null)
             claims.Remove(existingClaim);
-        }
+        
         claims.Add(new Claim("hasBarberShops", "true"));
 
         var updatedToken = authService.GenerateToken(claims);

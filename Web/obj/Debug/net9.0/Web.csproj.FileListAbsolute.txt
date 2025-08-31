@@ -102,7 +102,6 @@ C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0
 C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\compressed\yskz3lzs2t-fmwf2byvzy.gz
 C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\compressed\cupfzalo34-od0d4vo7ur.gz
 C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\compressed\ds8f6vp0dx-61n19gt1b8.gz
-C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\compressed\oigzvtf574-kcb3aomobn.gz
 C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\compressed\0r09xpg7mx-w6nr4hql5w.gz
 C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\compressed\ur965rwxtc-9ktzlfaqvy.gz
 C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\compressed\zu621e1u9k-r0y1r80rch.gz
@@ -110,7 +109,6 @@ C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0
 C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\compressed\il05hmak5q-hf7eqvbhgo.gz
 C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\compressed\t85162zhau-acxpomf2vt.gz
 C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\compressed\fcxckteirx-0ota3g2kvj.gz
-C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\compressed\ycgh1a40r3-q0v8m0hf6q.gz
 C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\compressed\931ao3d2a1-z23u14qmpp.gz
 C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\compressed\waxssfctjh-zvt1ucnmmy.gz
 C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\compressed\tg7qrzgydz-ze19c252pi.gz
@@ -270,3 +268,5 @@ C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\bin\Debug\net9.0
 C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\compressed\ycgh1a40r3-eav9l446ap.gz
+C:\Users\filip\Downloads\Projects\.NET Projects\BarbersClub\Web\obj\Debug\net9.0\compressed\oigzvtf574-9me004ojb6.gz

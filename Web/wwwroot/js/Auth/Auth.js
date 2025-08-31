@@ -39,7 +39,7 @@ function getRegistrationMarkup() {
  */
 function renderAuthenticatedMenu(payload) {
     const userMenu = document.getElementById('user-menu');
-    const hasBarberShop = String(payload.hasBarberShops).toLowerCase() === 'true';
+    const hasBarberShop = String(payload.hasBarbershops).toLowerCase() === 'true';
     const currentPagePath = window.location.pathname.toLowerCase();
     const dashboardPagePath = "/navbar/dashboard";
 

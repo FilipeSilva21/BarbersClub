@@ -14,14 +14,16 @@ public class UserService(ProjectDbContext context, IWebHostEnvironment webHostEn
 {
     public async Task<User?> GetUserByIdAsync(int userId)
     {
-        var user = await context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.UserId == userId);
-        if (user is null)
-            throw new UserIdNotFoundException(userId);
-        
-        return await context.Users
+        var user = await context.Users
             .Include(u => u.Services)
             .Include(u => u.Ratings)
+            .Include(u => u.BarberShops)
             .SingleOrDefaultAsync(u => u.UserId == userId);
+        
+        if (user is null)
+            throw new UserIdNotFoundException(userId);
+
+        return user;
     }
 
 
@@ -32,14 +34,16 @@ public class UserService(ProjectDbContext context, IWebHostEnvironment webHostEn
     
     public async Task<User?> UpdateUserAsync(int userId, UserUpdateRequest request)
     {
-        var user = await context.Users.FindAsync(userId);
-        
+        var user = await context.Users
+            .Include(u => u.BarberShops) 
+            .FirstOrDefaultAsync(u => u.UserId == userId);
+    
         if (user is null)
             throw new UserIdNotFoundException(userId);
 
         if (await context.Users.AnyAsync(u => u.Email == request.Email && u.UserId != userId))
             throw new EmailNotFoundException(request.Email);
-        
+
         user.FirstName = request.FirstName;
         user.LastName = request.LastName;
         user.Email = request.Email;
@@ -83,6 +87,4 @@ public class UserService(ProjectDbContext context, IWebHostEnvironment webHostEn
 
         return user;
     }
-    
-    
 }
