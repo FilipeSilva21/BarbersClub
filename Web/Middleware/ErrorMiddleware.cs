@@ -62,6 +62,10 @@ public class ErrorMiddleware(RequestDelegate next, ILogger<ErrorMiddleware> logg
         {
             details = new { ErrorType = exception.GetType().Name, StackTrace = exception.ToString() };
         }
+        else
+        {
+            details = new { ErrorType = exception.GetType().Name, StackTrace = "Internal Server Error" };
+        }
 
         var errorResponse = new { statusCode = context.Response.StatusCode, message, details };
         var jsonResponse = JsonSerializer.Serialize(errorResponse, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
