@@ -59,21 +59,20 @@ public class AuthService(ProjectDbContext context, IConfiguration config, IWebHo
 
     public async Task<(string? token, User? user)> LoginAsync(UserLoginRequest request)
     {
-        var user = await context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
+        var user = await context.Users
+            .Include(u => u.BarberShops) 
+            .FirstOrDefaultAsync(u => u.Email == request.Email);
 
         if (user is null)
-            throw new EmailNotFoundException($"Usuário com email {request.Email} não encontrado.");
+            throw new EmailNotFoundException(request.Email);
 
         if (new PasswordHasher<User>().VerifyHashedPassword(
                 user,
                 user.PasswordHashed,
                 request.Password) == PasswordVerificationResult.Failed)
             throw new InvalidCredentialsException("Usuário ou Senha inválida.");
-    
-        var barberShopIds = await context.BarberShops
-            .Where(b => b.UserId == user.UserId)
-            .Select(b => b.BarberShopId)
-            .ToListAsync();
+
+        bool hasShops = user.BarberShops is not null && user.BarberShops.Any();
 
         var claims = new List<Claim>
         {
@@ -81,16 +80,19 @@ public class AuthService(ProjectDbContext context, IConfiguration config, IWebHo
             new Claim(ClaimTypes.Email, user.Email),
             new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
             new Claim(ClaimTypes.Role, user.Role.ToString()),
-            new Claim("hasBarberShops", barberShopIds.Any().ToString())
+            new Claim("hasBarbershops", hasShops.ToString().ToLower())
         };
 
-        foreach (var id in barberShopIds)
+        if (hasShops)
         {
-            claims.Add(new Claim("barberShopId", id.ToString()));
+            foreach (var barbershop in user.BarberShops)
+            {
+                claims.Add(new Claim("barberShopId", barbershop.BarberShopId.ToString()));
+            }
         }
-
+    
         var token = GenerateToken(claims);
-        
+    
         return (token, user); 
     }
 

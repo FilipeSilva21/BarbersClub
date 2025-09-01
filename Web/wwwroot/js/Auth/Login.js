@@ -1,5 +1,5 @@
 ﻿document.addEventListener('DOMContentLoaded', function () {
-    const loginForm = document.getElementById('loginForm'); // Garanta que o ID do seu form é 'loginForm'
+    const loginForm = document.getElementById('loginForm'); 
     const errorMessageDiv = document.getElementById('errorMessage');
 
     if (!loginForm) {
@@ -14,7 +14,6 @@
         const submitButton = loginForm.querySelector('button[type="submit"]');
         const spinner = submitButton.querySelector('.spinner-border');
 
-        // Mostra o spinner e desativa o botão
         spinner.classList.remove('d-none');
         submitButton.disabled = true;
 
@@ -54,7 +53,6 @@
             errorMessageDiv.textContent = 'Erro de conexão. Tente novamente mais tarde.';
             errorMessageDiv.classList.remove('d-none');
         } finally {
-            // Esconde o spinner e reativa o botão
             spinner.classList.add('d-none');
             submitButton.disabled = false;
         }

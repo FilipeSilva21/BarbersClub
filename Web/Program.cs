@@ -6,6 +6,7 @@ using Business; // Referência à sua nova camada Entity
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.IdentityModel.Tokens;
 using Scalar.AspNetCore;
+using Web.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -64,6 +65,7 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
     app.MapScalarApiReference();
 }
+app.UseErrorMiddleware();
 
 app.UseHttpsRedirection();
 app.UseRouting();

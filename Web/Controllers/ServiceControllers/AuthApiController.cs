@@ -25,7 +25,7 @@ public class AuthApiController(IAuthService authService): ControllerBase
     }
     
     [HttpPost("login")]
-    public async Task<IActionResult> Login([FromBody]UserLoginRequest request)
+    public async Task<IActionResult> Login([FromBody] UserLoginRequest request)
     {
         var (token, user) = await authService.LoginAsync(request);
 
@@ -34,23 +34,37 @@ public class AuthApiController(IAuthService authService): ControllerBase
             return Unauthorized(new { message = "Email ou senha inválidos." });
         }
 
-        var claims = new List<Claim>
+        var cookieClaims = new List<Claim>
         {
             new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
             new Claim(ClaimTypes.Name, user.FirstName),
             new Claim(ClaimTypes.Email, user.Email),
-            new Claim(ClaimTypes.Email, user.Email),
             new Claim(ClaimTypes.Role, user.Role.ToString())
         };
 
+        bool hasShops = user.BarberShops is not null && user.BarberShops.Any();
+        cookieClaims.Add(new Claim("hasBarbershops", hasShops.ToString().ToLower()));
+
+        if (hasShops)
+        {
+            foreach (var barbershop in user.BarberShops)
+            {
+                cookieClaims.Add(new Claim("barberShopId", barbershop.BarberShopId.ToString()));
+            }
+        }
+        
         var claimsIdentity = new ClaimsIdentity(
-            claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            cookieClaims, CookieAuthenticationDefaults.AuthenticationScheme);
 
         await HttpContext.SignInAsync(
             CookieAuthenticationDefaults.AuthenticationScheme, 
             new ClaimsPrincipal(claimsIdentity), 
-            new AuthenticationProperties { IsPersistent = true }); 
-        
+            new AuthenticationProperties 
+            { 
+                IsPersistent = true, 
+                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(60)
+            }); 
+    
         return Ok(new { token });
     }
 }

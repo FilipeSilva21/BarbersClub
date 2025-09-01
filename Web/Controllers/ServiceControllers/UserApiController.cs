@@ -48,7 +48,7 @@ public class UserApiController (IUserService userService, IAuthService authServi
             .Where(c => c.Type != ClaimTypes.Name && 
                         c.Type != ClaimTypes.Email &&
                         c.Type != "hasBarbershops" &&
-                        c.Type != "barberShopId") // Também remove o ID antigo para evitar duplicatas
+                        c.Type != "barberShopId") 
             .ToList();
         
         claims.Add(new Claim(ClaimTypes.Name, updatedUser.FirstName));
