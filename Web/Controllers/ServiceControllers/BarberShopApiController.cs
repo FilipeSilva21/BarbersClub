@@ -34,11 +34,11 @@ public class BarberShopApiController(IBarberShopService barberShopService, IAuth
         
         var claims = User.Claims.ToList();
 
-        var existingClaim = claims.FirstOrDefault(c => c.Type == "hasBarberShops");
+        var existingClaim = claims.FirstOrDefault(c => c.Type == "hasBarbershops");
         if (existingClaim is not null)
             claims.Remove(existingClaim);
         
-        claims.Add(new Claim("hasBarberShops", "true"));
+        claims.Add(new Claim("hasBarbershops", "true"));
 
         var updatedToken = authService.GenerateToken(claims);
 
