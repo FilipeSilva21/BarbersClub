@@ -2,6 +2,7 @@ using System.Security.Claims;
 using BarbersClub.Business.DTOs;
 using BarbersClub.Business.Services.Interfaces;
 using Business.DTOs;
+using Business.Error_Handling;
 using Business.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -80,14 +81,24 @@ public class BarberShopApiController(IBarberShopService barberShopService, IAuth
     [Authorize]
     public async Task<IActionResult> DeleteBarberShop(int barberShopId)
     {
-        var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? string.Empty);
+        var userIdValue = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (!int.TryParse(userIdValue, out var userId))
+            return Unauthorized("ID de usuário inválido.");
 
         var success = await barberShopService.DeleteBarberShopAsync(barberShopId, userId);
 
         if (!success)
-            return NotFound();
+            throw new BarberShopNotFoundException(barberShopId);
+        
+        var claims = User.Claims.ToList();
 
-        return NoContent(); 
+        claims.RemoveAll(c => c.Type == "hasBarbershops" || c.Type == "barberShopId");
+
+        claims.Add(new Claim("hasBarbershops", "false"));
+    
+        var updatedToken = authService.GenerateToken(claims);
+
+        return Ok(new { token = updatedToken });
     }
     
     [HttpPost("edit")]

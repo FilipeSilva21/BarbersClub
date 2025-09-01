@@ -109,8 +109,16 @@
         
         <div id="errorMessage" class="error-message mb-3 d-none"></div>
 
-        <button type="submit" class="btn btn-primary w-100">Salvar Alterações</button>
-        <button href="/api/barbershop/delete/@Model.BarberShopId" class="btn btn-primary w-100">Deletar barbearia</button>
+        <div class="d-grid gap-2 mt-4">
+            <button type="submit" class="btn btn-primary">
+                <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                Salvar Alterações
+            </button>
+    
+            <a href="/api/barbershop/delete/@Model.BarberShopId" id="deleteButton" class="btn btn-outline-danger">
+                Deletar Barbearia
+            </a>
+        </div>
     </form>
 </div>
 

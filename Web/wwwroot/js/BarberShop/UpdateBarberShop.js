@@ -42,21 +42,17 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!token) {
             if (submitButton) submitButton.disabled = false;
             if (spinner) spinner.classList.add('d-none');
-            // Redireciona para o login ou exibe uma mensagem de erro
             return;
         }
 
-        // 🚀 Crie FormData para coletar todos os campos simples
         const formData = new FormData(form);
 
-        // 📝 Remova o WorkingDays e anexe-o novamente para evitar duplicatas
         const workingDays = Array.from(form.querySelectorAll('input[name="WorkingDays"]:checked')).map(cb => cb.value);
         formData.delete('WorkingDays');
         workingDays.forEach(day => {
             formData.append('WorkingDays', day);
         });
 
-        // 📝 Remova OfferedServices e anexe-o novamente com a sintaxe correta
         const offeredServices = [];
         form.querySelectorAll('.service-checkbox:checked').forEach(checkbox => {
             const serviceType = checkbox.value;
@@ -67,8 +63,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        // Remove os campos de OfferedServices para anexá-los corretamente
-        // Nota: as chaves são complexas, então este loop é mais seguro
         for (let pair of formData.entries()) {
             if (pair[0].startsWith('OfferedServices')) {
                 formData.delete(pair[0]);
@@ -79,7 +73,6 @@ document.addEventListener('DOMContentLoaded', function () {
             formData.append(`OfferedServices[${index}].Price`, service.price);
         });
 
-        // Verifique se o BarberShopId está no FormData
         const barberShopId = form.querySelector('input[name="BarberShopId"]').value;
         if (!formData.get('BarberShopId')) {
             formData.append('BarberShopId', barberShopId);
@@ -89,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         try {
             const response = await fetch(actionUrl, {
-                method: 'POST', // Use 'POST' para compatibilidade com FormData e arquivos
+                method: 'POST',
                 body: formData,
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -128,4 +121,68 @@ document.addEventListener('DOMContentLoaded', function () {
             if (spinner) spinner.classList.add('d-none');
         }
     });
+
+    const deleteButton = document.getElementById('deleteButton');
+    if (deleteButton) {
+        deleteButton.addEventListener('click', function (event) {
+            event.preventDefault();
+
+            const deleteUrl = this.href;
+            const token = localStorage.getItem('jwt_token');
+
+            Swal.fire({
+                title: 'Você tem certeza?',
+                text: "Esta ação não pode ser revertida!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sim, deletar!',
+                cancelButtonText: 'Cancelar'
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    try {
+                        const response = await fetch(deleteUrl, {
+                            method: 'DELETE',
+                            headers: {
+                                'Authorization': `Bearer ${token}`
+                            }
+                        });
+
+                        if (response.ok) {
+                            // ### INÍCIO DA CORREÇÃO ###
+                            const responseData = await response.json();
+
+                            if (responseData.token) {
+                                localStorage.setItem('jwt_token', responseData.token);
+                                console.log("Token de sessão atualizado após exclusão!");
+                            }
+                            // ### FIM DA CORREÇÃO ###
+
+                            Swal.fire(
+                                'Deletada!',
+                                'Sua barbearia foi removida.',
+                                'success'
+                            ).then(() => {
+                                window.location.href = '/';
+                            });
+                        } else {
+                            const errorData = await response.json();
+                            Swal.fire(
+                                'Erro!',
+                                errorData.message || 'Não foi possível deletar a barbearia.',
+                                'error'
+                            );
+                        }
+                    } catch (error) {
+                        Swal.fire(
+                            'Erro de Rede!',
+                            'Não foi possível conectar ao servidor.',
+                            'error'
+                        );
+                    }
+                }
+            });
+        });
+    }
 });
