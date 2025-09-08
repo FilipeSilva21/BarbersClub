@@ -19,10 +19,10 @@ public class ServiceService(ProjectDbContext context, IWebHostEnvironment webHos
         var offeredService = await context.OfferedServices
             .FirstOrDefaultAsync(os => os.BarberShopId == request.BarberShopId && os.ServiceType == request.ServiceTypes);
 
-        if (offeredService == null)
+        if (offeredService is null)
             throw new InvalidOperationException("Este serviço não é oferecido pela barbearia selecionada.");
 
-        if (barberShop == null || client == null)
+        if (barberShop is null || client is null)
             throw new KeyNotFoundException("Barbearia ou cliente não encontrado.");
 
         var newService = new Service
@@ -68,7 +68,7 @@ public class ServiceService(ProjectDbContext context, IWebHostEnvironment webHos
             query = query.Where(s => s.Client.FirstName.Contains(clientName) || s.Client.LastName.Contains(clientName));
         
         if (!string.IsNullOrEmpty(serviceType))
-            query = query.Where(s => s.ServiceType.ToString().Contains(serviceType));
+            query = query.Where(s => s.ServiceType.ToString()!.Contains(serviceType));
         
         if (startDate.HasValue)
             query = query.Where(s => s.Date.Date >= startDate.Value.Date);

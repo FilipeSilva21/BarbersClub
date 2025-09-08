@@ -24,7 +24,7 @@ public class ErrorMiddleware(RequestDelegate next, ILogger<ErrorMiddleware> logg
 
         var statusCode = HttpStatusCode.InternalServerError; // 500 por padrão
         var message = "Ocorreu um erro interno inesperado.";
-        object? details = null;
+        object? details;
 
         switch (exception)
         {

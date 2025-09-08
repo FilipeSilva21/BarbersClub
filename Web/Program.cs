@@ -4,7 +4,9 @@ using BarbersClub.Business; // Referência à sua nova camada Business
 using BarbersClub.Repository;
 using Business; // Referência à sua nova camada Entity
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Repository.DbContext;
 using Scalar.AspNetCore;
 using Web.Middleware;
 
@@ -53,6 +55,22 @@ builder.Services.AddDatabase(builder.Configuration);
 builder.Services.AddBusinessServices();
 
 var app = builder.Build();
+
+try
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var dbContext = scope.ServiceProvider.GetRequiredService<ProjectDbContext>(); 
+        
+        await dbContext.Database.MigrateAsync();
+        
+        Console.WriteLine("Migrations aplicadas com sucesso.");
+    }
+}
+catch (Exception ex)
+{
+    Console.WriteLine($"Ocorreu um erro ao aplicar as migrations: {ex.Message}");
+}
 
 if (!app.Environment.IsDevelopment())
 {

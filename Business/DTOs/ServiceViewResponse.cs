@@ -5,7 +5,7 @@ public record ServiceViewResponse
     public int? ServiceId { get; set; }
     public DateTime Date { get; set; }
     public TimeSpan Time { get; set; }
-    public string ServiceType { get; set; }
+    public string? ServiceType { get; set; }
     
     public string Status { get; set; }
     public int BarberShopId { get; set; }

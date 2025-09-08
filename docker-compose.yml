@@ -1,0 +1,42 @@
+﻿services:
+  barbersclub.web:
+    build:
+      context: .
+      dockerfile: Web/Dockerfile
+      args:
+        - BUILD_CONFIGURATION=Release
+    ports:
+      - "${WEB_PORT}:${WEB_PORT}"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:${WEB_PORT}
+      # AQUI ESTÁ A MUDANÇA: Conecte-se ao 'master' para a criação inicial
+      - ConnectionStrings__BarbersClubDB=Server=db;Database=master;User Id=${DB_USER};Password=${DB_PASSWORD};TrustServerCertificate=true;
+      - ASPNETCORE_DataProtection_Directory=/root/.aspnet/DataProtection-Keys
+    volumes:
+      - dataprotection-keys:/root/.aspnet/DataProtection-Keys
+    depends_on:
+      db:
+        condition: service_healthy
+  
+  # Serviço do Banco de Dados SQL Server (sem alterações aqui)
+  db:
+    build:
+      context: ./db
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "${DB_PASSWORD}"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqldata:/var/opt/mssql
+    healthcheck:
+      test: [ "CMD", "/opt/mssql-tools/bin/sqlcmd", "-S", "localhost", "-U", "${DB_USER}", "-P", "${DB_PASSWORD}", "-Q", "SELECT 1" ]
+      interval: 10s
+      retries: 10
+      start_period: 10s
+      timeout: 3s
+
+volumes:
+  sqldata:
+  dataprotection-keys:
