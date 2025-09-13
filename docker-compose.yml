@@ -10,7 +10,6 @@
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:${WEB_PORT}
-      # AQUI ESTÁ A MUDANÇA: Conecte-se ao 'master' para a criação inicial
       - ConnectionStrings__BarbersClubDB=Server=db;Database=master;User Id=${DB_USER};Password=${DB_PASSWORD};TrustServerCertificate=true;
       - ASPNETCORE_DataProtection_Directory=/root/.aspnet/DataProtection-Keys
     volumes:
@@ -19,7 +18,6 @@
       db:
         condition: service_healthy
   
-  # Serviço do Banco de Dados SQL Server (sem alterações aqui)
   db:
     build:
       context: ./db
