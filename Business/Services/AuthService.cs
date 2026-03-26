@@ -1,0 +1,118 @@
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using BarbersClub.Business.DTOs;
+using Business;
+using Business.Error_Handling;
+using Business.Services.Interfaces;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using Repository.DbContext;
+using Repository.Models;
+
+namespace Business.Services;
+
+public class AuthService(ProjectDbContext context, IConfiguration config, IWebHostEnvironment webHostEnvironment): IAuthService
+{
+    public async Task<User?> RegisterUserAsync(UserRegisterRequest request)
+    {
+        if (await context.Users.AnyAsync(u => u.Email == request.Email))
+            throw new DuplicateEmailException($"Email {request.Email} já está em uso.");
+        
+        if(request.Password != request.ConfirmPassword)
+            throw new ArgumentException("As senhas não conferem.");
+        
+        var user = new User();
+        
+        var hashedPassword = new PasswordHasher<User>().HashPassword(user, request.Password);
+
+        user.FirstName = request.FirstName;
+        user.LastName = request.LastName;
+        user.Email = request.Email;
+        user.PasswordHashed = hashedPassword;
+        user.Role = request.Role;
+
+        if (request.ProfilePic != null && request.ProfilePic.Length > 0)
+        {
+            string uniqueFileName = Guid.NewGuid() + Path.GetExtension(request.ProfilePic.FileName);
+        
+            string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "images", "users");
+            Directory.CreateDirectory(uploadsFolder); 
+            
+            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                await request.ProfilePic.CopyToAsync(fileStream);
+            }
+
+            user.ProfilePicUrl = $"/images/users/{uniqueFileName}";
+        }
+        context.Users.Add(user);
+        await context.SaveChangesAsync();
+        
+        return user;
+    }
+
+    public async Task<(string? token, User? user)> LoginAsync(UserLoginRequest request)
+    {
+        var user = await context.Users
+            .Include(u => u.BarberShops) 
+            .FirstOrDefaultAsync(u => u.Email == request.Email);
+
+        if (user is null)
+            throw new EmailNotFoundException(request.Email);
+
+        if (new PasswordHasher<User>().VerifyHashedPassword(
+                user,
+                user.PasswordHashed,
+                request.Password) == PasswordVerificationResult.Failed)
+            throw new InvalidCredentialsException("Usuário ou Senha inválida.");
+
+        bool hasShops = user.BarberShops is not null && user.BarberShops.Any();
+
+        var claims = new List<Claim>
+        {
+            new Claim("firstName", user.FirstName),
+            new Claim(ClaimTypes.Email, user.Email),
+            new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
+            new Claim(ClaimTypes.Role, user.Role.ToString()),
+            new Claim("hasBarbershops", hasShops.ToString().ToLower())
+        };
+
+        if (hasShops)
+        {
+            foreach (var barbershop in user.BarberShops)
+            {
+                claims.Add(new Claim("barberShopId", barbershop.BarberShopId.ToString()));
+            }
+        }
+    
+        var token = GenerateToken(claims);
+    
+        return (token, user); 
+    }
+
+    public string GenerateToken(IEnumerable<Claim> claims)
+    {
+        var tokenKeyString = config.GetValue<string>("Jwt:SecretKey");
+        if (string.IsNullOrEmpty(tokenKeyString))
+            throw new InvalidOperationException("A chave do token ('Jwt:SecretKey') não está configurada.");
+
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKeyString));
+        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
+
+        var tokenDescriptor = new JwtSecurityToken(
+            issuer: config.GetValue<string>("Jwt:Issuer"),
+            audience: config.GetValue<string>("Jwt:Audience"),
+            claims: claims,
+            expires: DateTime.Now.AddDays(1),
+            signingCredentials: creds
+        );
+
+        return new JwtSecurityTokenHandler().WriteToken(tokenDescriptor);
+    }
+}
