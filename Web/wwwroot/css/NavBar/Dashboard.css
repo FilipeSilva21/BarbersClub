@@ -15,6 +15,14 @@
     color: var(--bc-text-primary);
 }
 
+.barbershop-avatar {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 2px solid var(--bc-gold);
+    flex-shrink: 0;
+}
+
 .dashboard-card {
     background-color: var(--bc-surface);
     border: 1px solid var(--bc-border);

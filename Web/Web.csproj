@@ -34,4 +34,9 @@
       </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="wwwroot\images\barbershops\" />
+      <Folder Include="wwwroot\images\services\" />
+    </ItemGroup>
+
 </Project>

@@ -21,7 +21,11 @@
 <div id="dashboard-view" class="container my-5">
     @if (Model is not null)
     {
-        <header class="d-flex justify-content-between align-items-center mb-5">
+        <header class="d-flex align-items-start mb-5 gap-3">
+            <img src="@profileImage" 
+                 alt="Foto da Barbearia" 
+                 class="barbershop-avatar rounded"
+                 onerror="this.onerror=null; this.src='/images/default-barbershop.png';" />
             <div>
                 <h1 class="display-5 fw-bold">@Model.BarberShop?.Name</h1>
                 
@@ -36,7 +40,7 @@
             <div class="col-lg-8">
                 <h3 class="panel-title">Detalhes da Barbearia</h3>
                 
-                <h5 class="panel-subtitle mt-4">Informações de Contato</h5>
+                <h5 class="panel-subtitle">Informações de Contato</h5>
                 
                 <ul class="info-list mb-4">
                     <li><i class="bi bi-geo-alt-fill"></i>@Model.BarberShop?.Address, @Model.BarberShop?.City - @Model.BarberShop?.State</li>

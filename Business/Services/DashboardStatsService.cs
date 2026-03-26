@@ -11,10 +11,12 @@ public class DashboardStatsService(ProjectDbContext context) : IDashboardStatsSe
 {
     public async Task<DashboardStatsResponse> GetDashboardStatsAsync(int? barberShopId)
     {
-        var barberShop = await context.BarberShops.FindAsync(barberShopId);
+        var barberShop = await context.BarberShops
+            .AsNoTracking()
+            .FirstOrDefaultAsync(b => b.BarberShopId == barberShopId);
 
         if (barberShop is null)
-            throw new BarberShopNotFoundException(barberShop.BarberShopId); 
+            throw new BarberShopNotFoundException(barberShopId.GetValueOrDefault()); 
 
         var today = DateTime.UtcNow.Date;
         

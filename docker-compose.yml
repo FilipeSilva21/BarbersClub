@@ -10,7 +10,7 @@
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:${WEB_PORT}
-      - ConnectionStrings__BarbersClubDB=Server=db;Database=master;User Id=${DB_USER};Password=${DB_PASSWORD};TrustServerCertificate=true;
+      - ConnectionStrings__BarbersClubDB=Server=db;Database=BarbersClub;User Id=${DB_USER};Password=${DB_PASSWORD};TrustServerCertificate=true;
       - ASPNETCORE_DataProtection_Directory=/root/.aspnet/DataProtection-Keys
     volumes:
       - dataprotection-keys:/root/.aspnet/DataProtection-Keys
