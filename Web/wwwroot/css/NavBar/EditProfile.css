@@ -1,12 +1,7 @@
-/* /css/navbar/EditProfile.css - ADAPTADO */
+/* /css/navbar/EditProfile.css - Estilos específicos para edição de perfil */
 
-/* Removemos o layout de colunas e o .edit-card. 
-  Tudo agora ficará dentro do .auth-container, que provavelmente
-  já tem estilos globais. Se não tiver, os estilos básicos estão abaixo.
-*/
-
-/* Garante que o container principal tenha a aparência padrão */
-.auth-container {
+/* Container principal para edição de perfil */
+.edit-profile-container {
     max-width: 500px;
     margin: 3rem auto;
     padding: 2.5rem;
@@ -16,7 +11,7 @@
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.auth-container h2 {
+.edit-profile-container h2 {
     text-align: center;
     color: var(--bc-gold, #c5a86a);
     margin-bottom: 2rem;
@@ -60,6 +55,7 @@
     align-items: center;
     opacity: 0;
     transition: opacity 0.3s ease;
+    cursor: pointer;
 }
 
 .profile-picture-container:hover .picture-overlay {
@@ -78,7 +74,7 @@
 /* --- Estilos dos Campos do Formulário --- */
 
 /* Estilos para o <hr> para separar seções */
-.auth-container hr {
+.edit-profile-container hr {
     border: none;
     border-top: 1px solid var(--bc-border-color, #444);
     margin: 1.5rem 0;

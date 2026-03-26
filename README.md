@@ -7,16 +7,16 @@ Bem-vindo ao **BarbersClub**, uma plataforma completa e robusta desenvolvida par
 ## 🔥 Funcionalidades Principais
 
 ### 🙍‍♂️ Para Clientes
-- **Busca Avançada**: Pesquise barbearias por nome, cidade ou tipo de serviço (Corte, Barba, Pintura, Sobrancelha, etc.).
+- **Busca Avançada**: Pesquise barbearias por nome, cidade ou tipo de serviço (Corte Social, Corte Diversificado, Barba, Sobrancelha, etc.).
 - **Perfis Detalhados**: Visualize fotos das barbearias, serviços oferecidos e preços.
 - **Sistema de Avaliações**: Leia feedbacks de outros usuários e deixe sua própria nota para o atendimento recebido.
-- **Gestão de Perfil**: Gerencie seus dados de usuário e histórico.
+- **Gestão de Perfil**: Edite seus dados pessoais, foto de perfil e senha.
 
 ### 🏢 Para Donos de Barbearia
-- **Cadastro de Negócios**: Registre sua barbearia na plataforma.
-- **Gestão de Serviços**: Adicione, edite ou remova os serviços oferecidos (Haircuts, Beards, etc.).
-- **Dashboard de Estatísticas**: Visualize métricas importantes sobre o desempenho da sua barbearia (em desenvolvimento).
+- **Cadastro de Negócios**: Registre sua barbearia na plataforma com informações detalhadas (endereço, horários, redes sociais).
+- **Gestão de Serviços**: Adicione, edite ou remova os serviços oferecidos com preços e descrições.
 - **Galeria de Imagens**: Publique fotos dos seus melhores cortes e do ambiente.
+- **Gerenciamento de Horários**: Configure dias e horários de funcionamento.
 
 ---
 
@@ -24,8 +24,8 @@ Bem-vindo ao **BarbersClub**, uma plataforma completa e robusta desenvolvida par
 
 Este projeto foi construído utilizando as tecnologias mais modernas do ecossistema .NET:
 
-*   **Backend**: [.NET 8/9](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) Core (C#)
-*   **Acesso a Dados**: [Entity Framework Core](https://learn.microsoft.com/en-us/ef/core/) (Code First)
+*   **Backend**: [.NET 9.0](https://dotnet.microsoft.com/en-us/download/dotnet/9.0) Core (C#)
+*   **Acesso a Dados**: [Entity Framework Core 9.0](https://learn.microsoft.com/en-us/ef/core/) (Code First)
 *   **Banco de Dados**: Microsoft SQL Server (MSSQL)
 *   **Autenticação**:
     *   ASP.NET Core Cookies (para interface Web)
@@ -33,7 +33,8 @@ Este projeto foi construído utilizando as tecnologias mais modernas do ecossist
 *   **Frontend**: 
     *   ASP.NET Core MVC com Razor Views
     *   [Bootstrap 5](https://getbootstrap.com/) & [Bootstrap Icons](https://icons.getbootstrap.com/)
-    *   Custom JavaScript (consumo de APIs internas)
+    *   Vanilla JavaScript (consumo de APIs internas)
+    *   [SweetAlert2](https://sweetalert2.github.io/) para notificações
 *   **Documentação**: [Swagger / OpenAPI](https://swagger.io/) e [Scalar API Reference](https://scalar.com/)
 *   **Infraestrutura**: [Docker](https://www.docker.com/) e [Docker Compose](https://docs.docker.com/compose/)
 
@@ -43,14 +44,35 @@ Este projeto foi construído utilizando as tecnologias mais modernas do ecossist
 
 O projeto segue uma estrutura de **3 Camadas (3-Tier Architecture)** para garantir separação de responsabilidades e facilidade de manutenção:
 
-```bash
-BarbersClub/
-├── Business/       # Regras de Negócio, Serviços e DTOs
-├── Repository/     # Contexto do Banco (EF Core), Modelos e Migrations
-├── Web/            # Controllers, Views, Middlewares e Estáticos (wwwroot)
-├── db/             # Customizações do Docker para o banco de dados
-└── BarbersClub.sln # Arquivo da Solução .NET
 ```
+BarbersClub/
+├── Business/          # Regras de Negócio, Serviços e DTOs
+│   ├── Services/      # Implementação da lógica de negócio
+│   ├── DTOs/          # Data Transfer Objects
+│   └── Error Handling/ # Tratamento de exceções customizadas
+├── Repository/        # Contexto do Banco (EF Core), Modelos e Migrations
+│   ├── DbContext/     # Configuração do Entity Framework
+│   ├── Models/        # Entidades do banco de dados
+│   │   └── Enums/     # Enumeradores (ServiceTypes, WorkingDays, etc.)
+│   └── Migrations/    # Histórico de migrações do banco
+├── Web/               # Controllers, Views, Middlewares e Estáticos
+│   ├── Controllers/   # Controllers MVC e API
+│   │   ├── WebControllers/    # Controllers para Views
+│   │   └── ServiceControllers/ # Controllers para API REST
+│   ├── Views/         # Razor Views
+│   ├── Middleware/    # Middlewares customizados (error handling)
+│   └── wwwroot/       # Arquivos estáticos (CSS, JS, imagens)
+├── db/                # Configuração do Docker para SQL Server
+└── docker-compose.yml # Orquestração de containers
+```
+
+### Principais Modelos de Dados
+- **User**: Usuários do sistema (clientes e donos de barbearia)
+- **BarberShop**: Dados das barbearias
+- **Service**: Serviços oferecidos pelas barbearias
+- **OfferedService**: Relação entre barbearia e tipos de serviço
+- **Rating**: Avaliações dos clientes
+- **ServiceTypes** (Enum): CorteSocial, CorteDiversificado, Barba, Sobrancelha e combinações
 
 ---
 
@@ -63,25 +85,84 @@ BarbersClub/
 
 O projeto já está configurado para subir tanto a aplicação quanto o banco de dados SQL Server automaticamente:
 
-1.  Certifique-se de configurar as variáveis de ambiente necessárias no `docker-compose.yml` (ou em um arquivo `.env`).
+1.  Configure as variáveis de ambiente no arquivo `.env` na raiz do projeto:
+    ```env
+    WEB_PORT=8080
+    DB_USER=sa
+    DB_PASSWORD=YourStrong!Passw0rd
+    ```
+
 2.  No terminal, na raiz do projeto, execute:
     ```bash
     docker-compose up --build
     ```
-3.  Acesse a aplicação em: `http://localhost:5000` (ou na porta definida no seu arquivo).
-4.  A documentação da API (Swagger/Scalar) estará disponível em: `http://localhost:5000/scalar/v1`.
+
+3.  Acesse a aplicação em: `http://localhost:8080` (ou na porta definida no `.env`).
+
+4.  A documentação da API (Scalar) estará disponível em: `http://localhost:8080/scalar/v1`.
 
 ### Rodando Localmente (.NET SDK)
 
-1.  Configure a string de conexão no `Web/appsettings.json` apontando para um SQL Server local.
-2.  Execute as migrations para criar o banco de dados:
+1.  Certifique-se de ter o [.NET 9.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/9.0) instalado.
+
+2.  Configure a string de conexão no `Web/appsettings.json` apontando para um SQL Server local:
+    ```json
+    "ConnectionStrings": {
+      "BarbersClubDB": "Server=localhost;Database=BarbersClub;User Id=sa;Password=YourPassword;TrustServerCertificate=true;"
+    }
+    ```
+
+3.  Execute as migrations para criar o banco de dados:
     ```bash
     dotnet ef database update --project Repository --startup-project Web
     ```
-3.  Inicie o projeto:
+
+4.  Inicie o projeto:
     ```bash
     dotnet run --project Web
     ```
+
+---
+
+## 🔑 Configuração JWT
+
+Para autenticação via API, configure as seguintes chaves no `appsettings.json`:
+
+```json
+"Jwt": {
+  "SecretKey": "your-secret-key-here-min-32-chars",
+  "Issuer": "BarbersClubAPI",
+  "Audience": "BarbersClubUsers"
+}
+```
+
+---
+
+## 📡 Endpoints Principais da API
+
+### Autenticação
+- `POST /api/auth/register` - Registro de novos usuários
+- `POST /api/auth/login` - Login e geração de token JWT
+
+### Barbearias
+- `GET /api/barbershops` - Listar todas as barbearias
+- `GET /api/barbershops/{id}` - Detalhes de uma barbearia
+- `POST /api/barbershops` - Criar nova barbearia (autenticado)
+- `PUT /api/barbershops/{id}` - Atualizar barbearia (autenticado)
+- `DELETE /api/barbershops/{id}` - Deletar barbearia (autenticado)
+
+### Serviços
+- `GET /api/services/barbershop/{id}` - Serviços de uma barbearia
+- `POST /api/services` - Adicionar serviço (autenticado)
+- `PUT /api/services/{id}` - Atualizar serviço (autenticado)
+- `DELETE /api/services/{id}` - Remover serviço (autenticado)
+
+---
+
+## 🧪 Estrutura de Testes (Planejado)
+- Testes unitários para camada Business
+- Testes de integração para APIs
+- Testes E2E para fluxos principais
 
 ---
 

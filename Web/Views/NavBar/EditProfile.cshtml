@@ -6,10 +6,10 @@
 }
 
 @section Styles {
-    <link rel="stylesheet" href="~/css/navbar/EditProfile.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/NavBar/EditProfile.css" asp-append-version="true" />
 }
 
-<div class="auth-container">
+<div class="edit-profile-container">
     <form id="userProfileEditForm" action="/api/users/edit" method="post" enctype="multipart/form-data">
         @Html.AntiForgeryToken()
 
