@@ -56,7 +56,8 @@ form .form-label {
     color: var(--bc-text-secondary);
 }
 
-form .form-control {
+form .form-control,
+form .form-select {
     background-color: #2a2a2a;
     border: 1px solid var(--bc-border);
     color: var(--bc-text-primary);
@@ -64,7 +65,15 @@ form .form-control {
     padding: 0.75rem 1rem;
 }
 
-form .form-control:focus {
+form .form-select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23f0f0f0' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+}
+
+form .form-control:focus,
+form .form-select:focus {
     background-color: #2a2a2a;
     border-color: var(--bc-gold);
     box-shadow: 0 0 0 0.25rem rgba(197, 168, 106, 0.25);

@@ -5,8 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const token = localStorage.getItem('jwt_token');
 
             if (!token) {
-                console.error("Usuário não autenticado. Token não encontrado.");
-                document.body.innerHTML = '<div class="alert alert-danger text-center">Acesso negado. Por favor, faça o login novamente.</div>';
+                window.location.href = '/Auth/Login';
                 return;
             }
 
@@ -17,6 +16,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     'Authorization': `Bearer ${token}`
                 }
             });
+
+            if (response.status === 401) {
+                localStorage.removeItem('jwt_token');
+                window.location.href = '/Auth/Login';
+                return;
+            }
 
             if (!response.ok) {
                 throw new Error(`Erro ao buscar dados: ${response.status}`);

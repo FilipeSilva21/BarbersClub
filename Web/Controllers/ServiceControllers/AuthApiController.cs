@@ -67,4 +67,11 @@ public class AuthApiController(IAuthService authService): ControllerBase
     
         return Ok(new { token });
     }
+
+    [HttpPost("logout")]
+    public async Task<IActionResult> Logout()
+    {
+        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        return Ok(new { message = "Logout realizado com sucesso." });
+    }
 }

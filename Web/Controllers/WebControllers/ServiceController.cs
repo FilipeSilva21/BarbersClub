@@ -5,7 +5,7 @@ using BarbersClub.Business.Services.Interfaces;
 using Business.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BarbersClub.Controllers.WebControllers;
+namespace Web.Controllers.WebControllers;
 
 public class ServiceController(IServiceService serviceContext, IBarberShopService barberShopService) : Controller
 {

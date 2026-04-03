@@ -73,6 +73,33 @@
 
 /* --- Estilos dos Campos do Formulário --- */
 
+.edit-profile-container .form-control {
+    background-color: var(--bc-surface, #1e1e1e);
+    border: 1px solid var(--bc-border-color, #444);
+    color: var(--bc-text-primary, #f0f0f0);
+    border-radius: 0.5rem;
+    padding: 1rem 0.75rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.edit-profile-container .form-control:focus {
+    background-color: var(--bc-surface, #1e1e1e);
+    border-color: var(--bc-gold, #c5a86a);
+    color: var(--bc-text-primary, #f0f0f0);
+    box-shadow: 0 0 0 0.25rem rgba(197, 168, 106, 0.25);
+}
+
+.edit-profile-container .form-floating > label {
+    color: var(--bc-text-secondary, #a0a0a0);
+    padding: 1rem 0.75rem;
+}
+
+.edit-profile-container .form-floating > .form-control:focus ~ label,
+.edit-profile-container .form-floating > .form-control:not(:placeholder-shown) ~ label {
+    color: var(--bc-gold, #c5a86a);
+    opacity: 0.8;
+}
+
 /* Estilos para o <hr> para separar seções */
 .edit-profile-container hr {
     border: none;

@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <div class="d-flex justify-content-between align-items-start">
                     <div>
                         <h5 class="card-title mb-1">${appt.clientName}</h5>
-                        <p class="card-text text-muted mb-2">${appt.serviceType}</p>
+                        <p class="card-text text-info mb-2">${appt.serviceType}</p>
                         <p class="card-text small">
                             <i class="bi bi-calendar-event me-2"></i>${formattedDate}
                             <i class="bi bi-clock ms-3 me-2"></i>${formattedTime}

@@ -173,6 +173,7 @@
 }
 
 .barber-card .card-body {
+  padding: 1rem;
   color: var(--bc-text-primary);
   flex-grow: 1;
 }

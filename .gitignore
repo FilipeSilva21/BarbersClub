@@ -132,3 +132,8 @@ yarn-error.log*
 # OS Files
 .DS_Store
 Thumbs.db
+
+# Environment Variables (Sensitive Data)
+.env
+.env.local
+.env.*.local

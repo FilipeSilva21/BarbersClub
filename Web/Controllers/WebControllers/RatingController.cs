@@ -2,7 +2,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BarbersClub.Controllers.WebControllers
+namespace Web.Controllers.WebControllers
 {
     [Route("/rate/{serviceId}")]  
     public class RatingsController : Controller

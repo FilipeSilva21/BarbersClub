@@ -5,6 +5,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const resultsContainer = document.getElementById('results-container');
     const loadingMessage = document.getElementById('loading-message');
 
+    // Elementos de filtro
+    const searchTermInput = document.getElementById('searchTerm');
+    const cityInput = document.getElementById('city');
+    const stateInput = document.getElementById('state');
+    const barberInput = document.getElementById('barber');
+
+    let searchTimeout; // Para debounce - evitar muitas requisições
+
     async function fetchAndRenderBarberShops(params = {}) {
         loadingMessage.style.display = 'block';
         resultsContainer.innerHTML = '';
@@ -77,18 +85,49 @@ document.addEventListener('DOMContentLoaded', function () {
         resultsContainer.innerHTML = cardsHtml;
     }
 
+    // Função para buscar com debounce (evita muitas requisições)
+    function performSearch() {
+        clearTimeout(searchTimeout);
+        
+        searchTimeout = setTimeout(() => {
+            const params = {
+                barberShopName: searchTermInput.value,
+                city: cityInput.value,
+                state: stateInput.value,
+                barber: barberInput.value
+            };
+
+            fetchAndRenderBarberShops(params);
+        }, 300); // Aguarda 300ms sem mudanças antes de buscar
+    }
+
+    // Listeners para busca em tempo real conforme digita
+    searchTermInput.addEventListener('input', performSearch);
+    cityInput.addEventListener('input', performSearch);
+    stateInput.addEventListener('input', performSearch);
+    barberInput.addEventListener('input', performSearch);
+
+    // Listener do formulário para quando clica no botão "Filtrar"
     searchForm.addEventListener('submit', function (event) {
         event.preventDefault();
-
-        const params = {
-            barberShopName: document.getElementById('searchTerm').value,
-            city: document.getElementById('city').value,
-            state: '',
-            barber: document.getElementById('barber').value
-        };
-
-        fetchAndRenderBarberShops(params);
+        performSearch();
     });
 
-    fetchAndRenderBarberShops();
+    // Lê parâmetros da URL no carregamento inicial (ex: ?barberShopName=...)
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialParams = {
+        barberShopName: urlParams.get('barberShopName') || '',
+        city: urlParams.get('city') || '',
+        state: urlParams.get('state') || '',
+        barber: urlParams.get('barberName') || ''
+    };
+    
+    // Preenche os campos com os parâmetros da URL
+    if (initialParams.barberShopName) searchTermInput.value = initialParams.barberShopName;
+    if (initialParams.city) cityInput.value = initialParams.city;
+    if (initialParams.state) stateInput.value = initialParams.state;
+    if (initialParams.barber) barberInput.value = initialParams.barber;
+    
+    // Se houver parâmetros na URL, usa-os; senão, carrega todas as barbearias
+    fetchAndRenderBarberShops(initialParams);
 });

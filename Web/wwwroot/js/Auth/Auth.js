@@ -113,14 +113,89 @@ function checkAuthentication() {
 }
 
 /**
- * Realiza o logout do usuário.
+ * Verifica se o token JWT está expirado.
  */
-async function logout() {
-    localStorage.removeItem('jwt_token');
+function isTokenExpired(token) {
+    if (!token) return true;
 
-    await fetch('/api/auth/logout', { method: 'POST' }); 
+    try {
+        const payload = decodeJwtPayload(token);
+        if (!payload || !payload.exp) return true;
 
-    window.location.href = '/';
+        // exp está em segundos, Date.now() em milissegundos
+        const currentTime = Date.now() / 1000;
+        return payload.exp < currentTime;
+    } catch (e) {
+        console.error("Erro ao verificar expiração do token:", e);
+        return true;
+    }
 }
 
-document.addEventListener('DOMContentLoaded', checkAuthentication);
+/**
+ * Realiza o logout do usuário.
+ */
+async function logout(showExpiredMessage = false) {
+    localStorage.removeItem('jwt_token');
+
+    await fetch('/api/auth/logout', { method: 'POST' }).catch(() => {});
+
+    // Atualiza a navbar para exibir o menu de visitante
+    checkAuthentication();
+
+    if (showExpiredMessage) {
+        // Verifica se SweetAlert2 está disponível
+        if (typeof Swal !== 'undefined') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Sessão Expirada',
+                text: 'Seu tempo de sessão expirou. Faça login novamente para continuar.',
+                confirmButtonText: 'Fazer Login',
+                allowOutsideClick: false
+            }).then(() => {
+                window.location.href = '/Auth/Login';
+            });
+        } else {
+            alert('Sua sessão expirou. Faça login novamente.');
+            window.location.href = '/Auth/Login';
+        }
+    } else {
+        // Pequeno delay para garantir que a navbar foi atualizada antes do redirecionamento
+        setTimeout(() => {
+            window.location.href = '/';
+        }, 300);
+    }
+}
+
+/**
+ * Interceptor global para fetch - verifica expiração do token antes de cada requisição
+ */
+const originalFetch = window.fetch;
+window.fetch = function(...args) {
+    const token = localStorage.getItem('jwt_token');
+
+    // Se houver token e estiver expirado, faz logout automático
+    if (token && isTokenExpired(token)) {
+        logout(true);
+        return Promise.reject(new Error('Token expirado'));
+    }
+
+    return originalFetch.apply(this, args);
+};
+
+/**
+ * Verificação periódica da expiração do token (a cada 60 segundos)
+ */
+function startTokenExpirationCheck() {
+    setInterval(() => {
+        const token = localStorage.getItem('jwt_token');
+
+        if (token && isTokenExpired(token)) {
+            logout(true);
+        }
+    }, 60000); // 60 segundos
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    checkAuthentication();
+    startTokenExpirationCheck();
+});

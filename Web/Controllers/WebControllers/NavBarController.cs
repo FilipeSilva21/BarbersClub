@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using BarbersClub.Business.Services.Interfaces;
 using Business.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers.WebControllers;
@@ -8,6 +9,7 @@ namespace Web.Controllers.WebControllers;
 public class NavBarController(IDashboardStatsService dashboardContext, IBarberShopService barberShopContext) : Controller
 {
     [HttpGet]
+    [Authorize]
     [Route("/navbar/dashboard")]
     public async Task<IActionResult> Dashboard()
     {
@@ -15,7 +17,7 @@ public class NavBarController(IDashboardStatsService dashboardContext, IBarberSh
         
         if (!int.TryParse(userIdClaim, out var userId))
         {
-            return Unauthorized("ID de usuário inválido.");
+            return Redirect("/Auth/Login");
         }
 
         var barberShops = await barberShopContext.GetBarberShopsByUserIdAsync(userId);

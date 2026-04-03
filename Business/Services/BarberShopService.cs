@@ -225,13 +225,13 @@ public class BarberShopService(ProjectDbContext context, IWebHostEnvironment web
                 .Include(bs => bs.Barber);
 
             if (!string.IsNullOrEmpty(barberShopName))
-                query = query.Where(b => b.Name.Contains(barberShopName));
+                query = query.Where(b => b.Name.ToLower().Contains(barberShopName.ToLower()));
             if (!string.IsNullOrEmpty(state))
-                query = query.Where(b => b.State == state);
+                query = query.Where(b => b.State.ToLower().Contains(state.ToLower()));
             if (!string.IsNullOrEmpty(city))
-                query = query.Where(b => b.City == city);
+                query = query.Where(b => b.City.ToLower().Contains(city.ToLower()));
             if (!string.IsNullOrEmpty(barberName))
-                query = query.Where(b => b.Barber.FirstName.Contains(barberName));
+                query = query.Where(b => b.Barber.FirstName.ToLower().Contains(barberName.ToLower()));
         
             return await query
                 .Select(bs => new BarberShopViewResponse

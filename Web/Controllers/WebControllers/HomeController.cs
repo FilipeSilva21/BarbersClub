@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace BarbersClub.Controllers.WebControllers;
+namespace Web.Controllers.WebControllers;
 
 public class HomeController(ILogger<HomeController> logger) : Controller
 {

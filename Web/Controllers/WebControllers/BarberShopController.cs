@@ -1,12 +1,11 @@
 using System.Security.Claims;
 using BarbersClub.Business.DTOs;
-using BarbersClub.Business.Services.Interfaces;
 using Business.DTOs;
 using Business.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BarbersClub.Controllers.WebControllers;
+namespace Web.Controllers.WebControllers;
 
 public class BarberShopController(IBarberShopService barberShopContext) : Controller
 {
